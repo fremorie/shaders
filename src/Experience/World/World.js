@@ -11,4 +11,9 @@ export default class World {
         this.shaderPlane = new ShaderPlane()
         this.environment = new Environment()
     }
+
+    update() {
+        if(this.shaderPlane)
+            this.shaderPlane.update()
+    }
 }
