@@ -4,18 +4,19 @@ uniform mat4 modelMatrix;
 uniform float uBigWavesElevation;
 uniform vec2 uBigWavesFrequency;
 uniform float uTime;
+uniform float uBigWavesSpeed;
 
 attribute vec3 position;
 attribute vec2 uv;
 
-varying vec2 vUv;
+varying float vElevation;
 
 void main() {
     vec4 modelPosition = modelMatrix * vec4(position, 1);
 
     // Elevation
-    float elevation = sin(modelPosition.x * uBigWavesFrequency.x + uTime) *
-                      sin(modelPosition.z * uBigWavesFrequency.y + uTime) *
+    float elevation = sin(modelPosition.x * uBigWavesFrequency.x + uTime * uBigWavesSpeed) *
+                      sin(modelPosition.z * uBigWavesFrequency.y + uTime * uBigWavesSpeed) *
                       uBigWavesElevation;
     modelPosition.y += elevation;
 
@@ -24,5 +25,6 @@ void main() {
 
     gl_Position = projectedPosition;
 
-    vUv = uv;
+    // Varyings
+    vElevation = elevation;
 }

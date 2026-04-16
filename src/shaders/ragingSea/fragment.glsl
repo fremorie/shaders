@@ -1,9 +1,15 @@
 precision mediump float;
 
-varying vec2 vUv;
+uniform vec3 uDepthColor;
+uniform vec3 uSurfaceColor;
+uniform float uColorOffset;
+uniform float uColorMultiplier;
+
+varying float vElevation;
 
 void main() {
-    vec4 color = vec4(0.0, 0.0, 1.0, 1.0);
+    float mixStrength = (vElevation + uColorOffset) * uColorMultiplier;
+    vec3 color = mix(uDepthColor, uSurfaceColor, mixStrength);
 
-    gl_FragColor = color;
+    gl_FragColor = vec4(color, 1.0);
 }
