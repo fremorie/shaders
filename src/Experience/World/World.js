@@ -52,5 +52,8 @@ export default class World {
     update() {
         if(this.wobblyShader)
             this.wobblyShader.update()
+
+        if (this.ragingSea)
+            this.ragingSea.update()
     }
 }

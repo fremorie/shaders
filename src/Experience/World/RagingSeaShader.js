@@ -20,12 +20,17 @@ export default class RagingSeaShader extends ShaderPlane {
             side: THREE.DoubleSide,
             uniforms: {
                 uBigWavesElevation: { value: 0.2 },
-                uBigWavesFrequency: { value: new THREE.Vector2(4, 1.5) }
+                uBigWavesFrequency: { value: new THREE.Vector2(4, 1.5) },
+                uTime: { value: 0 },
             }
         })
     }
 
     rotateMesh() {
         this.mesh.rotation.x = - Math.PI * 0.5
+    }
+
+    update() {
+        this.material.uniforms.uTime.value = this.time.elapsed
     }
 }
