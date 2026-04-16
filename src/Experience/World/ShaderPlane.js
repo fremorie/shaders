@@ -35,7 +35,7 @@ export default class ShaderPlane {
 
     setMesh() {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.mesh.position.x = -2
+        this.mesh.position.x = -1.5
         this.scene.add(this.mesh)
     }
 
