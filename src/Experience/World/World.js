@@ -8,6 +8,7 @@ import WobblyShader from './WobblyShader'
 import MonochromeShader from './MonochromeShader'
 import MonochromeGradientShader from './MonochromeGradientShader'
 import NoiseShader from './NoiseShader'
+import MonochromeSpotShader from './MonochromeSpotShader'
 
 export default class World {
     constructor() {
@@ -38,6 +39,10 @@ export default class World {
         this.noiseShader = new NoiseShader(
             this.planeGeometry,
             [-1.2, -1.2, 0],
+        )
+        this.monochromeSpotShader = new MonochromeSpotShader(
+            this.planeGeometry,
+            [0, -1.2, 0]
         )
     }
 
