@@ -27,6 +27,8 @@ export default class Environment {
 
         // Debug
         if(this.debug.active) {
+            const lightHelper = new THREE.DirectionalLightHelper(this.sunLight)
+            this.scene.add(lightHelper)
             this.debugFolder
                 .add(this.sunLight, 'intensity')
                 .name('sunLightIntensity')
