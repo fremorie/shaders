@@ -2,10 +2,10 @@ import * as THREE from 'three'
 
 import Experience from '../Experience'
 
-import testFragmentShader from '../../shaders/test/fragment.glsl'
-import testVertexShader from '../../shaders/test/vertex.glsl'
+import testFragmentShader from '../../shaders/pattern/fragment.glsl'
+import testVertexShader from '../../shaders/pattern/vertex.glsl'
 
-export default class ShaderPlane {
+export default class PatternShader {
     constructor() {
         this.experience = new Experience()
         this.scene = this.experience.scene
@@ -25,21 +25,15 @@ export default class ShaderPlane {
             vertexShader: testVertexShader,
             fragmentShader: testFragmentShader,
             side: THREE.DoubleSide,
-            uniforms: {
-                uTime: {
-                    value: 0,
-                }
-            },
         })
     }
 
     setMesh() {
         this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.mesh.position.x = -2
         this.scene.add(this.mesh)
     }
 
     update() {
-        this.material.uniforms.uTime.value = this.time.elapsed
+
     }
 }
