@@ -17,7 +17,7 @@ export default class World {
 
         // Setup
         this.environment = new Environment()
-        this.planeGeometry = new THREE.PlaneGeometry(2, 2, 32, 32)
+        this.planeGeometry = new THREE.PlaneGeometry(2, 2, 128, 128)
 
         // Shaders
         this.wobblyShader = new WobblyShader(
