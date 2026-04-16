@@ -1,9 +1,11 @@
+import * as THREE from 'three'
+
 import Experience from '../Experience'
 import Environment from './Environment'
-import PatternShader from './PatternShader'
+
 import GradientShader from './GradientShader'
-import * as THREE from 'three'
 import WobblyShader from './WobblyShader'
+import MonochromeShader from './MonochromeShader'
 
 export default class World {
     constructor() {
@@ -19,7 +21,7 @@ export default class World {
             this.planeGeometry,
             [-1.2, 0, 0],
         )
-        this.patternShader = new PatternShader(
+        this.monochromeShader = new MonochromeShader(
             this.planeGeometry,
             [0, 0, 0],
         )
