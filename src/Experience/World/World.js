@@ -6,6 +6,7 @@ import Environment from './Environment'
 import GradientShader from './GradientShader'
 import WobblyShader from './WobblyShader'
 import MonochromeShader from './MonochromeShader'
+import MonochromeGradientShader from './MonochromeGradientShader'
 
 export default class World {
     constructor() {
@@ -21,13 +22,17 @@ export default class World {
             this.planeGeometry,
             [-1.2, 0, 0],
         )
-        this.monochromeShader = new MonochromeShader(
+        this.monochromeGradientShader = new MonochromeGradientShader(
             this.planeGeometry,
             [0, 0, 0],
         )
-        this.gradientShader = new GradientShader(
+        this.monochromeShader = new MonochromeShader(
             this.planeGeometry,
             [1.2, 0, 0],
+        )
+        this.gradientShader = new GradientShader(
+            this.planeGeometry,
+            [2.4, 0, 0],
         )
     }
 
