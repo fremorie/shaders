@@ -10,6 +10,7 @@ export default class RagingSeaShader extends ShaderPlane {
         super(geometry, position)
         this.setMaterial()
         this.setMesh()
+        this.rotateMesh()
     }
 
     setMaterial() {
@@ -17,6 +18,14 @@ export default class RagingSeaShader extends ShaderPlane {
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
             side: THREE.DoubleSide,
+            uniforms: {
+                uBigWavesElevation: { value: 0.2 },
+                uBigWavesFrequency: { value: new THREE.Vector2(4, 1.5) }
+            }
         })
+    }
+
+    rotateMesh() {
+        this.mesh.rotation.x = - Math.PI * 0.5
     }
 }

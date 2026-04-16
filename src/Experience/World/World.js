@@ -17,12 +17,12 @@ export default class World {
 
         // Setup
         this.environment = new Environment()
-        this.planeGeometry = new THREE.PlaneGeometry(1, 1, 32, 32)
+        this.planeGeometry = new THREE.PlaneGeometry(2, 2, 32, 32)
 
         // Shaders
         this.wobblyShader = new WobblyShader(
             this.planeGeometry,
-            [-1.2, 0, 0],
+            [-3.2, 0, 0],
         )
 
         this.ragingSea = new RagingSeaShader(
@@ -32,20 +32,20 @@ export default class World {
 
         this.monochromeGradientShader = new MonochromeGradientShader(
             this.planeGeometry,
-            [1.2, 0, 0],
+            [3.2, 0, 0],
         )
 
         this.gradientShader = new GradientShader(
             this.planeGeometry,
-            [2.4, 0, 0],
+            [6.4, 0, 0],
         )
         this.noiseShader = new NoiseShader(
             this.planeGeometry,
-            [-1.2, -1.2, 0],
+            [-3.2, -3.2, 0],
         )
         this.monochromeSpotShader = new MonochromeSpotShader(
             this.planeGeometry,
-            [0, -1.2, 0]
+            [0, -3.2, 0]
         )
     }
 
