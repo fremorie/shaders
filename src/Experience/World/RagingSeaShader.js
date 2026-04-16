@@ -2,10 +2,10 @@ import * as THREE from 'three'
 
 import ShaderPlane from './ShaderPlane'
 
-import fragmentShader from '../../shaders/monochrome/fragment.glsl'
-import vertexShader from '../../shaders/monochrome/vertex.glsl'
+import fragmentShader from '../../shaders/ragingSea/fragment.glsl'
+import vertexShader from '../../shaders/ragingSea/vertex.glsl'
 
-export default class MonochromeShader extends ShaderPlane {
+export default class RagingSeaShader extends ShaderPlane {
     constructor(geometry, position) {
         super(geometry, position)
         this.setMaterial()

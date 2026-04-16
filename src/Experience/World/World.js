@@ -5,7 +5,7 @@ import Environment from './Environment'
 
 import GradientShader from './GradientShader'
 import WobblyShader from './WobblyShader'
-import MonochromeShader from './MonochromeShader'
+import RagingSeaShader from './RagingSeaShader'
 import MonochromeGradientShader from './MonochromeGradientShader'
 import NoiseShader from './NoiseShader'
 import MonochromeSpotShader from './MonochromeSpotShader'
@@ -24,14 +24,17 @@ export default class World {
             this.planeGeometry,
             [-1.2, 0, 0],
         )
-        this.monochromeGradientShader = new MonochromeGradientShader(
+
+        this.ragingSea = new RagingSeaShader(
             this.planeGeometry,
             [0, 0, 0],
         )
-        this.monochromeShader = new MonochromeShader(
+
+        this.monochromeGradientShader = new MonochromeGradientShader(
             this.planeGeometry,
             [1.2, 0, 0],
         )
+
         this.gradientShader = new GradientShader(
             this.planeGeometry,
             [2.4, 0, 0],
