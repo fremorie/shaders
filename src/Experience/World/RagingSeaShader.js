@@ -36,6 +36,11 @@ export default class RagingSeaShader extends ShaderPlane {
                 uBigWavesFrequency: { value: new THREE.Vector2(4, 1.5) },
                 uBigWavesSpeed: { value: 0.75 },
 
+                uSmallWavesElevation: { value: 0.15 },
+                uSmallWavesFrequency: { value: 3 },
+                uSmallWavesSpeed: { value: 0.2 },
+                uSmallWavesIterations: { value: 4 },
+
                 uTime: { value: 0 },
 
                 uDepthColor: { value: new THREE.Color(this.debugObject.depthColor) },
@@ -53,6 +58,33 @@ export default class RagingSeaShader extends ShaderPlane {
                 .max(10)
                 .step(0.001)
 
+            // Small waves
+            this.debugFolder
+                .add(this.material.uniforms.uSmallWavesFrequency, 'value')
+                .name('uSmallWavesFrequency')
+                .min(0)
+                .max(30)
+                .step(0.001)
+            this.debugFolder
+                .add(this.material.uniforms.uSmallWavesSpeed, 'value')
+                .name('uSmallWavesSpeed')
+                .min(0)
+                .max(4)
+                .step(0.001)
+            this.debugFolder
+                .add(this.material.uniforms.uSmallWavesIterations, 'value')
+                .name('uSmallWavesIterations')
+                .min(0)
+                .max(10)
+                .step(0.001)
+            this.debugFolder
+                .add(this.material.uniforms.uSmallWavesElevation, 'value')
+                .name('uSmallWavesElevation')
+                .min(0)
+                .max(1)
+                .step(0.001)
+
+            // Colors
             this.debugFolder
                 .add(this.material.uniforms.uColorOffset, 'value')
                 .name('uColorOffset')
