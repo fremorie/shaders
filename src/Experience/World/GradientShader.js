@@ -2,10 +2,10 @@ import * as THREE from 'three'
 
 import ShaderPlane from './ShaderPlane'
 
-import fragmentShader from '../../shaders/pattern/fragment.glsl'
-import vertexShader from '../../shaders/pattern/vertex.glsl'
+import fragmentShader from '../../shaders/gradient/fragment.glsl'
+import vertexShader from '../../shaders/gradient/vertex.glsl'
 
-export default class PatternShader extends ShaderPlane {
+export default class GradientShader extends ShaderPlane {
     constructor(geometry, position) {
         super(geometry, position)
         this.setMaterial()
