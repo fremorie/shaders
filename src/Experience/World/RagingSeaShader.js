@@ -22,8 +22,6 @@ export default class RagingSeaShader extends ShaderPlane {
 
         this.setMaterial()
         this.setMesh()
-        this.rotateMesh()
-
     }
 
     setMaterial() {
@@ -115,10 +113,6 @@ export default class RagingSeaShader extends ShaderPlane {
                         .set(this.debugObject.surfaceColor)
                 })
         }
-    }
-
-    rotateMesh() {
-        this.mesh.rotation.x = - Math.PI * 0.5
     }
 
     update() {
