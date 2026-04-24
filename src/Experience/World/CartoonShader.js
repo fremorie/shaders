@@ -6,8 +6,8 @@ import fragmentShader from '../../shaders/cartoon/fragment.glsl'
 import vertexShader from '../../shaders/cartoon/vertex.glsl'
 
 export default class CartoonShader extends ShaderPlane {
-    constructor(geometry, position) {
-        super(geometry, position)
+    constructor(geometry, position, lightDirection) {
+        super(geometry, position, lightDirection)
         this.setMaterial()
         this.setMesh()
     }
@@ -16,7 +16,13 @@ export default class CartoonShader extends ShaderPlane {
         this.material = new THREE.RawShaderMaterial({
             vertexShader: vertexShader,
             fragmentShader: fragmentShader,
-            side: THREE.DoubleSide,
+            uniforms: {
+                uLightDirection: { value: this.lightDirection }
+            },
         })
+    }
+
+    update() {
+        this.mesh.rotation.y += this.experience.time.delta * 0.001
     }
 }

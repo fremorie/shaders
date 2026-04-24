@@ -2,7 +2,7 @@ import Experience from '../Experience'
 import * as THREE from 'three'
 
 export default class ShaderPlane {
-    constructor(geometry, position) {
+    constructor(geometry, position, lightDirection) {
         this.experience = new Experience()
         this.scene = this.experience.scene
         this.time = this.experience.time
@@ -10,6 +10,7 @@ export default class ShaderPlane {
         this.geometry = geometry
         this.position = position
         this.material = null
+        this.lightDirection = lightDirection
     }
 
     setMesh() {

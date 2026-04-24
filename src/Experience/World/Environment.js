@@ -13,7 +13,9 @@ export default class Environment {
             this.debugFolder = this.debug.ui.addFolder('environment')
         }
 
+        this.lightDirection = new THREE.Vector3()
         this.setLight()
+        this.updateLight()
     }
 
     setLight() {
@@ -22,7 +24,7 @@ export default class Environment {
         this.sunLight.shadow.camera.far = 15
         this.sunLight.shadow.mapSize.set(1024, 1024)
         this.sunLight.shadow.normalBias = 0.05
-        this.sunLight.position.set(2, 2, 2)
+        this.sunLight.position.set(2, 10, 2)
         this.scene.add(this.sunLight)
 
         // Debug
@@ -57,5 +59,21 @@ export default class Environment {
                 .max(5)
                 .step(0.001)
         }
+    }
+
+    updateLight() {
+        this.lightDirection.subVectors(
+            this.sunLight.target.position,
+            this.sunLight.position
+        ).normalize();
+
+        // convert to VIEW space
+        this.lightDirection.transformDirection(
+            this.experience.camera.instance.matrixWorldInverse
+        );
+    }
+
+    update() {
+        this.updateLight()
     }
 }

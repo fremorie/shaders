@@ -9,7 +9,7 @@ import RagingSeaShader from './RagingSeaShader'
 import MonochromeGradientShader from './MonochromeGradientShader'
 import NoiseShader from './NoiseShader'
 import MonochromeSpotShader from './MonochromeSpotShader'
-import CartoonShader from './CartoonShader.js'
+import CartoonShader from './CartoonShader'
 
 export default class World {
     constructor() {
@@ -28,18 +28,22 @@ export default class World {
             32,
             32
         );
+        this.sphereGeometry = new THREE.SphereGeometry(
+            this.geometrySize / 2,
+        );
+        this.torusKnotGeometry = new THREE.TorusKnotGeometry(0.8, 0.3, 128, 16)
 
         this.shaders = [
             [
-                WobblyShader,
-                RagingSeaShader,
-                MonochromeGradientShader,
-                GradientShader,
+                {shader: WobblyShader},
+                {shader: RagingSeaShader},
+                {shader: MonochromeGradientShader},
+                {shader: GradientShader},
             ],
             [
-                NoiseShader,
-                MonochromeSpotShader,
-                CartoonShader,
+                {shader: NoiseShader},
+                {shader: MonochromeSpotShader},
+                {shader: CartoonShader, geometry: this.torusKnotGeometry},
             ],
         ]
 
@@ -64,12 +68,14 @@ export default class World {
 
                 this.shaderPositions.push(position)
 
-                const ShaderClass = this.shaders[j][i];
+                const ShaderClass = this.shaders[j][i].shader;
+                const geometry = this.shaders[j][i].geometry ?? this.cubeGeometry;
 
                 this.shaderInstances.push(
                     new ShaderClass(
-                        this.cubeGeometry,
-                        position
+                        geometry,
+                        position,
+                        this.environment.lightDirection,
                     )
                 )
             }
@@ -84,6 +90,8 @@ export default class World {
     }
 
     update() {
+        this.environment.update()
+
         for (const shader of this.shaderInstances) {
             if (!!shader.update) {
                 shader.update()

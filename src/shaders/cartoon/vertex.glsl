@@ -1,11 +1,15 @@
 uniform mat4 projectionMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 modelMatrix;
+uniform mat3 normalMatrix;
 
 attribute vec3 position;
-attribute vec2 uv;
+attribute vec3 normal;
 
-varying vec2 vUv;
+// Custom variables
+uniform vec3 uLightDirection;
+
+varying vec3 vNormal;
 
 void main() {
     vec4 modelPosition = modelMatrix * vec4(position, 1);
@@ -14,5 +18,6 @@ void main() {
 
     gl_Position = projectedPosition;
 
-    vUv = uv;
+    // Varyings
+    vNormal = normalize(normalMatrix * normal);
 }
