@@ -10,6 +10,7 @@ import MonochromeGradientShader from './MonochromeGradientShader'
 import NoiseShader from './NoiseShader'
 import MonochromeSpotShader from './MonochromeSpotShader'
 import CartoonShader from './CartoonShader'
+import AluminumShader from './AluminumShader'
 
 export default class World {
     constructor() {
@@ -28,22 +29,30 @@ export default class World {
             32,
             32
         );
-        this.sphereGeometry = new THREE.SphereGeometry(
-            this.geometrySize / 2,
-        );
+        //this.sphereGeometry = new THREE.SphereGeometry(this.geometrySize / 2);
         this.torusKnotGeometry = new THREE.TorusKnotGeometry(0.8, 0.3, 128, 16)
+        //this.capsuleGeometry = new THREE.CapsuleGeometry( 1, 1, 32, 64, 1 )
+        //this.torusGeometry = new THREE.TorusGeometry(0.8, 0.3, 128, 64)
+        this.octahedronGeometry = new THREE.OctahedronGeometry(this.geometrySize / 1.5)
+        this.planeGeometry = new THREE.PlaneGeometry(
+            2.5,
+            2.5,
+            32,
+            32,
+        )
 
         this.shaders = [
             [
-                {shader: WobblyShader},
-                {shader: RagingSeaShader},
+                {shader: NoiseShader},
+                {shader: RagingSeaShader, geometry: this.planeGeometry},
                 {shader: MonochromeGradientShader},
-                {shader: GradientShader},
+                {shader: AluminumShader, geometry: this.octahedronGeometry},
             ],
             [
-                {shader: NoiseShader},
+                {shader: GradientShader, geometry: this.planeGeometry},
                 {shader: MonochromeSpotShader},
                 {shader: CartoonShader, geometry: this.torusKnotGeometry},
+                {shader: WobblyShader, geometry: this.planeGeometry},
             ],
         ]
 
