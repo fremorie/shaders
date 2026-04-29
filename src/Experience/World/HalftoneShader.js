@@ -12,9 +12,9 @@ export default class HalftoneShader extends ShaderPlane {
         this.sizes = this.experience.sizes
 
         this.materialParameters = {
-            color: '#5697a4',
-            shadowColor: '#1a1967',
-            lightColor: '#f0f1e5',
+            color: '#E1D9BC',
+            shadowColor: '#ACBAC4',
+            lightColor: '#F0F0DB',
         }
 
         this.setMaterial()
