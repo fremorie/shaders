@@ -11,6 +11,7 @@ import NoiseShader from './NoiseShader'
 import MonochromeSpotShader from './MonochromeSpotShader'
 import CartoonShader from './CartoonShader'
 import AluminumShader from './AluminumShader'
+import HalftoneShader from './HalftoneShader.js'
 
 export default class World {
     constructor() {
@@ -40,6 +41,7 @@ export default class World {
             32,
             32,
         )
+        this.torusGeometry = new THREE.TorusGeometry()
 
         this.shaders = [
             [
@@ -54,6 +56,9 @@ export default class World {
                 {shader: CartoonShader, geometry: this.torusKnotGeometry},
                 {shader: WobblyShader, geometry: this.planeGeometry},
             ],
+            [
+                {shader: HalftoneShader, geometry: this.torusGeometry},
+            ]
         ]
 
         this.shaderInstances = []
