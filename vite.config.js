@@ -1,23 +1,18 @@
-import restart from 'vite-plugin-restart'
+import { defineConfig } from 'vite'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
 import glsl from 'vite-plugin-glsl'
 
-export default {
-    root: 'src/',
-    publicDir: '../static/',
-    server:
-    {
-        host: true,
-        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env)
-    },
-    build:
-    {
-        outDir: '../dist',
-        emptyOutDir: true,
-        sourcemap: true
-    },
-    plugins:
-    [
-        restart({ restart: [ '../static/**', ] }),
-        glsl()
+// https://vite.dev/config/
+export default defineConfig({
+    base: '/shaders/',
+    plugins: [
+        react(),
+        babel({ presets: [reactCompilerPreset()] }),
+        glsl(),
     ],
-}
+    server: {
+        host: true, // Open to local network and display URL
+        open: !('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env) // Open if it's not a CodeSandbox
+    },
+})
