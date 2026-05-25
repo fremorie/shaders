@@ -1,21 +1,19 @@
-import { Canvas } from '@react-three/fiber'
+import { BrowserRouter, Routes, Route, Outlet } from "react-router";
 
-import { Experience } from './components/Experience'
+import { RagingSeaPage } from './components/RagingSea/Page'
+
 import './App.css'
 
 function App() {
     return (
-        <Canvas
-            shadows
-            camera={ {
-                fov: 45,
-                near: 0.1,
-                far: 200,
-                position: [ 10, 15, 25 ]
-            } }
-        >
-            <Experience />
-        </Canvas>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/shaders/raging-sea" element={<RagingSeaPage />} />
+            </Routes>
+
+            <Outlet />
+        </BrowserRouter>
+
     )
 }
 
