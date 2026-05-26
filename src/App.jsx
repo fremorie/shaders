@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router'
 
 import { Sidebar } from './components/layout/Sidebar'
-import { pages } from './routes'
+import { ROUTES } from './routes'
 
 import './App.css'
 
@@ -19,8 +19,8 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route element={<Layout />}>
-                    {pages.map((page) => (
-                        <Route path={page.path} element={page.component()} />
+                    {ROUTES.map(({ path, element, label }) => (
+                        <Route path={path} element={element} key={label} />
                     ))}
                 </Route>
             </Routes>

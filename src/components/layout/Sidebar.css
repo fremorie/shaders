@@ -62,3 +62,20 @@
     inset: 0;
     z-index: 10;
 }
+
+.sidebar__section {
+}
+
+.sidebar__section_title {
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: bold;
+    white-space: nowrap;
+    transition:
+        background 0.15s,
+        color 0.15s;
+}
