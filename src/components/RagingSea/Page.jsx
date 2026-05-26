@@ -1,6 +1,5 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import { Perf } from 'r3f-perf'
 
 import { RagingSeaShader } from './RagingSeaShader'
 
@@ -14,7 +13,6 @@ export function RagingSeaPage() {
                 position: [2, 2, 2],
             }}
         >
-            <Perf position="top-left" />
             <OrbitControls makeDefault />
             <RagingSeaShader />
         </Canvas>

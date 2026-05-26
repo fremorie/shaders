@@ -1,18 +1,28 @@
-import { BrowserRouter, Routes, Route } from 'react-router'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router'
 
-import { RagingSeaPage } from './components/RagingSea/Page'
+import { Sidebar } from './components/layout/Sidebar'
+import { pages } from './routes'
 
 import './App.css'
-import { GradientShader } from './components/Gradient/GradientShader'
-import { GradientShaderPage } from './components/Gradient/Page.jsx'
+
+function Layout() {
+    return (
+        <>
+            <Sidebar />
+            <Outlet />
+        </>
+    )
+}
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/shaders/" element={<RagingSeaPage />} />
-                <Route path="/shaders/raging-sea" element={<RagingSeaPage />} />
-                <Route path="/shaders/gradient" element={<GradientShaderPage />} />
+                <Route element={<Layout />}>
+                    {pages.map((page) => (
+                        <Route path={page.path} element={page.component()} />
+                    ))}
+                </Route>
             </Routes>
         </BrowserRouter>
     )
