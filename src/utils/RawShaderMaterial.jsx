@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from 'react'
+import { forwardRef, useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 
 export const RawShaderMaterial = forwardRef(
@@ -22,14 +22,15 @@ export const RawShaderMaterial = forwardRef(
                 wireframe,
                 side,
             })
-        }, [
-            vertexShader,
-            fragmentShader,
-            uniforms,
-            transparent,
-            wireframe,
-            side,
-        ])
+        }, [vertexShader, fragmentShader, transparent, wireframe, side])
+
+        useEffect(() => {
+            Object.assign(material.uniforms, uniforms)
+        }, [material, uniforms])
+
+        useEffect(() => {
+            return () => material.dispose()
+        }, [material])
 
         return <primitive object={material} ref={ref} attach="material" />
     }

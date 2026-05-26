@@ -8,10 +8,9 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/shaders/" element={<RagingSeaPage />} />
                 <Route path="/shaders/raging-sea" element={<RagingSeaPage />} />
             </Routes>
-
-            <Outlet />
         </BrowserRouter>
 
     )

@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { useControls } from 'leva'
@@ -35,8 +35,10 @@ export function RagingSeaShader() {
         uColorMultiplier: { value: 5 },
     })
 
-    uniforms.current.uDepthColor.value.set(new THREE.Color(depthColor))
-    uniforms.current.uSurfaceColor.value.set(new THREE.Color(surfaceColor))
+    useEffect(() => {
+        uniforms.current.uDepthColor.value.set(depthColor)
+        uniforms.current.uSurfaceColor.value.set(surfaceColor)
+    }, [depthColor, surfaceColor])
 
     useFrame((state) => {
         uniforms.current.uTime.value = state.clock.elapsedTime
