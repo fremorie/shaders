@@ -11,9 +11,7 @@ export function TemplateShaderPage() {
                 <TemplateShader />
                 <OrthographicCamera makeDefault position={[0, 0, 1]} />
             </Canvas>
-            <Explanation title="Lorem ipsum">
-                Lorem ipsum
-            </Explanation>
+            <Explanation title="Lorem ipsum">Lorem ipsum</Explanation>
         </>
     )
 }

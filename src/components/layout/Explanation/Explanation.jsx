@@ -19,7 +19,7 @@ export function Explanation({ title, children }) {
             <div
                 className={`explanation__body${open ? '' : ' explanation__body--closed'}`}
             >
-                <p className="explanation__details">{children}</p>
+                <div className="explanation__details">{children}</div>
             </div>
         </div>
     )
