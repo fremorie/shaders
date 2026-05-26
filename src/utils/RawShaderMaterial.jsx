@@ -22,6 +22,7 @@ export const RawShaderMaterial = forwardRef(
                 wireframe,
                 side,
             })
+            // eslint-disable-next-line react-hooks/exhaustive-deps
         }, [vertexShader, fragmentShader, transparent, wireframe, side])
 
         useEffect(() => {

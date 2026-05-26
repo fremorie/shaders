@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Outlet } from "react-router";
+import { BrowserRouter, Routes, Route } from 'react-router'
 
 import { RagingSeaPage } from './components/RagingSea/Page'
 
@@ -12,7 +12,6 @@ function App() {
                 <Route path="/shaders/raging-sea" element={<RagingSeaPage />} />
             </Routes>
         </BrowserRouter>
-
     )
 }
 
