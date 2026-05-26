@@ -1,6 +1,7 @@
 import { RagingSeaPage } from './components/RagingSea/Page'
 import { GradientShaderPage } from './components/Gradient/Page'
 import { HomePage } from './components/Home/Page'
+import { SmoothstepShaderPage } from './components/Smoothstep/Page'
 
 export const ROUTES = [
     {
@@ -14,6 +15,12 @@ export const ROUTES = [
         path: '/shaders/gradient',
         label: 'Gradient',
         element: <GradientShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/smoothstep',
+        label: 'Smooth step',
+        element: <SmoothstepShaderPage />,
         section: 'Basics',
     },
 

@@ -1,0 +1,19 @@
+.explanation {
+    color: #ffffff;
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.explanation__title {
+    margin: 0;
+    font-size: 16px;
+}
+
+.explanation__details {
+    font-size: 14px;
+}
