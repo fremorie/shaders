@@ -1,18 +1,18 @@
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 
 import { RagingSeaShader } from './RagingSeaShader'
 
 export function RagingSeaPage() {
     return (
-        <Canvas
-            camera={{
-                fov: 45,
-                near: 0.1,
-                far: 200,
-                position: [2, 2, 2],
-            }}
-        >
+        <Canvas>
+            <PerspectiveCamera
+                makeDefault
+                fov={45}
+                near={0.1}
+                far={200}
+                position={[2, 2, 2]}
+            />
             <OrbitControls makeDefault />
             <RagingSeaShader />
         </Canvas>

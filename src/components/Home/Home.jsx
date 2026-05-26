@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import * as THREE from 'three'
+
 import {
     OrbitControls,
     Text3D,
@@ -7,7 +10,14 @@ import {
 } from '@react-three/drei'
 
 export function Home() {
-    const [matcapTexture] = useMatcapTexture('C7C7D7_4C4E5A_818393_6C6C74', 256)
+    const [matcapTexture] = useMatcapTexture('8194AB_D6DFEB_C0CEDE_B0BFD1', 256)
+
+    useEffect(() => {
+        // eslint-disable-next-line
+        matcapTexture.colorSpace = THREE.SRGBColorSpace
+        matcapTexture.needsUpdate = true
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>
