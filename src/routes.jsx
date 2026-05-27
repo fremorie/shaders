@@ -4,6 +4,7 @@ import { HomePage } from './components/Home/Page'
 import { SmoothstepShaderPage } from './components/Smoothstep/Page'
 import { StripesShaderPage } from './components/Stripes/Page'
 import { VignetteShaderPage } from './components/Vignette/Page'
+import { GradientStripesShaderPage } from './components/GradientStripes/Page'
 
 export const ROUTES = [
     {
@@ -35,6 +36,12 @@ export const ROUTES = [
         path: '/shaders/vignette',
         label: 'Vignette',
         element: <VignetteShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/gradient-stripes',
+        label: 'Gradient stripes',
+        element: <GradientStripesShaderPage />,
         section: 'Basics',
     },
 
