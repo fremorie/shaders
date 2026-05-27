@@ -21,6 +21,8 @@ export function Home() {
 
     return (
         <>
+            <color args={['#4b5694']} attach="background" />
+
             <OrbitControls makeDefault />
 
             <Center>

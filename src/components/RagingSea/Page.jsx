@@ -13,6 +13,7 @@ export function RagingSeaPage() {
                 far={200}
                 position={[2, 2, 2]}
             />
+            <color args={['#05151d']} attach="background" />
             <OrbitControls makeDefault />
             <RagingSeaShader />
         </Canvas>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './Explanation.css'
 
 export function Explanation({ title, children }) {
-    const [open, setOpen] = useState(true)
+    const [open, setOpen] = useState(false)
 
     return (
         <div className="explanation">
