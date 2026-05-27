@@ -2,7 +2,8 @@ import { RagingSeaPage } from './components/RagingSea/Page'
 import { GradientShaderPage } from './components/Gradient/Page'
 import { HomePage } from './components/Home/Page'
 import { SmoothstepShaderPage } from './components/Smoothstep/Page'
-import { StripesShaderPage } from './components/Stripes/Page.jsx'
+import { StripesShaderPage } from './components/Stripes/Page'
+import { VignetteShaderPage } from './components/Vignette/Page'
 
 export const ROUTES = [
     {
@@ -28,6 +29,12 @@ export const ROUTES = [
         path: '/shaders/stripes',
         label: 'Stripes',
         element: <StripesShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/vignette',
+        label: 'Vignette',
+        element: <VignetteShaderPage />,
         section: 'Basics',
     },
 
