@@ -5,6 +5,7 @@ import { SmoothstepShaderPage } from './components/Smoothstep/Page'
 import { StripesShaderPage } from './components/Stripes/Page'
 import { VignetteShaderPage } from './components/Vignette/Page'
 import { GradientStripesShaderPage } from './components/GradientStripes/Page'
+import { ColoredGradientStripesShaderPage } from './components/ColoredGradientStripes/Page'
 
 export const ROUTES = [
     {
@@ -42,6 +43,12 @@ export const ROUTES = [
         path: '/shaders/gradient-stripes',
         label: 'Gradient stripes',
         element: <GradientStripesShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/colored-gradient-stripes',
+        label: 'Colored gradient stripes',
+        element: <ColoredGradientStripesShaderPage />,
         section: 'Basics',
     },
 

@@ -11,7 +11,7 @@ export function GradientStripesShader() {
     const { width, height } = useThree((state) => state.viewport)
     const materialRef = useRef(null)
 
-    const { uRepeatCount, uModulo } = useControls({
+    const { uRepeatCount } = useControls({
         uRepeatCount: { value: 10, min: 0, max: 100, step: 1 },
     })
 
@@ -26,7 +26,7 @@ export function GradientStripesShader() {
         if (materialRef.current) {
             materialRef.current.uniforms.uRepeatCount.value = uRepeatCount
         }
-    }, [uRepeatCount, uModulo])
+    }, [uRepeatCount])
 
     return (
         <mesh scale={[width, height, 1]}>
