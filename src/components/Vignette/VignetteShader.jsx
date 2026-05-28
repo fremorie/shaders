@@ -20,7 +20,9 @@ export function VignetteShader() {
         () => ({
             uHaloThreshold: new THREE.Uniform(0.1),
             uScale: new THREE.Uniform(0.05),
+            uResolution: new THREE.Uniform(new THREE.Vector2(width, height)),
         }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         []
     )
 
@@ -28,8 +30,10 @@ export function VignetteShader() {
         if (materialRef.current) {
             materialRef.current.uniforms.uHaloThreshold.value = uHaloThreshold
             materialRef.current.uniforms.uScale.value = uScale
+            materialRef.current.uniforms.uResolution.value.x = width
+            materialRef.current.uniforms.uResolution.value.y = height
         }
-    }, [uHaloThreshold, uScale])
+    }, [uHaloThreshold, uScale, width, height])
 
     return (
         <mesh scale={[width, height, 1]}>
