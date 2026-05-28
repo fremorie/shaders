@@ -7,6 +7,7 @@ import { VignetteShaderPage } from './components/Vignette/Page'
 import { GradientStripesShaderPage } from './components/GradientStripes/Page'
 import { ColoredGradientStripesShaderPage } from './components/ColoredGradientStripes/Page'
 import { SDFCircleShaderPage } from './components/SDFCircle/Page'
+import { SpiralShaderPage } from './components/Spiral/Page.jsx'
 
 export const ROUTES = [
     {
@@ -58,7 +59,13 @@ export const ROUTES = [
         path: '/shaders/sdf-circle',
         label: 'SDF Circle',
         element: <SDFCircleShaderPage />,
-        section: 'Signed Distance Fields',
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/spiral',
+        label: 'Spiral',
+        element: <SpiralShaderPage />,
+        section: 'Experiments',
     },
 
     // Three.js Journey
