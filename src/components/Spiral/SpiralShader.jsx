@@ -27,15 +27,15 @@ export function SpiralShader() {
         () => ({
             uTime: new THREE.Uniform(0),
             uResolution: new THREE.Uniform(new THREE.Vector2(width, height)),
-            uSpeed: new THREE.Uniform(2),
+            uSpeed: new THREE.Uniform(controls.uSpeed),
 
-            uBias: new THREE.Uniform(new THREE.Vector3(0.86, 0.62, 0.55)),
-            uAmplitude: new THREE.Uniform(new THREE.Vector3(0.4, 0.41, 0.53)),
-            uFrequency: new THREE.Uniform(new THREE.Vector3(2, 1, 1)),
-            uPhase: new THREE.Uniform(new THREE.Vector3(0, 0.25, 0.25)),
+            uBias: new THREE.Uniform(new THREE.Vector3(controls.uBias.r / 255, controls.uBias.g / 255, controls.uBias.b / 255)),
+            uAmplitude: new THREE.Uniform(new THREE.Vector3(controls.uAmplitude.r / 255, controls.uAmplitude.g / 255, controls.uAmplitude.b / 255)),
+            uFrequency: new THREE.Uniform(new THREE.Vector3(controls.uFrequency.x, controls.uFrequency.y, controls.uFrequency.z)),
+            uPhase: new THREE.Uniform(new THREE.Vector3(controls.uPhase.x, controls.uPhase.y, controls.uPhase.z)),
         }),
         // eslint-disable-next-line react-hooks/exhaustive-deps
-        []
+        [] // intentionally empty: uniform objects are created once; useEffect mutates .value to sync controls
     )
 
     useEffect(() => {
