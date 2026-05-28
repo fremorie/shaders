@@ -3,8 +3,8 @@ import * as THREE from 'three'
 import { useThree } from '@react-three/fiber'
 import { RawShaderMaterial } from '../../utils/RawShaderMaterial'
 
-import vertexShader from '../../shaders/sdfCircle/vertex.glsl'
-import fragmentShader from '../../shaders/sdfCircle/fragment.glsl'
+import vertexShader from './vertex.glsl'
+import fragmentShader from './fragment.glsl'
 
 export function SDFCircleShader() {
     const { width, height } = useThree((state) => state.viewport)
