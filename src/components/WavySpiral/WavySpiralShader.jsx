@@ -102,8 +102,6 @@ export function WavySpiralShader({ store }) {
                 controls.uPhase.y,
                 controls.uPhase.z
             )
-
-            console.log(materialRef.current.uniforms)
         }
     }, [width, height, controls])
 
