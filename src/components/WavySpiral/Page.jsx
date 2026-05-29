@@ -8,7 +8,10 @@ export function WavySpiralShaderPage() {
     const store = useCreateStore()
     return (
         <>
-            <LevaPanel store={store} />
+            <LevaPanel
+                store={store}
+                theme={{ sizes: { rootWidth: '350px' } }}
+            />
             <Canvas>
                 <WavySpiralShader store={store} />
                 <OrthographicCamera makeDefault position={[0, 0, 1]} />

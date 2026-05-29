@@ -6,7 +6,9 @@ uniform vec3 uBias;
 uniform vec3 uAmplitude;
 uniform vec3 uFrequency;
 uniform vec3 uPhase;
-uniform float uSpeed;
+uniform float uSpiralSpeed;
+uniform float uEdgesSpeed;
+uniform bool uUseCosinePalette;
 
 varying vec2 vUv;
 
@@ -31,17 +33,22 @@ void main() {
     // Create a circle
     float strength = sdfCircle(uv, 0.5);
 
-    vec3 finalColor = cosinePalette(
-        uTime * 0.2 + strength,
-        uBias,
-        uAmplitude,
-        uFrequency,
-        uPhase
-    );
+    vec3 finalColor = uUseCosinePalette
+    ?
+        cosinePalette(
+            uTime * 0.2 + strength,
+            uBias,
+            uAmplitude,
+            uFrequency,
+            uPhase
+        )
+    : vec3(1.0, 2.0, 3.0);
 
     // Create a spiral
     float angle = atan(uv.y, uv.x);
-    strength = sin(strength * 16.0 - uTime * uSpeed + angle) / 2.0 + 0.5;
+    strength = strength + 0.01 * sin(32.0 * angle + uTime * uEdgesSpeed);
+    strength = sin(strength * 16.0 - uTime * uSpiralSpeed + angle) / 2.0 + 0.5;
+
 
     vec4 color = vec4(
         finalColor * strength,

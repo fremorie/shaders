@@ -14,13 +14,15 @@ export function WavySpiralShader({ store }) {
     const controls = useControls(
         {
             'Cosine Palette': folder({
+                uUseCosinePalette: { value: true, label: 'Use cosine palette' },
                 uBias: { r: 0.054 * 255, g: 0.28 * 255, b: 0.031 * 255 },
                 uAmplitude: { r: 0.29 * 255, g: 0.32 * 255, b: 0.75 * 255 },
                 uFrequency: { x: 2.0, y: 1.0, z: 1.0 },
                 uPhase: { x: 0, y: 0.25, z: 0.25 },
             }),
             General: folder({
-                uSpeed: { value: 1.5, min: 0, max: 10, step: 0.01 },
+                uSpiralSpeed: { value: 1.5, min: 0, max: 10, step: 0.01 },
+                uEdgesSpeed: { value: 2.5, min: 0, max: 10, step: 0.01 },
             }),
         },
         { store }
@@ -30,7 +32,9 @@ export function WavySpiralShader({ store }) {
         () => ({
             uTime: new THREE.Uniform(0),
             uResolution: new THREE.Uniform(new THREE.Vector2(width, height)),
-            uSpeed: new THREE.Uniform(controls.uSpeed),
+            uSpiralSpeed: new THREE.Uniform(controls.uSpiralSpeed),
+            uEdgesSpeed: new THREE.Uniform(controls.uEdgesSpeed),
+            uUseCosinePalette: new THREE.Uniform(controls.uUseCosinePalette),
 
             uBias: new THREE.Uniform(
                 new THREE.Vector3(
@@ -70,7 +74,12 @@ export function WavySpiralShader({ store }) {
             materialRef.current.uniforms.uResolution.value.x = width
             materialRef.current.uniforms.uResolution.value.y = height
 
-            materialRef.current.uniforms.uSpeed.value = controls.uSpeed
+            materialRef.current.uniforms.uSpiralSpeed.value =
+                controls.uSpiralSpeed
+            materialRef.current.uniforms.uEdgesSpeed.value =
+                controls.uEdgesSpeed
+            materialRef.current.uniforms.uUseCosinePalette.value =
+                controls.uUseCosinePalette
 
             materialRef.current.uniforms.uBias.value = new THREE.Vector3(
                 controls.uBias.r / 255,
