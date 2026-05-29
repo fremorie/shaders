@@ -10,6 +10,11 @@
     max-width: 600px;
 }
 
+.explanation a {
+    font-weight: bold;
+    color: lightblue;
+}
+
 .explanation__header {
     display: flex;
     align-items: center;
