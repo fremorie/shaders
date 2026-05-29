@@ -7,14 +7,17 @@ import { useControls } from 'leva'
 import vertexShader from '../../shaders/point/vertex.glsl'
 import fragmentShader from '../../shaders/point/fragment.glsl'
 
-export function VignetteShader() {
+export function VignetteShader({ store }) {
     const { width, height } = useThree((state) => state.viewport)
     const materialRef = useRef(null)
 
-    const { uHaloThreshold, uScale } = useControls({
-        uHaloThreshold: { value: 0.1, min: 0, max: 1 },
-        uScale: { value: 0.05, min: 0, max: 1 },
-    })
+    const { uHaloThreshold, uScale } = useControls(
+        {
+            uHaloThreshold: { value: 0.1, min: 0, max: 1 },
+            uScale: { value: 0.05, min: 0, max: 1 },
+        },
+        { store }
+    )
 
     const uniforms = useMemo(
         () => ({

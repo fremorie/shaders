@@ -8,13 +8,16 @@ import { RawShaderMaterial } from '../../utils/RawShaderMaterial'
 import fragmentShader from '../../shaders/ragingSea/fragment.glsl'
 import vertexShader from '../../shaders/ragingSea/vertex.glsl'
 
-export function RagingSeaShader() {
+export function RagingSeaShader({ store }) {
     const materialRef = useRef()
 
-    const { depthColor, surfaceColor } = useControls({
-        depthColor: '#186691',
-        surfaceColor: '#9bd8ff',
-    })
+    const { depthColor, surfaceColor } = useControls(
+        {
+            depthColor: '#186691',
+            surfaceColor: '#9bd8ff',
+        },
+        { store }
+    )
 
     const uniforms = useMemo(
         () => ({

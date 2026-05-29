@@ -7,17 +7,20 @@ import { useControls } from 'leva'
 import vertexShader from '../../shaders/coloredGradientStripes/vertex.glsl'
 import fragmentShader from '../../shaders/coloredGradientStripes/fragment.glsl'
 
-export function ColoredGradientStripesShader() {
+export function ColoredGradientStripesShader({ store }) {
     const { width, height } = useThree((state) => state.viewport)
     const materialRef = useRef(null)
 
     const { uRepeatCount, uRedStrength, uGreenStrength, uBlueStrength } =
-        useControls({
-            uRepeatCount: { value: 10, min: 0, max: 100, step: 1 },
-            uRedStrength: { value: 0.65, min: 0, max: 1 },
-            uGreenStrength: { value: 0.67, min: 0, max: 1 },
-            uBlueStrength: { value: 1, min: 0, max: 1 },
-        })
+        useControls(
+            {
+                uRepeatCount: { value: 10, min: 0, max: 100, step: 1 },
+                uRedStrength: { value: 0.65, min: 0, max: 1 },
+                uGreenStrength: { value: 0.67, min: 0, max: 1 },
+                uBlueStrength: { value: 1, min: 0, max: 1 },
+            },
+            { store }
+        )
 
     const uniforms = useMemo(
         () => ({

@@ -7,14 +7,17 @@ import { useControls } from 'leva'
 import vertexShader from '../../shaders/stripes/vertex.glsl'
 import fragmentShader from '../../shaders/stripes/fragment.glsl'
 
-export function StripesShader() {
+export function StripesShader({ store }) {
     const { width, height } = useThree((state) => state.viewport)
     const materialRef = useRef(null)
 
-    const { uRepeatCount, uModulo } = useControls({
-        uRepeatCount: { value: 5, min: 0, max: 10 },
-        uModulo: { value: 1, min: 0, max: 10 },
-    })
+    const { uRepeatCount, uModulo } = useControls(
+        {
+            uRepeatCount: { value: 5, min: 0, max: 10 },
+            uModulo: { value: 1, min: 0, max: 10 },
+        },
+        { store }
+    )
 
     const uniforms = useMemo(
         () => ({

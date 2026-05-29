@@ -7,14 +7,17 @@ import { useControls } from 'leva'
 import vertexShader from '../../shaders/smoothstep/vertex.glsl'
 import fragmentShader from '../../shaders/smoothstep/fragment.glsl'
 
-export function TemplateShader() {
+export function TemplateShader({ store }) {
     const { width, height } = useThree((state) => state.viewport)
     const materialRef = useRef(null)
 
-    const { uEdge0, uEdge1 } = useControls({
-        uEdge0: { value: 0, min: 0, max: 1 },
-        uEdge1: { value: 1, min: 0, max: 1 },
-    })
+    const { uEdge0, uEdge1 } = useControls(
+        {
+            uEdge0: { value: 0, min: 0, max: 1 },
+            uEdge1: { value: 1, min: 0, max: 1 },
+        },
+        { store }
+    )
 
     const uniforms = useMemo(
         () => ({

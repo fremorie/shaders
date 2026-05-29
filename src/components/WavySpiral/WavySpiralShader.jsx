@@ -7,15 +7,15 @@ import vertexShader from './vertex.glsl'
 import fragmentShader from './fragment.glsl'
 import { useControls, folder } from 'leva'
 
-export function SpiralShader({ store }) {
+export function WavySpiralShader({ store }) {
     const { width, height } = useThree((state) => state.viewport)
     const materialRef = useRef(null)
 
     const controls = useControls(
         {
             'Cosine Palette': folder({
-                uBias: { r: 0.86 * 255, g: 0.62 * 255, b: 0.55 * 255 },
-                uAmplitude: { r: 0.4 * 255, g: 0.41 * 255, b: 0.53 * 255 },
+                uBias: { r: 0.054 * 255, g: 0.28 * 255, b: 0.031 * 255 },
+                uAmplitude: { r: 0.29 * 255, g: 0.32 * 255, b: 0.75 * 255 },
                 uFrequency: { x: 2.0, y: 1.0, z: 1.0 },
                 uPhase: { x: 0, y: 0.25, z: 0.25 },
             }),
@@ -93,6 +93,8 @@ export function SpiralShader({ store }) {
                 controls.uPhase.y,
                 controls.uPhase.z
             )
+
+            console.log(materialRef.current.uniforms)
         }
     }, [width, height, controls])
 

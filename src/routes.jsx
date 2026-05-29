@@ -8,6 +8,7 @@ import { GradientStripesShaderPage } from './components/GradientStripes/Page'
 import { ColoredGradientStripesShaderPage } from './components/ColoredGradientStripes/Page'
 import { SDFCircleShaderPage } from './components/SDFCircle/Page'
 import { SpiralShaderPage } from './components/Spiral/Page.jsx'
+import { WavySpiralShaderPage } from './components/WavySpiral/Page.jsx'
 
 export const ROUTES = [
     {
@@ -65,6 +66,12 @@ export const ROUTES = [
         path: '/shaders/spiral',
         label: 'Spiral',
         element: <SpiralShaderPage />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/wavy-spiral',
+        label: 'Wavy Spiral',
+        element: <WavySpiralShaderPage />,
         section: 'Experiments',
     },
 
