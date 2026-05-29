@@ -19,7 +19,7 @@ export function SpiralShader() {
             uPhase: { x: 0, y: 0.25, z: 0.25 },
         }),
         General: folder({
-            uSpeed: { value: 1.5, min: 0, max: 100, step: 0.01 },
+            uSpeed: { value: 1.5, min: 0, max: 10, step: 0.01 },
         }),
     })
 
