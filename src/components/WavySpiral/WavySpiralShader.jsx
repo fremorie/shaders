@@ -15,8 +15,8 @@ export function WavySpiralShader({ store }) {
         {
             'Cosine Palette': folder({
                 uUseCosinePalette: { value: true, label: 'Use cosine palette' },
-                uBias: { r: 0.054 * 255, g: 0.28 * 255, b: 0.031 * 255 },
-                uAmplitude: { r: 0.29 * 255, g: 0.32 * 255, b: 0.75 * 255 },
+                uBias: { r: 0.5 * 255, g: 0.56 * 255, b: 0.717 * 255 },
+                uAmplitude: { r: 0.192 * 255, g: 0.345 * 255, b: 0.239 * 255 },
                 uFrequency: { x: 2.0, y: 1.0, z: 1.0 },
                 uPhase: { x: 0, y: 0.25, z: 0.25 },
             }),
