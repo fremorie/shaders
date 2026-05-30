@@ -7,9 +7,10 @@ import { VignetteShaderPage } from './components/Vignette/Page'
 import { GradientStripesShaderPage } from './components/GradientStripes/Page'
 import { ColoredGradientStripesShaderPage } from './components/ColoredGradientStripes/Page'
 import { SDFCircleShaderPage } from './components/SDFCircle/Page'
-import { SpiralShaderPage } from './components/Spiral/Page.jsx'
-import { WavySpiralShaderPage } from './components/WavySpiral/Page.jsx'
-import { SDFSphereShaderPage } from './components/SDFSphere/Page.jsx'
+import { SpiralShaderPage } from './components/Spiral/Page'
+import { WavySpiralShaderPage } from './components/WavySpiral/Page'
+import { SDFSphereShaderPage } from './components/SDFSphere/Page'
+import { PulsatingSpiralShaderPage } from './components/PulsatingSpiral/Page'
 
 export const ROUTES = [
     {
@@ -79,6 +80,12 @@ export const ROUTES = [
         path: '/shaders/wavy-spiral',
         label: 'Wavy Spiral',
         element: <WavySpiralShaderPage />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/pulsating-spiral',
+        label: 'Pulsating Spiral',
+        element: <PulsatingSpiralShaderPage />,
         section: 'Experiments',
     },
 
