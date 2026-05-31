@@ -1,0 +1,34 @@
+import { Float, Stage, useGLTF } from '@react-three/drei'
+import { Perf } from 'r3f-perf'
+
+export function Experience() {
+    const { nodes } = useGLTF('./models/Bottle_smoothed.glb')
+
+    return (
+        <>
+            <Perf />
+            <Stage>
+                <group dispose={null}>
+                    <Float>
+                        <mesh position-y={1}>
+                            <boxGeometry />
+                            <meshStandardMaterial color="mediumpurple" />
+                        </mesh>
+                    </Float>
+                    <mesh
+                        castShadow
+                        receiveShadow
+                        geometry={nodes.Bottle.geometry}
+                        position={[0, 0.1, 0]}
+                    >
+                        <meshPhysicalMaterial
+                            transparent
+                            transmission={0.9}
+                            roughness={0.01}
+                        />
+                    </mesh>
+                </group>
+            </Stage>
+        </>
+    )
+}

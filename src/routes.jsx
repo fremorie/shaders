@@ -11,7 +11,9 @@ import { SpiralShaderPage } from './components/Spiral/Page'
 import { WavySpiralShaderPage } from './components/WavySpiral/Page'
 import { SDFSphereShaderPage } from './components/SDFSphere/Page'
 import { PulsatingSpiralShaderPage } from './components/PulsatingSpiral/Page'
-import { StencilBufferPage } from './components/StencilBuffer/Page.jsx'
+import { StencilBufferPage } from './components/StencilBuffer/Page'
+import { GlassBottle } from './models/GlassBottle'
+import { LowPolyGlassBottle } from './models/LowPolyGlassBottle'
 
 export const ROUTES = [
     {
@@ -94,6 +96,18 @@ export const ROUTES = [
         label: 'Stencil Buffer',
         element: <StencilBufferPage />,
         section: 'Experiments',
+    },
+    {
+        path: '/shaders/glass-bottle',
+        label: 'Glass Bottle',
+        element: <GlassBottle />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/low-poly-glass-bottle',
+        label: 'Low Poly Glass Bottle',
+        element: <LowPolyGlassBottle />,
+        section: 'Models',
     },
 
     // Three.js Journey
