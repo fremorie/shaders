@@ -42,6 +42,15 @@ function TorusKnot() {
 }
 
 function Frame(props) {
+    return (
+        <mesh {...props}>
+            <torusGeometry args={[0.5, 0.05, 32, 64]} />
+            <meshPhongMaterial color="orange" />
+        </mesh>
+    )
+}
+
+const CircularMask = (props) => {
     const [hovered, setHovered] = useState(false)
     const [grabbed, setGrabbed] = useState(false)
 
@@ -49,26 +58,19 @@ function Frame(props) {
     useCursor(grabbed, 'grabbing', 'grab')
 
     return (
-        <mesh
-            {...props}
-            onPointerOver={() => setHovered(true)}
-            onPointerOut={() => setHovered(false)}
-            onPointerDown={() => setGrabbed(true)}
-            onPointerUp={() => setGrabbed(false)}
-        >
-            <torusGeometry args={[0.5, 0.05, 32, 64]} />
-            <meshPhongMaterial color="orange" />
-        </mesh>
+        <DragControls>
+            <group
+                {...props}
+                onPointerOver={() => setHovered(true)}
+                onPointerOut={() => setHovered(false)}
+                onPointerDown={() => setGrabbed(true)}
+                onPointerUp={() => setGrabbed(false)}
+            >
+                <Frame position={[0, 0, 1]} />
+                <Mask id={1} position={[0, 0, 0.95]}>
+                    <circleGeometry args={[0.5, 64]} />
+                </Mask>
+            </group>
+        </DragControls>
     )
 }
-
-const CircularMask = (props) => (
-    <DragControls>
-        <group {...props}>
-            <Frame position={[0, 0, 1]} />
-            <Mask id={1} position={[0, 0, 0.95]}>
-                <circleGeometry args={[0.5, 64]} />
-            </Mask>
-        </group>
-    </DragControls>
-)
