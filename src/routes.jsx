@@ -11,6 +11,7 @@ import { SpiralShaderPage } from './components/Spiral/Page'
 import { WavySpiralShaderPage } from './components/WavySpiral/Page'
 import { SDFSphereShaderPage } from './components/SDFSphere/Page'
 import { PulsatingSpiralShaderPage } from './components/PulsatingSpiral/Page'
+import { StencilBufferPage } from './components/StencilBuffer/Page.jsx'
 
 export const ROUTES = [
     {
@@ -86,6 +87,12 @@ export const ROUTES = [
         path: '/shaders/pulsating-spiral',
         label: 'Pulsating Spiral',
         element: <PulsatingSpiralShaderPage />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/stencil-buffer',
+        label: 'Stencil Buffer',
+        element: <StencilBufferPage />,
         section: 'Experiments',
     },
 
