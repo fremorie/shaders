@@ -67,7 +67,7 @@ export const ROUTES = [
     },
     {
         path: '/shaders/sdf-sphere',
-        label: 'SDF Sphere',
+        label: 'Ray marching: Sphere',
         element: <SDFSphereShaderPage />,
         section: 'Basics',
     },
