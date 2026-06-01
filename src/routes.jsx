@@ -16,6 +16,7 @@ import { GlassBottle } from './models/GlassBottle'
 import { LowPolyGlassBottle } from './models/LowPolyGlassBottle'
 import { Sakura } from './models/Sakura'
 import { SakuraV2 } from './models/SakuraV2'
+import { BottledSakura } from './models/BottledSakura'
 
 export const ROUTES = [
     {
@@ -123,6 +124,12 @@ export const ROUTES = [
         path: '/shaders/low-poly-sakura-tree-v2',
         label: 'Low poly sakura tree, version 2',
         element: <SakuraV2 />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/bottled-sakura',
+        label: 'Sakura in a bottle',
+        element: <BottledSakura />,
         section: 'Models',
     },
 
