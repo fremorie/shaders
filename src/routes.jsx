@@ -14,6 +14,7 @@ import { PulsatingSpiralShaderPage } from './components/PulsatingSpiral/Page'
 import { StencilBufferPage } from './components/StencilBuffer/Page'
 import { GlassBottle } from './models/GlassBottle'
 import { LowPolyGlassBottle } from './models/LowPolyGlassBottle'
+import { Sakura } from './models/Sakura'
 
 export const ROUTES = [
     {
@@ -97,16 +98,24 @@ export const ROUTES = [
         element: <StencilBufferPage />,
         section: 'Experiments',
     },
+
+    // Models
     {
         path: '/shaders/glass-bottle',
-        label: 'Glass Bottle',
+        label: 'Glass bottle',
         element: <GlassBottle />,
         section: 'Models',
     },
     {
         path: '/shaders/low-poly-glass-bottle',
-        label: 'Low Poly Glass Bottle',
+        label: 'Low poly glass bottle',
         element: <LowPolyGlassBottle />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/low-poly-sakura-tree',
+        label: 'Low poly sakura tree',
+        element: <Sakura />,
         section: 'Models',
     },
 
