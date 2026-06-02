@@ -17,6 +17,8 @@ import { LowPolyGlassBottle } from './models/LowPolyGlassBottle'
 import { Sakura } from './models/Sakura'
 import { SakuraV2 } from './models/SakuraV2'
 import { BottledSakura } from './models/BottledSakura'
+import { SakuraScene } from './models/SakuraScene'
+import { SakuraSceneBaked } from './models/SakuraSceneBaked'
 
 export const ROUTES = [
     {
@@ -130,6 +132,18 @@ export const ROUTES = [
         path: '/shaders/bottled-sakura',
         label: 'Sakura in a bottle',
         element: <BottledSakura />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/spring',
+        label: 'Spring',
+        element: <SakuraScene />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/spring-baked',
+        label: 'Spring (baked)',
+        element: <SakuraSceneBaked />,
         section: 'Models',
     },
 
