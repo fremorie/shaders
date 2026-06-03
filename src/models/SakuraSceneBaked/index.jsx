@@ -6,23 +6,23 @@ import { OrbitControls, useGLTF, useTexture } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { Canvas } from '@react-three/fiber'
 
-export function SakuraScene(props) {
-    const { nodes } = useGLTF('./models/bakedSpring/Spring.glb')
-    const bakedTexture = useTexture('./models/bakedSpring/baked.jpg')
+export function SakuraScene() {
+    const { nodes } = useGLTF('./models/Spring/Spring.glb')
+    const bakedTexture = useTexture('./models/Spring/baked.jpg')
     // eslint-disable-next-line
     bakedTexture.flipY = false
 
     return (
-        <group {...props} dispose={null}>
+        <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
             <mesh
                 geometry={nodes.merged.geometry}
-                position={[-1.255, 0.616, 0.493]}
+                position={[-0.871, 0.616, 0.325]}
             >
                 <meshBasicMaterial map={bakedTexture} />
             </mesh>
             <mesh
                 geometry={nodes.River.geometry}
-                position={[-0.635, 0.508, 0.294]}
+                position={[-0.251, 0.508, 0.127]}
             >
                 <meshBasicMaterial />
             </mesh>
@@ -30,11 +30,19 @@ export function SakuraScene(props) {
     )
 }
 
-useGLTF.preload('./models/bakedSpring/Spring.glb')
+useGLTF.preload('./models/Spring/Spring.glb')
 
 export function SakuraSceneBaked() {
     return (
-        <Canvas gl={{ stencil: true }}>
+        <Canvas
+            flat
+            camera={{
+                fov: 45,
+                near: 0.1,
+                far: 200,
+                position: [2, 1, 2],
+            }}
+        >
             <color args={['#291b18']} attach="background" />
             <OrbitControls makeDefault />
             <Perf />

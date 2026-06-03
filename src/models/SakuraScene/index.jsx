@@ -6,16 +6,24 @@ import { OrbitControls, useGLTF } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { Canvas } from '@react-three/fiber'
 
-export function SakuraScene(props) {
+export function SakuraScene() {
     const { nodes, materials } = useGLTF('./models/Sakura_scene_full.glb')
     return (
-        <Canvas gl={{ stencil: true }}>
+        <Canvas
+            flat
+            camera={{
+                fov: 45,
+                near: 0.1,
+                far: 200,
+                position: [2, 1, 2],
+            }}
+        >
             <color args={['#ffffff']} attach="background" />
             <OrbitControls makeDefault />
             <Perf />
             <ambientLight />
             <directionalLight />
-            <group {...props} dispose={null}>
+            <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
                 <mesh
                     castShadow
                     receiveShadow
