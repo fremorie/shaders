@@ -19,13 +19,13 @@ import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
 
 const riverShapeConfig = {
-    uPhaseA: 12.0,
-    uFrequencyA: 0.9,
+    uPhaseA: 7.61,
+    uFrequencyA: 5.03,
 
-    uPhaseB: 10.9,
+    uPhaseB: 10.3,
     uFrequencyB: 0.0,
 
-    uPhaseC: 2.85,
+    uPhaseC: 8.56,
     uFrequencyC: 2.93,
 
     uPhaseD: 4.14,
@@ -46,7 +46,7 @@ const RiverMaterial = shaderMaterial(
 extend({ RiverMaterial })
 
 function SakuraScene() {
-    const { nodes } = useGLTF('./models/Spring/Spring.glb')
+    const { nodes } = useGLTF('./models/Spring/Spring2.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
     // eslint-disable-next-line
     bakedTexture.flipY = false
@@ -167,7 +167,7 @@ function SakuraScene() {
     )
 }
 
-useGLTF.preload('./models/Spring/Spring.glb')
+useGLTF.preload('./models/Spring/Spring2.glb')
 
 export function SpringShadedRiver() {
     const store = useCreateStore()

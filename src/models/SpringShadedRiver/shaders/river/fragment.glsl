@@ -18,15 +18,15 @@ varying vec3 vPosition;
 void main() {
     float riverLeftCenter =
         0.5 +
-        0.2 * sin(vUv.y * uFrequencyA + uPhaseA) +
-        0.5 * sin(vUv.y * uFrequencyB + uPhaseB);
+        0.2 * sin(vUv.x * uFrequencyA + uPhaseA) +
+        0.5 * sin(vUv.x * uFrequencyB + uPhaseB);
 
     float riverRightCenter =
         0.5 +
-        0.2 * sin(vUv.y * uFrequencyC + uPhaseC) +
-        0.5 * sin(vUv.y * uFrequencyD + uPhaseD);
+        0.2 * sin(vUv.x * uFrequencyC + uPhaseC) +
+        0.5 * sin(vUv.x * uFrequencyD + uPhaseD);
 
-    float offsetStrength = smoothstep(0.4, 0.6, vUv.y);
+    float offsetStrength = smoothstep(0.4, 0.6, vUv.x);
 
     // Use riverLeftCenter on the left side and riverRightCenter on the right.
     float centerOffset = offsetStrength * riverLeftCenter + (1.0 - offsetStrength) * riverRightCenter;
@@ -34,12 +34,17 @@ void main() {
     float center = 0.5 + centerOffset;
 
     // Depth gradient (X)
-    float distFromCenter = abs(vUv.x - center);
+    float distFromCenter = abs(vUv.y - center);
     float mixStrength = smoothstep(0.0, 0.7, distFromCenter);
+
+    float ripple = mod(mixStrength - uTime * 0.05, 0.1);
+    ripple = ripple > 0.08 ? ripple : 0.0;
+    ripple = distFromCenter > 0.15 ? ripple : 0.0;
+
     vec3 color = mix(uDepthColor, uEdgeColor, mixStrength);
 
 
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(color + ripple, 1.0);
 
     #include <colorspace_fragment>
 }
