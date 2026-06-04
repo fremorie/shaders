@@ -12,10 +12,10 @@ import { Perf } from 'r3f-perf'
 import { Canvas, extend, useFrame } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { LevaPanel, useControls, useCreateStore } from 'leva'
 
 import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
-import { useControls } from 'leva'
 
 const RiverMaterial = shaderMaterial(
     {
@@ -74,20 +74,26 @@ function SakuraScene() {
 useGLTF.preload('./models/Spring/Spring.glb')
 
 export function SpringShadedRiver() {
+    const store = useCreateStore()
+
     return (
-        <Canvas
-            flat
-            camera={{
-                fov: 45,
-                near: 0.1,
-                far: 200,
-                position: [2, 1, 2],
-            }}
-        >
-            <color args={['#291b18']} attach="background" />
-            <OrbitControls makeDefault />
-            <Perf />
-            <SakuraScene />
-        </Canvas>
+        <>
+            <LevaPanel store={store} />
+
+            <Canvas
+                flat
+                camera={{
+                    fov: 45,
+                    near: 0.1,
+                    far: 200,
+                    position: [2, 1, 2],
+                }}
+            >
+                <color args={['#291b18']} attach="background" />
+                <OrbitControls makeDefault />
+                <Perf position="bottom-right" />
+                <SakuraScene />
+            </Canvas>
+        </>
     )
 }
