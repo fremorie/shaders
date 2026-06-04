@@ -10,14 +10,18 @@ import {
 } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { Canvas, extend, useFrame } from '@react-three/fiber'
+import { useEffect, useRef } from 'react'
+import * as THREE from 'three'
 
 import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
-import { useRef } from 'react'
+import { useControls } from 'leva'
 
 const RiverMaterial = shaderMaterial(
     {
         uTime: 0,
+        uEdgeColor: new THREE.Color('#99C460FF'),
+        uDepthColor: new THREE.Color('#0e5852'),
     },
     vertexShader,
     fragmentShader
@@ -31,6 +35,11 @@ function SakuraScene() {
     // eslint-disable-next-line
     bakedTexture.flipY = false
 
+    const { edgeColor, depthColor } = useControls('River', {
+        edgeColor: '#99C460FF',
+        depthColor: '#0e5852',
+    })
+
     const riverMaterialRef = useRef(null)
 
     useFrame((state, delta) => {
@@ -38,6 +47,11 @@ function SakuraScene() {
             riverMaterialRef.current.uTime += delta
         }
     })
+
+    useEffect(() => {
+        riverMaterialRef.current.uEdgeColor = new THREE.Color(edgeColor)
+        riverMaterialRef.current.uDepthColor = new THREE.Color(depthColor)
+    }, [edgeColor, depthColor])
 
     return (
         <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
