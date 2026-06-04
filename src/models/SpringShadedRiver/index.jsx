@@ -7,6 +7,7 @@ import {
     useGLTF,
     useTexture,
     shaderMaterial,
+    Sparkles,
 } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
 import { Canvas, extend, useFrame } from '@react-three/fiber'
@@ -17,11 +18,26 @@ import { LevaPanel, useControls, useCreateStore } from 'leva'
 import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
 
+const riverShapeConfig = {
+    uPhaseA: 12.0,
+    uFrequencyA: 0.9,
+
+    uPhaseB: 10.9,
+    uFrequencyB: 0.0,
+
+    uPhaseC: 2.85,
+    uFrequencyC: 2.93,
+
+    uPhaseD: 4.14,
+    uFrequencyD: 3.18,
+}
+
 const RiverMaterial = shaderMaterial(
     {
         uTime: 0,
         uEdgeColor: new THREE.Color('#99C460FF'),
         uDepthColor: new THREE.Color('#0e5852'),
+        ...riverShapeConfig,
     },
     vertexShader,
     fragmentShader
@@ -35,9 +51,68 @@ function SakuraScene() {
     // eslint-disable-next-line
     bakedTexture.flipY = false
 
-    const { edgeColor, depthColor } = useControls('River', {
+    const {
+        edgeColor,
+        depthColor,
+        phaseA,
+        frequencyA,
+        phaseB,
+        frequencyB,
+        phaseC,
+        frequencyC,
+        phaseD,
+        frequencyD,
+    } = useControls('River', {
         edgeColor: '#99C460FF',
         depthColor: '#0e5852',
+        phaseA: {
+            value: riverShapeConfig.uPhaseA,
+            min: 0,
+            max: 20,
+            step: 0.01,
+        },
+        frequencyA: {
+            value: riverShapeConfig.uFrequencyA,
+            min: 0,
+            max: 20,
+            step: 0.01,
+        },
+        phaseB: {
+            value: riverShapeConfig.uPhaseB,
+            min: 0,
+            max: 20,
+            step: 0.01,
+        },
+        frequencyB: {
+            value: riverShapeConfig.uFrequencyB,
+            min: 0,
+            max: 20,
+            step: 0.01,
+        },
+        phaseC: {
+            value: riverShapeConfig.uPhaseC,
+            min: 0,
+            max: 20,
+            step: 0.01,
+        },
+        frequencyC: {
+            value: riverShapeConfig.uFrequencyC,
+            min: 0,
+            max: 20,
+            step: 0.01,
+        },
+        phaseD: {
+            value: riverShapeConfig.uPhaseD,
+            min: 0,
+            max: 20,
+            step: 0.01,
+        },
+        frequencyD: {
+            value: riverShapeConfig.uFrequencyD,
+            min: 0,
+            max: 20,
+            step: 0.01,
+        },
     })
 
     const riverMaterialRef = useRef(null)
@@ -51,7 +126,28 @@ function SakuraScene() {
     useEffect(() => {
         riverMaterialRef.current.uEdgeColor = new THREE.Color(edgeColor)
         riverMaterialRef.current.uDepthColor = new THREE.Color(depthColor)
-    }, [edgeColor, depthColor])
+
+        riverMaterialRef.current.uFrequencyA = frequencyA
+        riverMaterialRef.current.uPhaseA = phaseA
+        riverMaterialRef.current.uFrequencyB = frequencyB
+        riverMaterialRef.current.uPhaseB = phaseB
+
+        riverMaterialRef.current.uFrequencyC = frequencyC
+        riverMaterialRef.current.uPhaseC = phaseC
+        riverMaterialRef.current.uFrequencyD = frequencyD
+        riverMaterialRef.current.uPhaseD = phaseD
+    }, [
+        edgeColor,
+        depthColor,
+        phaseA,
+        frequencyA,
+        phaseB,
+        frequencyB,
+        phaseC,
+        frequencyC,
+        phaseD,
+        frequencyD,
+    ])
 
     return (
         <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
@@ -93,6 +189,13 @@ export function SpringShadedRiver() {
                 <OrbitControls makeDefault />
                 <Perf position="bottom-right" />
                 <SakuraScene />
+                <Sparkles
+                    size={2}
+                    scale={[2, 1, 2]}
+                    position-y={0.7}
+                    speed={0.2}
+                    count={40}
+                />
             </Canvas>
         </>
     )
