@@ -1,12 +1,17 @@
 # Getting started
 
-To use the project's Node version:
+Use the project's Node version:
 
 ```bash
 nvm use
 ```
 
-To start dev server:
+Install dependencies:
+```bash
+npm install
+```
+
+Start dev server:
 
 ```bash
 npm run dev
