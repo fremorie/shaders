@@ -22,7 +22,7 @@ const riverShapeConfig = {
     uPhaseA: 7.61,
     uFrequencyA: 5.03,
 
-    uPhaseB: 10.3,
+    uPhaseB: 0.1,
     uFrequencyB: 0.0,
 
     uPhaseC: 8.56,
@@ -37,6 +37,9 @@ const RiverMaterial = shaderMaterial(
         uTime: 0,
         uEdgeColor: new THREE.Color('#99C460FF'),
         uDepthColor: new THREE.Color('#0e5852'),
+        uDepthMap: null,
+        uDepthMapSmooth: null,
+        uPerlinNoise: null,
         ...riverShapeConfig,
     },
     vertexShader,
@@ -46,10 +49,18 @@ const RiverMaterial = shaderMaterial(
 extend({ RiverMaterial })
 
 function SakuraScene() {
-    const { nodes } = useGLTF('./models/Spring/Spring2.glb')
+    const { nodes } = useGLTF('./models/Spring/Spring3.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
+    const depthMap = useTexture('./models/Spring/SpringTerrainDepthMap.jpg')
+    const depthMapSmooth = useTexture('./models/Spring/SpringTerrainDepthMapFixed.jpg')
+    const perlinNoise = useTexture('./textures/perlin.png');
+
     // eslint-disable-next-line
     bakedTexture.flipY = false
+    // eslint-disable-next-line
+    depthMap.flipY = false
+    // eslint-disable-next-line
+    depthMapSmooth.flipY = false
 
     const {
         edgeColor,
@@ -67,8 +78,8 @@ function SakuraScene() {
         depthColor: '#0e5852',
         phaseA: {
             value: riverShapeConfig.uPhaseA,
-            min: 0,
-            max: 20,
+            min: -3.14,
+            max: 3.14,
             step: 0.01,
         },
         frequencyA: {
@@ -80,8 +91,8 @@ function SakuraScene() {
         phaseB: {
             value: riverShapeConfig.uPhaseB,
             min: 0,
-            max: 20,
-            step: 0.01,
+            max: 1,
+            step: 0.001,
         },
         frequencyB: {
             value: riverShapeConfig.uFrequencyB,
@@ -161,13 +172,19 @@ function SakuraScene() {
                 geometry={nodes.river.geometry}
                 position={[-0.251, 0.508, 0.127]}
             >
-                <riverMaterial key={RiverMaterial.key} ref={riverMaterialRef} />
+                <riverMaterial
+                    key={RiverMaterial.key}
+                    ref={riverMaterialRef}
+                    uDepthMap={depthMap}
+                    uDepthMapSmooth={depthMapSmooth}
+                    uPerlinNoise={perlinNoise}
+                />
             </mesh>
         </group>
     )
 }
 
-useGLTF.preload('./models/Spring/Spring2.glb')
+useGLTF.preload('./models/Spring/Spring3.glb')
 
 export function SpringShadedRiver() {
     const store = useCreateStore()

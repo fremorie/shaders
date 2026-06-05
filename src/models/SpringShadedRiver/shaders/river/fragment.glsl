@@ -3,48 +3,40 @@ uniform float uTime;
 uniform vec3 uEdgeColor;
 uniform vec3 uDepthColor;
 
-uniform float uPhaseA;
-uniform float uFrequencyA;
-uniform float uPhaseB;
-uniform float uFrequencyB;
-uniform float uPhaseC;
-uniform float uFrequencyC;
-uniform float uPhaseD;
-uniform float uFrequencyD;
+uniform sampler2D uPerlinNoise;
+
+uniform sampler2D uDepthMapSmooth;
 
 varying vec2 vUv;
 varying vec3 vPosition;
 
 void main() {
-    float riverLeftCenter =
-        0.5 +
-        0.2 * sin(vUv.x * uFrequencyA + uPhaseA) +
-        0.5 * sin(vUv.x * uFrequencyB + uPhaseB);
+    // Final color
+    vec3 finalColor = vec3(1.0, 1.0, 1.0);
 
-    float riverRightCenter =
-        0.5 +
-        0.2 * sin(vUv.x * uFrequencyC + uPhaseC) +
-        0.5 * sin(vUv.x * uFrequencyD + uPhaseD);
+    // Noise
+    float noise = texture2D(uPerlinNoise, vUv).r;
 
-    float offsetStrength = smoothstep(0.4, 0.6, vUv.x);
+    // Water color based on depth
+    float depthSmooth = texture2D(uDepthMapSmooth, vUv).r;
+    finalColor = mix(uDepthColor, uEdgeColor, pow(depthSmooth, 1.5));
 
-    // Use riverLeftCenter on the left side and riverRightCenter on the right.
-    float centerOffset = offsetStrength * riverLeftCenter + (1.0 - offsetStrength) * riverRightCenter;
+    // Ripple
+    float rippleMixStrength = depthSmooth;
+    float ripple = mod((rippleMixStrength - uTime * 0.05) * 20.0, 1.0);
+    ripple = ripple - (1.0 - depthSmooth);
+    ripple += noise;
+    bool isRight = vUv.y > 0.3 || vUv.x > 0.3;
+    ripple = (
+        ripple > 0.8 &&
+        depthSmooth > 0.01
+//        vUv.y < 0.7 &&
+//        isRight
+    ) ? ripple : 0.0;
 
-    float center = 0.5 + centerOffset;
+    finalColor += ripple;
 
-    // Depth gradient (X)
-    float distFromCenter = abs(vUv.y - center);
-    float mixStrength = smoothstep(0.0, 0.7, distFromCenter);
-
-    float ripple = mod(mixStrength - uTime * 0.05, 0.1);
-    ripple = ripple > 0.08 ? ripple : 0.0;
-    ripple = distFromCenter > 0.15 ? ripple : 0.0;
-
-    vec3 color = mix(uDepthColor, uEdgeColor, mixStrength);
-
-
-    gl_FragColor = vec4(color + ripple, 1.0);
+    gl_FragColor = vec4(vec3(finalColor), 1.0);
 
     #include <colorspace_fragment>
 }
