@@ -19,6 +19,7 @@ export function SpringInABottle() {
                     far: 200,
                     position: [2, 1, 2],
                 }}
+                gl={{ stencil: true }}
             >
                 <color args={['#291b18']} attach="background" />
                 <OrbitControls makeDefault />

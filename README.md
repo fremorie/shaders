@@ -7,6 +7,7 @@ nvm use
 ```
 
 Install dependencies:
+
 ```bash
 npm install
 ```

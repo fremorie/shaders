@@ -1,4 +1,4 @@
-import { useGLTF, useTexture, shaderMaterial } from '@react-three/drei'
+import { useGLTF, useTexture, shaderMaterial, useMask } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
@@ -21,6 +21,8 @@ const RiverMaterial = shaderMaterial(
 extend({ RiverMaterial })
 
 export function SpringModel() {
+    const stencil = useMask(1)
+
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
     const depthMap = useTexture(
@@ -47,7 +49,7 @@ export function SpringModel() {
                 geometry={nodes.merged.geometry}
                 position={[-0.871, 0.616, 0.325]}
             >
-                <meshBasicMaterial map={bakedTexture} />
+                <meshBasicMaterial map={bakedTexture} {...stencil} />
             </mesh>
             <mesh
                 geometry={nodes.river.geometry}
@@ -58,6 +60,7 @@ export function SpringModel() {
                     ref={riverMaterialRef}
                     uDepthMap={depthMap}
                     uPerlinNoise={perlinNoise}
+                    {...stencil}
                 />
             </mesh>
         </group>
