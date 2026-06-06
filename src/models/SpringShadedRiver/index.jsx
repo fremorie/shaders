@@ -35,8 +35,8 @@ const riverShapeConfig = {
 const RiverMaterial = shaderMaterial(
     {
         uTime: 0,
-        uEdgeColor: new THREE.Color('#99C460FF'),
-        uDepthColor: new THREE.Color('#0e5852'),
+        uEdgeColor: new THREE.Color('#dbd497'), //new THREE.Color('#99C460FF'),
+        uDepthColor: new THREE.Color('#23938a'), // new THREE.Color('#0e5852'),
         uDepthMap: null,
         uDepthMapSmooth: null,
         uPerlinNoise: null,
@@ -52,8 +52,10 @@ function SakuraScene() {
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
     const depthMap = useTexture('./models/Spring/SpringTerrainDepthMap.jpg')
-    const depthMapSmooth = useTexture('./models/Spring/SpringTerrainDepthMapFixed.jpg')
-    const perlinNoise = useTexture('./textures/perlin.png');
+    const depthMapSmooth = useTexture(
+        './models/Spring/SpringTerrainDepthMapFixed.jpg'
+    )
+    const perlinNoise = useTexture('./textures/perlin.png')
 
     // eslint-disable-next-line
     bakedTexture.flipY = false
@@ -74,8 +76,8 @@ function SakuraScene() {
         phaseD,
         frequencyD,
     } = useControls('River', {
-        edgeColor: '#99C460FF',
-        depthColor: '#0e5852',
+        edgeColor: '#dbd497',
+        depthColor: '#23938a',
         phaseA: {
             value: riverShapeConfig.uPhaseA,
             min: -3.14,

@@ -20,6 +20,7 @@ import { BottledSakura } from './models/BottledSakura'
 import { SakuraScene } from './models/SakuraScene'
 import { SakuraSceneBaked } from './models/SakuraSceneBaked'
 import { SpringShadedRiver } from './models/SpringShadedRiver'
+import { SpringInABottle } from './scenes/SpringInABottle/index.jsx'
 
 export const ROUTES = [
     {
@@ -102,6 +103,13 @@ export const ROUTES = [
         label: 'Stencil Buffer',
         element: <StencilBufferPage />,
         section: 'Experiments',
+    },
+    // Scenes
+    {
+        path: '/shaders/spring-in-a-bottle',
+        label: 'Spring in a bottle',
+        element: <SpringInABottle />,
+        section: 'Scenes',
     },
 
     // Models
