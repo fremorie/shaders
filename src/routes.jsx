@@ -21,6 +21,7 @@ import { SakuraScene } from './models/SakuraScene'
 import { SakuraSceneBaked } from './models/SakuraSceneBaked'
 import { SpringShadedRiver } from './models/SpringShadedRiver'
 import { SpringInABottle } from './scenes/SpringInABottle/index.jsx'
+import { WinterV1 } from './models/WinterV1'
 
 export const ROUTES = [
     {
@@ -159,6 +160,12 @@ export const ROUTES = [
         path: '/shaders/spring-river-shader',
         label: 'Spring (baked, with river shader)',
         element: <SpringShadedRiver />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/winter-v1',
+        label: 'Winter V1',
+        element: <WinterV1 />,
         section: 'Models',
     },
 
