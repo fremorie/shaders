@@ -4,11 +4,9 @@ uniform vec3 uEdgeColor;
 uniform vec3 uDepthColor;
 
 uniform sampler2D uPerlinNoise;
-
-uniform sampler2D uDepthMapSmooth;
+uniform sampler2D uDepthMap;
 
 varying vec2 vUv;
-varying vec3 vPosition;
 
 void main() {
     // Final color
@@ -18,20 +16,17 @@ void main() {
     float noise = texture2D(uPerlinNoise, vUv).r;
 
     // Water color based on depth
-    float depthSmooth = texture2D(uDepthMapSmooth, vUv).r;
-    finalColor = mix(uDepthColor, uEdgeColor, pow(depthSmooth, 1.5));
+    float depthMap = texture2D(uDepthMap, vUv).r;
+    finalColor = mix(uDepthColor, uEdgeColor, pow(depthMap, 1.5));
 
     // Ripple
-    float rippleMixStrength = depthSmooth;
+    float rippleMixStrength = depthMap;
     float ripple = mod((rippleMixStrength - uTime * 0.05) * 20.0, 1.0);
-    ripple = ripple - (1.0 - depthSmooth);
+    ripple = ripple - (1.0 - depthMap);
     ripple += noise;
-    bool isRight = vUv.y > 0.3 || vUv.x > 0.3;
     ripple = (
-        ripple > 0.8 &&
-        depthSmooth > 0.01
-//        vUv.y < 0.7 &&
-//        isRight
+    ripple > 0.8 &&
+    depthMap > 0.01
     ) ? ripple : 0.0;
 
     finalColor += ripple;

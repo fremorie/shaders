@@ -18,29 +18,13 @@ import { LevaPanel, useControls, useCreateStore } from 'leva'
 import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
 
-const riverShapeConfig = {
-    uPhaseA: 7.61,
-    uFrequencyA: 5.03,
-
-    uPhaseB: 0.1,
-    uFrequencyB: 0.0,
-
-    uPhaseC: 8.56,
-    uFrequencyC: 2.93,
-
-    uPhaseD: 4.14,
-    uFrequencyD: 3.18,
-}
-
 const RiverMaterial = shaderMaterial(
     {
         uTime: 0,
-        uEdgeColor: new THREE.Color('#dbd497'), //new THREE.Color('#99C460FF'),
-        uDepthColor: new THREE.Color('#23938a'), // new THREE.Color('#0e5852'),
+        uEdgeColor: new THREE.Color('#dbd497'),
+        uDepthColor: new THREE.Color('#23938a'),
         uDepthMap: null,
-        uDepthMapSmooth: null,
         uPerlinNoise: null,
-        ...riverShapeConfig,
     },
     vertexShader,
     fragmentShader
@@ -51,8 +35,7 @@ extend({ RiverMaterial })
 function SakuraScene() {
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
-    const depthMap = useTexture('./models/Spring/SpringTerrainDepthMap.jpg')
-    const depthMapSmooth = useTexture(
+    const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapFixed.jpg'
     )
     const perlinNoise = useTexture('./textures/perlin.png')
@@ -61,71 +44,10 @@ function SakuraScene() {
     bakedTexture.flipY = false
     // eslint-disable-next-line
     depthMap.flipY = false
-    // eslint-disable-next-line
-    depthMapSmooth.flipY = false
 
-    const {
-        edgeColor,
-        depthColor,
-        phaseA,
-        frequencyA,
-        phaseB,
-        frequencyB,
-        phaseC,
-        frequencyC,
-        phaseD,
-        frequencyD,
-    } = useControls('River', {
+    const { edgeColor, depthColor } = useControls('River', {
         edgeColor: '#dbd497',
         depthColor: '#23938a',
-        phaseA: {
-            value: riverShapeConfig.uPhaseA,
-            min: -3.14,
-            max: 3.14,
-            step: 0.01,
-        },
-        frequencyA: {
-            value: riverShapeConfig.uFrequencyA,
-            min: 0,
-            max: 20,
-            step: 0.01,
-        },
-        phaseB: {
-            value: riverShapeConfig.uPhaseB,
-            min: 0,
-            max: 1,
-            step: 0.001,
-        },
-        frequencyB: {
-            value: riverShapeConfig.uFrequencyB,
-            min: 0,
-            max: 20,
-            step: 0.01,
-        },
-        phaseC: {
-            value: riverShapeConfig.uPhaseC,
-            min: 0,
-            max: 20,
-            step: 0.01,
-        },
-        frequencyC: {
-            value: riverShapeConfig.uFrequencyC,
-            min: 0,
-            max: 20,
-            step: 0.01,
-        },
-        phaseD: {
-            value: riverShapeConfig.uPhaseD,
-            min: 0,
-            max: 20,
-            step: 0.01,
-        },
-        frequencyD: {
-            value: riverShapeConfig.uFrequencyD,
-            min: 0,
-            max: 20,
-            step: 0.01,
-        },
     })
 
     const riverMaterialRef = useRef(null)
@@ -139,28 +61,7 @@ function SakuraScene() {
     useEffect(() => {
         riverMaterialRef.current.uEdgeColor = new THREE.Color(edgeColor)
         riverMaterialRef.current.uDepthColor = new THREE.Color(depthColor)
-
-        riverMaterialRef.current.uFrequencyA = frequencyA
-        riverMaterialRef.current.uPhaseA = phaseA
-        riverMaterialRef.current.uFrequencyB = frequencyB
-        riverMaterialRef.current.uPhaseB = phaseB
-
-        riverMaterialRef.current.uFrequencyC = frequencyC
-        riverMaterialRef.current.uPhaseC = phaseC
-        riverMaterialRef.current.uFrequencyD = frequencyD
-        riverMaterialRef.current.uPhaseD = phaseD
-    }, [
-        edgeColor,
-        depthColor,
-        phaseA,
-        frequencyA,
-        phaseB,
-        frequencyB,
-        phaseC,
-        frequencyC,
-        phaseD,
-        frequencyD,
-    ])
+    }, [edgeColor, depthColor])
 
     return (
         <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
@@ -178,7 +79,6 @@ function SakuraScene() {
                     key={RiverMaterial.key}
                     ref={riverMaterialRef}
                     uDepthMap={depthMap}
-                    uDepthMapSmooth={depthMapSmooth}
                     uPerlinNoise={perlinNoise}
                 />
             </mesh>
