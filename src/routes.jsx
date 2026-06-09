@@ -20,8 +20,10 @@ import { BottledSakura } from './models/BottledSakura'
 import { SakuraScene } from './models/SakuraScene'
 import { SakuraSceneBaked } from './models/SakuraSceneBaked'
 import { SpringShadedRiver } from './models/SpringShadedRiver'
-import { SpringInABottle } from './scenes/SpringInABottle/index.jsx'
+import { SpringInABottle } from './scenes/SpringInABottle'
 import { WinterV1 } from './models/WinterV1'
+import { WinterV2 } from './models/WinterV2'
+import { WinterV3 } from './models/WinterV3'
 
 export const ROUTES = [
     {
@@ -166,6 +168,18 @@ export const ROUTES = [
         path: '/shaders/winter-v1',
         label: 'Winter V1',
         element: <WinterV1 />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/winter-v2',
+        label: 'Winter V2',
+        element: <WinterV2 />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/winter-v3',
+        label: 'Winter V3',
+        element: <WinterV3 />,
         section: 'Models',
     },
 
