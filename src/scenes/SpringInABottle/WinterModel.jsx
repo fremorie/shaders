@@ -1,7 +1,7 @@
 import { useGLTF, useMask, useTexture } from '@react-three/drei'
 
 export function WinterModel() {
-    const stencil = useMask(1, true)
+    const stencil = useMask(1)
 
     const { nodes } = useGLTF('./models/Winter/WinterMerged.glb')
     const bakedTexture = useTexture('./models/Winter/BakedWinter.jpg')
@@ -17,7 +17,6 @@ export function WinterModel() {
                 position={[-0.251, 0.508, 0.127]}
             >
                 <meshPhysicalMaterial
-                    reflectivity={1}
                     roughness={0}
                     color="#767D93"
                     {...stencil}

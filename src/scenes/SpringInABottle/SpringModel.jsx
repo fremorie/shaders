@@ -21,7 +21,7 @@ const RiverMaterial = shaderMaterial(
 extend({ RiverMaterial })
 
 export function SpringModel() {
-    const stencil = useMask(1)
+    const stencil = useMask(1, true)
 
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
