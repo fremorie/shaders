@@ -1,9 +1,8 @@
-import { useGLTF, useMask } from '@react-three/drei'
+import { useGLTF } from '@react-three/drei'
 import { folder, useControls } from 'leva'
 
 export function BottleModel({ position, store }) {
-    const { nodes } = useGLTF('./models/Bottle.glb')
-    const stencil = useMask(1, true)
+    const { nodes } = useGLTF('./models/BottleWithAHole.glb')
 
     const controls = useControls(
         {
@@ -19,14 +18,16 @@ export function BottleModel({ position, store }) {
 
     return (
         <group position={position}>
-            <mesh geometry={nodes.Bottle.geometry} position={[0, 0.1, 0]}>
+            <mesh
+                geometry={nodes.BottleWithAHole.geometry}
+                position={[-0.023, 0.1, 0.011]}
+            >
                 <meshPhysicalMaterial
                     transparent
                     transmission={controls.transmission}
                     roughness={controls.roughness}
                     reflectivity={controls.reflectivity}
                     iridescence={controls.iridescence}
-                    {...stencil}
                 />
             </mesh>
         </group>

@@ -9,7 +9,7 @@ export function WinterModel() {
     bakedTexture.flipY = false
 
     return (
-        <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
+        <group dispose={null}>
             <mesh
                 castShadow
                 receiveShadow

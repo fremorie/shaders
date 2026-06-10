@@ -44,7 +44,7 @@ export function SpringModel() {
     })
 
     return (
-        <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
+        <group dispose={null}>
             <mesh
                 geometry={nodes.merged.geometry}
                 position={[-0.871, 0.616, 0.325]}

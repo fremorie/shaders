@@ -1,10 +1,12 @@
-import { Mask } from '@react-three/drei'
+import { Mask, useGLTF } from '@react-three/drei'
 
 export const CircularMask = (props) => {
+    const { nodes } = useGLTF('./models/MagicGlass.glb')
+
     return (
         <group {...props}>
-            <Mask id={1} position={[0, 0, 0.95]}>
-                <circleGeometry args={[0.5, 64]} />
+            <Mask id={1} position={[-1.054, 1.093, 0.012]}>
+                <primitive object={nodes.MagicGlas001.geometry} />
             </Mask>
         </group>
     )

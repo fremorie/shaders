@@ -13,13 +13,10 @@ export function Experience({ store }) {
                 backgroundBlurriness={0.5}
                 backgroundIntensity={0.5}
             />
-            <BottleModel position={[0, -0.5, 0]} store={store} />
+            <BottleModel store={store} />
             <Scene />
 
-            <CircularMask
-                position={[0.15, 0.5, 0.15]}
-                rotation-y={Math.PI / 4}
-            />
+            <CircularMask />
         </>
     )
 }
