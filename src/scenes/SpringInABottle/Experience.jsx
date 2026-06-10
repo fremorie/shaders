@@ -4,7 +4,7 @@ import { Scene } from './Scene'
 import { BottleModel } from './BottleModel'
 import { CircularMask } from './CircularMask'
 
-export function Experience() {
+export function Experience({ store }) {
     return (
         <>
             <Environment
@@ -13,7 +13,7 @@ export function Experience() {
                 backgroundBlurriness={0.5}
                 backgroundIntensity={0.5}
             />
-            <BottleModel position={[0, -0.5, 0]} />
+            <BottleModel position={[0, -0.5, 0]} store={store} />
             <Scene />
 
             <CircularMask

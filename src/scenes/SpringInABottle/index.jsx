@@ -25,7 +25,7 @@ export function SpringInABottle() {
                 <color args={['#291b18']} attach="background" />
                 <OrbitControls makeDefault />
                 <Perf position="bottom-right" />
-                <Experience />
+                <Experience store={store} />
             </Canvas>
         </>
     )
