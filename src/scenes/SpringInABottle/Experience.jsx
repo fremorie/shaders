@@ -1,4 +1,4 @@
-import { Environment } from '@react-three/drei'
+import { Environment, Float } from '@react-three/drei'
 
 import { Scene } from './Scene'
 import { BottleModel } from './BottleModel'
@@ -13,10 +13,14 @@ export function Experience({ store }) {
                 backgroundBlurriness={0.5}
                 backgroundIntensity={0.5}
             />
-            <BottleModel store={store} />
-            <Scene />
 
-            <CircularMask />
+            <Float>
+                <group>
+                    <BottleModel store={store} />
+                    <Scene />
+                    <CircularMask />
+                </group>
+            </Float>
         </>
     )
 }
