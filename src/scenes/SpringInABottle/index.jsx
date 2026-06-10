@@ -23,7 +23,7 @@ export function SpringInABottle() {
                 gl={{ stencil: true }}
             >
                 <color args={['#291b18']} attach="background" />
-                <OrbitControls makeDefault />
+                <OrbitControls makeDefault maxDistance={10} minDistance={2} />
                 <Perf position="bottom-right" />
                 <Experience store={store} />
             </Canvas>
