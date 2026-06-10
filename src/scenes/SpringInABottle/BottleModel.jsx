@@ -9,8 +9,10 @@ export function BottleModel({ position }) {
             <mesh geometry={nodes.Bottle.geometry} position={[0, 0.1, 0]}>
                 <meshPhysicalMaterial
                     transparent
-                    transmission={0.99}
+                    transmission={0.9}
                     roughness={0}
+                    reflectivity={0.1}
+                    iridiscence={0.5}
                     {...stencil}
                 />
             </mesh>

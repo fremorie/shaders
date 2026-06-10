@@ -7,7 +7,12 @@ import { CircularMask } from './CircularMask'
 export function Experience() {
     return (
         <>
-            <Environment preset="forest" />
+            <Environment
+                preset="sunset"
+                background={true}
+                backgroundBlurriness={0.5}
+                backgroundIntensity={0.5}
+            />
             <BottleModel position={[0, -0.5, 0]} />
             <Scene />
 

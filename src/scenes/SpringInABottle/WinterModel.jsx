@@ -17,7 +17,8 @@ export function WinterModel() {
                 position={[-0.251, 0.508, 0.127]}
             >
                 <meshPhysicalMaterial
-                    roughness={0}
+                    anisotropy={0.5}
+                    roughness={0.1}
                     color="#767D93"
                     {...stencil}
                 />
