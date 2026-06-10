@@ -14,7 +14,7 @@ void main() {
     modelPosition.y -= uTime * speed;
 
     // Loop back to top
-    modelPosition.y = mod(modelPosition.y + 20.0, 20.0);
+    modelPosition.y = mod(modelPosition.y + 2.0, 2.0);
 
     // Wind
     float offset = random(position) * 10.0;
@@ -25,7 +25,7 @@ void main() {
     vec4 projectedPosition = projectionMatrix * viewPosition;
 
     gl_Position = projectedPosition;
-    gl_PointSize = 100.0;
+    gl_PointSize = 60.0;
     gl_PointSize *= 1.0 / -viewPosition.z;
 
     if (gl_PointSize < 1.0) {

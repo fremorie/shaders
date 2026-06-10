@@ -1,9 +1,11 @@
-import { extend } from '@react-three/fiber'
+import { useMemo, useRef } from 'react'
+import { extend, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { shaderMaterial, useMask, useTexture } from '@react-three/drei'
 
 import vertexShader from './shaders/snowflakes/vertex.glsl'
 import fragmentShader from './shaders/snowflakes/fragment.glsl'
+import { generateSnowflakePositions } from './utils/generateSnowflakePositions'
 
 const SnowflakeMaterial = shaderMaterial(
     {
@@ -16,32 +18,36 @@ const SnowflakeMaterial = shaderMaterial(
 
 extend({ SnowflakeMaterial })
 
-const particlesCount = 100
-const particlePositions = new Float32Array(particlesCount * 3)
-
-for (let i = 0; i < particlesCount; i++) {
-    const i3 = i * 3
-
-    particlePositions[i3] = Math.random()
-    particlePositions[i3 + 1] = Math.random()
-    particlePositions[i3 + 2] = Math.random()
-}
-
 export function Snowflakes() {
     const stencil = useMask(1)
     const snowflakeTexture = useTexture('./textures/snowflake.png')
+
+    const snowflakeMaterialRef = useRef(null)
+
+    useFrame((state, delta) => {
+        if (snowflakeMaterialRef.current) {
+            snowflakeMaterialRef.current.uTime += delta * 0.1
+        }
+    })
+
+    const snowflakeCount = 500
+    const snowflakePositions = useMemo(
+        () => generateSnowflakePositions(snowflakeCount),
+        []
+    )
 
     return (
         <points>
             <bufferGeometry>
                 <bufferAttribute
                     attach="attributes-position"
-                    count={particlesCount}
-                    itemSize={3}
-                    array={particlePositions}
+                    count={snowflakeCount}
+                    itemSize={3} // x, y, z
+                    array={snowflakePositions}
                 />
             </bufferGeometry>
             <snowflakeMaterial
+                ref={snowflakeMaterialRef}
                 key={SnowflakeMaterial.key}
                 transparent
                 depthWrite={false}
