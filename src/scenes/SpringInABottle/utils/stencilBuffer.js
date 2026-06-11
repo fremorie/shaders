@@ -9,7 +9,7 @@ export const SEASONS = {
 }
 
 export function useSeason() {
-    const [mainSeason, setMainSeason] = useState(SEASONS.winter)
+    const [mainSeason, setMainSeason] = useState(SEASONS.spring)
 
     return {
         setMainSeason,
