@@ -26,6 +26,7 @@ export function BottleModel({ position, store }) {
             >
                 <meshPhysicalMaterial
                     transparent
+                    depthWrite={false}
                     transmission={controls.transmission}
                     roughness={controls.roughness}
                     reflectivity={controls.reflectivity}
