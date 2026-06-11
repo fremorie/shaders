@@ -4,6 +4,7 @@ import { extend, useFrame } from '@react-three/fiber'
 
 import vertexShader from './shaders/magicGlass/vertex.glsl'
 import fragmentShader from './shaders/magicGlass/fragment.glsl'
+import { MASK_ID } from './utils/stencilBuffer'
 
 const MagicGlassMaterial = shaderMaterial(
     {
@@ -18,7 +19,7 @@ extend({ MagicGlassMaterial })
 
 export function MagicGlass() {
     const { nodes } = useGLTF('./models/MagicGlass.glb')
-    const stencil = useMask(1)
+    const stencil = useMask(MASK_ID)
 
     const magicGlassMaterialRef = useRef(null)
 

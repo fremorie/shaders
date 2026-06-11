@@ -6,6 +6,8 @@ import { shaderMaterial, useMask, useTexture } from '@react-three/drei'
 import vertexShader from './shaders/snowflakes/vertex.glsl'
 import fragmentShader from './shaders/snowflakes/fragment.glsl'
 import { generateSnowflakePositions } from './utils/generateSnowflakePositions'
+import { MASK_ID } from './utils/stencilBuffer'
+import { RENDER_ORDER } from './utils/renderOrder.js'
 
 const SnowflakeMaterial = shaderMaterial(
     {
@@ -19,7 +21,7 @@ const SnowflakeMaterial = shaderMaterial(
 extend({ SnowflakeMaterial })
 
 export function Snowflakes() {
-    const stencil = useMask(1)
+    const stencil = useMask(MASK_ID)
     const snowflakeTexture = useTexture('./textures/snowflake/snowflake.png')
 
     const snowflakeMaterialRef = useRef(null)
@@ -37,7 +39,7 @@ export function Snowflakes() {
     )
 
     return (
-        <points>
+        <points renderOrder={RENDER_ORDER.snowflakes}>
             <bufferGeometry>
                 <bufferAttribute
                     attach="attributes-position"

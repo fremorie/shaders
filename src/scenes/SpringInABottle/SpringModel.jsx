@@ -1,10 +1,11 @@
-import { useGLTF, useTexture, shaderMaterial, useMask } from '@react-three/drei'
+import { useGLTF, useTexture, shaderMaterial } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
 import { useRef } from 'react'
 import * as THREE from 'three'
 
 import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
+import { SEASONS, useStencil } from './utils/stencilBuffer'
 
 const RiverMaterial = shaderMaterial(
     {
@@ -21,7 +22,7 @@ const RiverMaterial = shaderMaterial(
 extend({ RiverMaterial })
 
 export function SpringModel() {
-    const stencil = useMask(1, true)
+    const stencil = useStencil(SEASONS.spring)
 
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')

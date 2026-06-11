@@ -1,7 +1,9 @@
-import { useGLTF, useMask, useTexture } from '@react-three/drei'
+import { useGLTF, useTexture } from '@react-three/drei'
+
+import { SEASONS, useStencil } from './utils/stencilBuffer'
 
 export function WinterModel() {
-    const stencil = useMask(1)
+    const stencil = useStencil(SEASONS.winter)
 
     const { nodes } = useGLTF('./models/Winter/WinterMerged.glb')
     const bakedTexture = useTexture('./models/Winter/BakedWinter.jpg')

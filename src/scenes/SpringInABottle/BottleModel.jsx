@@ -1,5 +1,6 @@
 import { useGLTF } from '@react-three/drei'
 import { folder, useControls } from 'leva'
+import { RENDER_ORDER } from './utils/renderOrder.js'
 
 export function BottleModel({ position, store }) {
     const { nodes } = useGLTF('./models/BottleWithAHole.glb')
@@ -21,6 +22,7 @@ export function BottleModel({ position, store }) {
             <mesh
                 geometry={nodes.BottleWithAHole.geometry}
                 position={[-0.023, 0.1, 0.011]}
+                renderOrder={RENDER_ORDER.bottle}
             >
                 <meshPhysicalMaterial
                     transparent
