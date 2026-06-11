@@ -1,19 +1,36 @@
-import { useGLTF, useTexture } from '@react-three/drei'
+import { shaderMaterial, useGLTF, useTexture } from '@react-three/drei'
+import { extend } from '@react-three/fiber'
 
 import { SEASONS, useStencil } from './utils/stencilBuffer'
+import vertexShader from './shaders/snow/vertex.glsl'
+import fragmentShader from './shaders/snow/fragment.glsl'
+
+const SnowMaterial = shaderMaterial(
+    {
+        uTime: 0,
+        uBakedTexture: null,
+        uPerlinNoise: null,
+    },
+    vertexShader,
+    fragmentShader
+)
+
+extend({ SnowMaterial })
 
 export function WinterModel() {
     const stencil = useStencil(SEASONS.winter)
 
-    const { nodes } = useGLTF('./models/Winter/WinterMerged.glb')
+    const { nodes } = useGLTF('./models/Winter/WinterMerged2.glb')
     const bakedTexture = useTexture('./models/Winter/BakedWinter.jpg')
     // eslint-disable-next-line
     bakedTexture.flipY = false
 
+    const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
+
     return (
         <group dispose={null}>
             <mesh
-                geometry={nodes.river001.geometry}
+                geometry={nodes.river002.geometry}
                 position={[-0.251, 0.508, 0.127]}
             >
                 <meshPhysicalMaterial
@@ -24,14 +41,19 @@ export function WinterModel() {
                 />
             </mesh>
             <mesh
-                geometry={nodes.snow.geometry}
-                position={[0.005, 0.284, -0.003]}
+                geometry={nodes.snow001.geometry}
+                position={[0.859, 0.707, -0.054]}
             >
-                <meshBasicMaterial map={bakedTexture} {...stencil} />
+                <snowMaterial
+                    key={SnowMaterial.key}
+                    uBakedTexture={bakedTexture}
+                    uPerlinNoise={perlinNoise}
+                    {...stencil}
+                />
             </mesh>
             <mesh
-                geometry={nodes.merged001.geometry}
-                position={[0.385, 0.863, -0.803]}
+                geometry={nodes.winterMerged.geometry}
+                position={[0.316, 0.539, 0.82]}
             >
                 <meshBasicMaterial map={bakedTexture} {...stencil} />
             </mesh>
@@ -39,4 +61,4 @@ export function WinterModel() {
     )
 }
 
-useGLTF.preload('./models/Winter/WinterMerged.glb')
+useGLTF.preload('./models/Winter/WinterMerged2.glb')
