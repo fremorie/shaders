@@ -20,9 +20,7 @@ void main() {
 
     vec4 color = texture2D(uTexture, uv);
 
-    gl_FragColor = color;
+    float alpha = smoothstep(0.6, 0.9, vPosition.y);
 
-    if (sqrt(pow(vPosition.x, 2.0) + pow(vPosition.y, 2.0)) > 1.6) {
-        discard;
-    }
+    gl_FragColor = vec4(color.rgb, alpha);
 }

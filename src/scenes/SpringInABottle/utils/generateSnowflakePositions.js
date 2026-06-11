@@ -1,7 +1,7 @@
 export function generateSnowflakePositions(
     snowflakeCount = 5000,
-    sceneRadius = 1,
-    sceneHeight = 2
+    sceneRadius = 0.7,
+    sceneHeight = 1.7
 ) {
     const snowflakePositions = new Float32Array(snowflakeCount * 3)
 

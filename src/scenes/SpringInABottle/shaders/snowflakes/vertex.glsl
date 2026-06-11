@@ -15,7 +15,7 @@ void main() {
     modelPosition.y -= uTime * speed;
 
     // Loop back to top
-    modelPosition.y = mod(modelPosition.y + 2.0, 2.0);
+    modelPosition.y = mod(modelPosition.y + 1.8, 1.8);
 
     // Wind
     float offset = random(position) * 10.0;
@@ -35,5 +35,5 @@ void main() {
 
     // Varyings
     vRotation = sin(uTime) * 10.0;
-    vPosition = projectedPosition;
+    vPosition = modelPosition;
 }

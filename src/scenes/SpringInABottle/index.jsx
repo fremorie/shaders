@@ -1,7 +1,8 @@
 import { LevaPanel, useCreateStore } from 'leva'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Loader } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
+import { Suspense } from 'react'
 
 import { Experience } from './Experience'
 import { CAMERA_POSITION } from './utils/camera'
@@ -25,16 +26,23 @@ export function SpringInABottle() {
                 }}
                 gl={{ stencil: true }}
             >
-                <color args={['#291b18']} attach="background" />
                 <OrbitControls
                     makeDefault
                     maxDistance={10}
                     minDistance={2}
                     target={[0, 1.2, 0]}
                 />
+
                 {debug && <Perf position="bottom-right" />}
-                <Experience store={store} />
+
+                {debug && <axesHelper args={[2]} />}
+
+                <Suspense fallback={null}>
+                    <Experience store={store} />
+                </Suspense>
             </Canvas>
+
+            <Loader />
         </>
     )
 }
