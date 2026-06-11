@@ -1,6 +1,7 @@
 uniform float uTime;
 
 varying float vRotation;
+varying vec4 vPosition;
 
 float random(vec3 p) {
     return fract(sin(dot(p, vec3(12.9898, 78.233, 45.164))) * 43758.5453);
@@ -34,4 +35,5 @@ void main() {
 
     // Varyings
     vRotation = sin(uTime) * 10.0;
+    vPosition = projectedPosition;
 }
