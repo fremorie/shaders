@@ -5,13 +5,15 @@ import { Perf } from 'r3f-perf'
 
 import { Experience } from './Experience'
 import { CAMERA_POSITION } from './utils/camera'
+import { useDebug } from './hooks/useDebug'
 
 export function SpringInABottle() {
+    const debug = useDebug()
     const store = useCreateStore()
 
     return (
         <>
-            <LevaPanel store={store} hidden={true} />
+            <LevaPanel store={store} hidden={!debug} />
 
             <Canvas
                 flat
@@ -30,7 +32,7 @@ export function SpringInABottle() {
                     minDistance={2}
                     target={[0, 1.2, 0]}
                 />
-                {/*<Perf position="bottom-right" />*/}
+                {debug && <Perf position="bottom-right" />}
                 <Experience store={store} />
             </Canvas>
         </>

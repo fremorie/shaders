@@ -9,8 +9,11 @@ import { BottleModel } from './BottleModel'
 import { CircularMask } from './CircularMask'
 import { MagicGlass } from './MagicGlass'
 import { CAMERA_POSITION } from './utils/camera'
+import { useDebug } from './hooks/useDebug'
 
 export function Experience({ store }) {
+    const debug = useDebug()
+
     const camera = useThree((state) => state.camera)
 
     const levaControls = useControls(
@@ -25,7 +28,9 @@ export function Experience({ store }) {
     )
 
     useEffect(() => {
-        camera.position.set(levaControls.x, levaControls.y, levaControls.z)
+        if (debug) {
+            camera.position.set(levaControls.x, levaControls.y, levaControls.z)
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [levaControls.x, levaControls.y, levaControls.z])
 
