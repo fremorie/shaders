@@ -9,7 +9,7 @@ export function Experience({ store }) {
     return (
         <>
             <Environment
-                preset="sunset"
+                files={['./environmentMaps/veniceSunset/venice_sunset_1k.hdr']}
                 background={true}
                 backgroundBlurriness={0.5}
                 backgroundIntensity={0.5}
