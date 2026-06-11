@@ -11,8 +11,6 @@ export function WinterModel() {
     return (
         <group dispose={null}>
             <mesh
-                castShadow
-                receiveShadow
                 geometry={nodes.river001.geometry}
                 position={[-0.251, 0.508, 0.127]}
             >
@@ -24,16 +22,12 @@ export function WinterModel() {
                 />
             </mesh>
             <mesh
-                castShadow
-                receiveShadow
                 geometry={nodes.snow.geometry}
                 position={[0.005, 0.284, -0.003]}
             >
                 <meshBasicMaterial map={bakedTexture} {...stencil} />
             </mesh>
             <mesh
-                castShadow
-                receiveShadow
                 geometry={nodes.merged001.geometry}
                 position={[0.385, 0.863, -0.803]}
             >

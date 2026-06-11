@@ -38,7 +38,7 @@ function SakuraScene() {
     const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapFixed.jpg'
     )
-    const perlinNoise = useTexture('./textures/perlin.png')
+    const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
 
     // eslint-disable-next-line
     bakedTexture.flipY = false

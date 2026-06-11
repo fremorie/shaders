@@ -20,7 +20,7 @@ extend({ SnowflakeMaterial })
 
 export function Snowflakes() {
     const stencil = useMask(1)
-    const snowflakeTexture = useTexture('./textures/snowflake.png')
+    const snowflakeTexture = useTexture('./textures/snowflake/snowflake.png')
 
     const snowflakeMaterialRef = useRef(null)
 
