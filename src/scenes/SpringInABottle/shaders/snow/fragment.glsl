@@ -15,7 +15,8 @@ void main() {
     // Baked texture
     vec4 bakedTexture = texture2D(uBakedTexture, vUv);
 
-    gl_FragColor = bakedTexture;
+    // Make whiter
+    gl_FragColor = bakedTexture * 1.5;
 
     #include <colorspace_fragment>
 }
