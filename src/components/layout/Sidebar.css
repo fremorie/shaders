@@ -24,6 +24,7 @@
     gap: 4px;
     padding: 64px 12px 16px;
     height: 100%;
+    box-sizing: border-box;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
     transform: translateX(-100%);
