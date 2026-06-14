@@ -1,17 +1,20 @@
 import { SpringModel } from './SpringModel'
 import { GrassField } from './GrassField'
 import { useMemo } from 'react'
+import { useControls, folder } from 'leva'
 
 const getRandom = (min, max) => Math.random() * (max - min) + min
 
-const getGrassBladesPositions = (count = 20) => {
-    const minX = -1
-    const maxX = 1
+const getGrassBladesPositions = (
+    count = 20,
 
-    const minZ = -1
-    const maxZ = 1
+    minX = 0.91,
+    maxX = 0.1,
 
-    const y = 0.6
+    minZ = 0.2,
+    maxZ = 0.3,
+    ) => {
+    const y = 0.67
 
     const positions = []
 
@@ -24,8 +27,29 @@ const getGrassBladesPositions = (count = 20) => {
     return positions
 }
 
-export function SpringScene() {
-    const grassBladePositions = useMemo(() => getGrassBladesPositions(100), [])
+export function SpringScene({store}) {
+    const {minX, maxX, minZ, maxZ} = useControls(
+        {
+            Grass: folder({
+                minX: {value: 0.2, min: -1, max: 1, step: 0.01},
+                maxX: {value: 0.3, min: -1, max: 1, step: 0.01},
+                minZ: {value: 0.2, min: -1, max: 1, step: 0.01},
+                maxZ: {value: 0.3, min: -1, max: 1, step: 0.01},
+            }),
+        },
+        {store},
+    );
+
+
+    const grassBladePositions = useMemo(
+        () => getGrassBladesPositions(
+            10,
+            minX,
+            maxX,
+            minZ,
+            maxZ,
+        ), [minX, maxX, minZ, maxZ]
+    )
 
     return (
         <>
