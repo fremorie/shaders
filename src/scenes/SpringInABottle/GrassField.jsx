@@ -32,8 +32,6 @@ export function GrassField({ positions }) {
     const { count, matrices, phaseOffsets } = useMemo(() => {
         const count = positions.length
 
-        console.log({ count })
-
         const phaseOffsets = new Float32Array(count)
         const matrices = []
         const matrix = new THREE.Matrix4()
