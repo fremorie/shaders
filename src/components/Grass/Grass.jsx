@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { folder, useControls } from 'leva'
 
 import { GrassField } from './GrassField'
-import { SpringModel } from './SpringModel'
+import { Terrain } from './Terrain'
 
 const TERRAIN_MESH_POSITION = new THREE.Vector3(0.005, 0.32, -0.003)
 const RAYCAST_ORIGIN_HEIGHT = 5
@@ -36,7 +36,7 @@ const getGrassBladesPositions = (
     return positions
 }
 
-export function SpringScene({ store }) {
+export function Grass({ store }) {
     const { nodes } = useGLTF('./models/Spring/Terrain.glb')
 
     const terrainRaycasterMesh = useMemo(() => {
@@ -49,10 +49,10 @@ export function SpringScene({ store }) {
     const { centerX, centerZ, radius, count } = useControls(
         {
             Grass: folder({
-                centerX: { value: 0.25, min: -1, max: 1, step: 0.01 },
-                centerZ: { value: 0.25, min: -1, max: 1, step: 0.01 },
-                radius: { value: 0.1, min: 0.01, max: 1, step: 0.01 },
-                count: { value: 100, min: 1, max: 1000, step: 1 },
+                centerX: { value: 0, min: -1, max: 1, step: 0.01 },
+                centerZ: { value: 0, min: -1, max: 1, step: 0.01 },
+                radius: { value: 1.2, min: 0.01, max: 2, step: 0.01 },
+                count: { value: 50000, min: 1, max: 100000, step: 1 },
             }),
         },
         { store }
@@ -69,15 +69,10 @@ export function SpringScene({ store }) {
         [terrainRaycasterMesh, centerX, centerZ, radius, count]
     )
 
-    const grassBladePositions = useMemo(
-        () => [...grassClampActive],
-        [grassClampActive]
-    )
-
     return (
         <>
-            <SpringModel />
-            <GrassField positions={grassBladePositions} />
+            <Terrain />
+            <GrassField positions={grassClampActive} />
         </>
     )
 }

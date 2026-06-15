@@ -14,7 +14,7 @@ export function Terrain(props) {
                 geometry={nodes.GrassPlane.geometry}
                 position={[0.005, 0.33, -0.003]}
             >
-                <meshBasicMaterial />
+                <meshBasicMaterial color="#6f8f46" />
             </mesh>
         </group>
     )

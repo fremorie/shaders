@@ -25,6 +25,7 @@ import { WinterV1 } from './models/WinterV1'
 import { WinterV2 } from './models/WinterV2'
 import { WinterV3 } from './models/WinterV3'
 import { WinterSceneBaked } from './models/WinterSceneBaked/index.jsx'
+import { GrassPage } from './components/Grass/Page'
 
 export const ROUTES = [
     {
@@ -108,6 +109,13 @@ export const ROUTES = [
         element: <StencilBufferPage />,
         section: 'Experiments',
     },
+    {
+        path: '/shaders/grass',
+        label: 'Grass',
+        element: <GrassPage />,
+        section: 'Experiments',
+    },
+
     // Scenes
     {
         path: '/shaders/spring-in-a-bottle',
