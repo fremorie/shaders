@@ -1,5 +1,5 @@
-import { SpringModel } from './SpringModel'
 import { WinterScene } from './WinterScene'
+import { SpringModel } from './SpringModel'
 
 export function Scene() {
     return (
