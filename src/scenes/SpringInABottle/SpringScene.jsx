@@ -33,7 +33,17 @@ export function SpringScene({ store }) {
 
     const grassClamp2 = getGrassBladesPositions([0.2, 0.63, -0.4], 0.06, 58)
 
-    const grassClamp3 = useMemo(
+    const grassClamp3 = getGrassBladesPositions([0.42, 0.63, 0.26], 0.08, 100)
+
+    const grassClamp4 = getGrassBladesPositions([-0.2, 0.6, -0.8], 0.07, 100)
+
+    const grassClamp5 = getGrassBladesPositions([-0.1, 0.58, -0.9], 0.1, 200)
+    const grassClamp6 = getGrassBladesPositions([0.15, 0.67, -0.4], 0.1, 100)
+    const grassClamp7 = getGrassBladesPositions([0.1, 0.67, -0.5], 0.09, 100)
+    const grassClamp8 = getGrassBladesPositions([0, 0.65, -0.6], 0.07, 60)
+    const grassClamp9 = getGrassBladesPositions([-0.9, 0.56, -0.2], 0.06, 60)
+
+    const grassClampActive = useMemo(
         () =>
             getGrassBladesPositions(
                 [centerX, elevation, centerZ],
@@ -44,8 +54,30 @@ export function SpringScene({ store }) {
     )
 
     const grassBladePositions = useMemo(
-        () => [...grassClamp1, ...grassClamp2, ...grassClamp3],
-        [grassClamp1, grassClamp2, grassClamp3]
+        () => [
+            ...grassClamp1,
+            ...grassClamp2,
+            ...grassClamp3,
+            ...grassClamp4,
+            ...grassClamp5,
+            ...grassClamp6,
+            ...grassClamp7,
+            ...grassClamp8,
+            ...grassClamp9,
+            ...grassClampActive,
+        ],
+        [
+            grassClamp1,
+            grassClamp2,
+            grassClamp3,
+            grassClamp4,
+            grassClamp5,
+            grassClamp6,
+            grassClamp7,
+            grassClamp8,
+            grassClamp9,
+            grassClampActive,
+        ]
     )
 
     console.log({ grassClamp2 })
