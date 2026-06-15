@@ -23,8 +23,8 @@ extend({ GrassBladeMaterial })
 const MIN_BLADE_SCALE = 0.8
 const MAX_BLADE_SCALE = 1.2
 
-const BLADE_WIDTH = 0.02
-const BLADE_HEIGHT = 0.2
+const BLADE_WIDTH = 0.01
+const BLADE_HEIGHT = 0.1
 // Vertical subdivisions so the blade can curve along its length instead of
 // tilting as a rigid strip.
 const BLADE_HEIGHT_SEGMENTS = 6

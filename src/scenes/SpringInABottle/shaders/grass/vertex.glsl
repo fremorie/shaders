@@ -4,13 +4,16 @@ attribute float aPhaseOffset;
 
 varying vec2 vUv;
 
-void main() {
-    vec4 modelPosition = modelMatrix * instanceMatrix * vec4(position, 1.0);
+const float WIND_STRENGTH = 0.02;
 
-    float windMultiplier = uv.y;
+void main() {
+    float windMultiplier = smoothstep(0.0, 1.0, uv.y);
     float wind = sin(uTime + aPhaseOffset) * windMultiplier;
-    modelPosition.x += wind * 0.02;
-    modelPosition.z += wind * 0.02 + 0.01;
+
+    vec3 localPosition = position;
+    localPosition.x += wind * WIND_STRENGTH;
+
+    vec4 modelPosition = modelMatrix * instanceMatrix * vec4(localPosition, 1.0);
 
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectionPosition = projectionMatrix * viewPosition;
