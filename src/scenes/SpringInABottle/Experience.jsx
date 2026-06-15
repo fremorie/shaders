@@ -62,7 +62,7 @@ export function Experience({ store }) {
                     rotation-y={-2.8}
                 >
                     <BottleModel store={store} />
-                    <Scene store={store} />
+                    <Scene />
                     <CircularMask />
                     <MagicGlass />
                 </group>

@@ -1,4 +1,3 @@
-import { RagingSeaPage } from './components/RagingSea/Page'
 import { GradientShaderPage } from './components/Gradient/Page'
 import { HomePage } from './components/Home/Page'
 import { SmoothstepShaderPage } from './components/Smoothstep/Page'
@@ -24,7 +23,7 @@ import { SpringInABottle } from './scenes/SpringInABottle'
 import { WinterV1 } from './models/WinterV1'
 import { WinterV2 } from './models/WinterV2'
 import { WinterV3 } from './models/WinterV3'
-import { WinterSceneBaked } from './models/WinterSceneBaked/index.jsx'
+import { WinterSceneBaked } from './models/WinterSceneBaked'
 import { GrassPage } from './components/Grass/Page'
 
 export const ROUTES = [
@@ -34,57 +33,6 @@ export const ROUTES = [
         element: <HomePage />,
     },
 
-    // Basics
-    {
-        path: '/shaders/gradient',
-        label: 'Gradient',
-        element: <GradientShaderPage />,
-        section: 'Basics',
-    },
-    {
-        path: '/shaders/smoothstep',
-        label: 'Smooth step',
-        element: <SmoothstepShaderPage />,
-        section: 'Basics',
-    },
-    {
-        path: '/shaders/stripes',
-        label: 'Stripes',
-        element: <StripesShaderPage />,
-        section: 'Basics',
-    },
-    {
-        path: '/shaders/vignette',
-        label: 'Vignette',
-        element: <VignetteShaderPage />,
-        section: 'Basics',
-    },
-    {
-        path: '/shaders/gradient-stripes',
-        label: 'Gradient stripes',
-        element: <GradientStripesShaderPage />,
-        section: 'Basics',
-    },
-    {
-        path: '/shaders/colored-gradient-stripes',
-        label: 'Colored gradient stripes',
-        element: <ColoredGradientStripesShaderPage />,
-        section: 'Basics',
-    },
-
-    // SDF
-    {
-        path: '/shaders/sdf-circle',
-        label: 'SDF Circle',
-        element: <SDFCircleShaderPage />,
-        section: 'Basics',
-    },
-    {
-        path: '/shaders/sdf-sphere',
-        label: 'Ray marching: Sphere',
-        element: <SDFSphereShaderPage />,
-        section: 'Basics',
-    },
     {
         path: '/shaders/spiral',
         label: 'Spiral',
@@ -198,11 +146,55 @@ export const ROUTES = [
         section: 'Models',
     },
 
-    // Three.js Journey
+    // Basics
     {
-        path: '/shaders/raging-sea',
-        label: 'Raging Sea',
-        element: <RagingSeaPage />,
-        section: 'Three.js Journey',
+        path: '/shaders/gradient',
+        label: 'Gradient',
+        element: <GradientShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/smoothstep',
+        label: 'Smooth step',
+        element: <SmoothstepShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/stripes',
+        label: 'Stripes',
+        element: <StripesShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/vignette',
+        label: 'Vignette',
+        element: <VignetteShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/gradient-stripes',
+        label: 'Gradient stripes',
+        element: <GradientStripesShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/colored-gradient-stripes',
+        label: 'Colored gradient stripes',
+        element: <ColoredGradientStripesShaderPage />,
+        section: 'Basics',
+    },
+
+    // SDF
+    {
+        path: '/shaders/sdf-circle',
+        label: 'SDF Circle',
+        element: <SDFCircleShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/sdf-sphere',
+        label: 'Ray marching: Sphere',
+        element: <SDFSphereShaderPage />,
+        section: 'Basics',
     },
 ]

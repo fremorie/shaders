@@ -1,11 +1,11 @@
 import { WinterScene } from './WinterScene'
-import { SpringScene } from './SpringScene'
+import { SpringModel } from './SpringModel'
 
-export function Scene({ store }) {
+export function Scene() {
     return (
         <>
             <WinterScene />
-            <SpringScene store={store} />
+            <SpringModel />
         </>
     )
 }
