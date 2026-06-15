@@ -40,8 +40,8 @@ export function Experience({ store }) {
             y: CAMERA_POSITION.final[1],
             z: CAMERA_POSITION.final[2],
             duration: 7,
-            delay: 2,
-            ease: 'power4.out',
+            delay: 1,
+            ease: 'power1.out',
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
