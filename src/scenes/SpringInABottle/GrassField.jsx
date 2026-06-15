@@ -23,11 +23,30 @@ extend({ GrassBladeMaterial })
 const MIN_BLADE_SCALE = 0.8
 const MAX_BLADE_SCALE = 1.2
 
+const BLADE_WIDTH = 0.02
+const BLADE_HEIGHT = 0.2
+// Vertical subdivisions so the blade can curve along its length instead of
+// tilting as a rigid strip.
+const BLADE_HEIGHT_SEGMENTS = 6
+
 export function GrassField({ positions }) {
     const stencil = useStencil(SEASONS.spring)
     const meshRef = useRef(null)
     const materialRef = useRef(null)
     const bladeAlphaMap = useTexture('./textures/grassBlade/blade_alpha.jpg')
+
+    const bladeGeometry = useMemo(() => {
+        const geometry = new THREE.PlaneGeometry(
+            BLADE_WIDTH,
+            BLADE_HEIGHT,
+            1,
+            BLADE_HEIGHT_SEGMENTS
+        )
+        // Move the origin to the base of the blade so it plants on the terrain
+        // surface instead of sinking its lower half below ground.
+        geometry.translate(0, BLADE_HEIGHT / 2, 0)
+        return geometry
+    }, [])
 
     const { count, matrices, phaseOffsets } = useMemo(() => {
         const count = positions.length
@@ -89,8 +108,7 @@ export function GrassField({ positions }) {
     })
 
     return (
-        <instancedMesh ref={meshRef} args={[null, null, count]}>
-            <planeGeometry args={[0.01, 0.1]} />
+        <instancedMesh ref={meshRef} args={[bladeGeometry, null, count]}>
             <grassBladeMaterial
                 key={GrassBladeMaterial.key}
                 ref={materialRef}
