@@ -29,7 +29,6 @@
     backdrop-filter: blur(8px);
     transform: translateX(-100%);
     transition: transform 0.25s ease;
-    width: 250px;
     overflow-y: scroll;
     scrollbar-width: none;
 }
