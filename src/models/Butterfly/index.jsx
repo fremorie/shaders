@@ -11,7 +11,8 @@ const ButterflyModel = () => {
     useEffect(() => {
         if (actions?.ArmatureAction) {
             actions.ArmatureAction.play()
-            actions.ArmatureAction.timeScale = 3.0;
+            // eslint-disable-next-line
+            actions.ArmatureAction.timeScale = 3.0
         }
     }, [actions?.ArmatureAction])
 
@@ -43,7 +44,7 @@ export function Butterfly() {
             >
                 <color args={['#ffffff']} attach="background" />
                 <OrbitControls makeDefault autoRotate />
-                <directionalLight position={2, 2, 2}/>
+                <directionalLight position={[2, 2, 2]} />
                 <Perf />
                 <ButterflyModel />
                 <axesHelper />
