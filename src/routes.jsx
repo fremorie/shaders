@@ -25,6 +25,7 @@ import { WinterV2 } from './models/WinterV2'
 import { WinterV3 } from './models/WinterV3'
 import { WinterSceneBaked } from './models/WinterSceneBaked'
 import { GrassPage } from './components/Grass/Page'
+import { Butterfly } from './models/Butterfly'
 
 export const ROUTES = [
     {
@@ -143,6 +144,12 @@ export const ROUTES = [
         path: '/shaders/winter-baked',
         label: 'Winter (baked)',
         element: <WinterSceneBaked />,
+        section: 'Models',
+    },
+    {
+        path: '/shaders/butterfly',
+        label: 'Butterfly',
+        element: <Butterfly />,
         section: 'Models',
     },
 
