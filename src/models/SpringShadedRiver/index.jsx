@@ -18,19 +18,22 @@ import { LevaPanel, useControls, useCreateStore } from 'leva'
 import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
 
-const RiverMaterial = shaderMaterial(
+const ShadedRiverMaterial = shaderMaterial(
     {
         uTime: 0,
         uEdgeColor: new THREE.Color('#dbd497'),
         uDepthColor: new THREE.Color('#23938a'),
         uDepthMap: null,
         uPerlinNoise: null,
+        uFresnelColor: new THREE.Color('#ffffff'),
+        uFresnelPower: 3.0,
+        uFresnelStrength: 0.6,
     },
     vertexShader,
     fragmentShader
 )
 
-extend({ RiverMaterial })
+extend({ ShadedRiverMaterial })
 
 function SakuraScene() {
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
@@ -45,9 +48,18 @@ function SakuraScene() {
     // eslint-disable-next-line
     depthMap.flipY = false
 
-    const { edgeColor, depthColor } = useControls('River', {
+    const {
+        edgeColor,
+        depthColor,
+        fresnelColor,
+        fresnelPower,
+        fresnelStrength,
+    } = useControls('River', {
         edgeColor: '#dbd497',
         depthColor: '#23938a',
+        fresnelColor: '#ffffff',
+        fresnelPower: { value: 3.0, min: 0.5, max: 10, step: 0.1 },
+        fresnelStrength: { value: 0.6, min: 0, max: 1, step: 0.01 },
     })
 
     const riverMaterialRef = useRef(null)
@@ -61,7 +73,10 @@ function SakuraScene() {
     useEffect(() => {
         riverMaterialRef.current.uEdgeColor = new THREE.Color(edgeColor)
         riverMaterialRef.current.uDepthColor = new THREE.Color(depthColor)
-    }, [edgeColor, depthColor])
+        riverMaterialRef.current.uFresnelColor = new THREE.Color(fresnelColor)
+        riverMaterialRef.current.uFresnelPower = fresnelPower
+        riverMaterialRef.current.uFresnelStrength = fresnelStrength
+    }, [edgeColor, depthColor, fresnelColor, fresnelPower, fresnelStrength])
 
     return (
         <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
@@ -75,8 +90,8 @@ function SakuraScene() {
                 geometry={nodes.river.geometry}
                 position={[-0.251, 0.508, 0.127]}
             >
-                <riverMaterial
-                    key={RiverMaterial.key}
+                <shadedRiverMaterial
+                    key={ShadedRiverMaterial.key}
                     ref={riverMaterialRef}
                     uDepthMap={depthMap}
                     uPerlinNoise={perlinNoise}

@@ -6,7 +6,13 @@ uniform vec3 uDepthColor;
 uniform sampler2D uPerlinNoise;
 uniform sampler2D uDepthMap;
 
+uniform vec3 uFresnelColor;
+uniform float uFresnelPower;
+uniform float uFresnelStrength;
+
 varying vec2 vUv;
+varying vec3 vWorldPosition;
+varying vec3 vWorldNormal;
 
 void main() {
     // Final color
@@ -25,11 +31,19 @@ void main() {
     ripple = ripple - (1.0 - depthMap);
     ripple += noise;
     ripple = (
-    ripple > 0.8 &&
-    depthMap > 0.01
+        ripple > 0.8 &&
+        depthMap > 0.01
     ) ? ripple : 0.0;
 
     finalColor += ripple;
+
+    // Fresnel
+    vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
+    float fresnel = pow(
+        1.0 - max(dot(normalize(vWorldNormal), viewDirection), 0.0),
+        uFresnelPower
+    );
+    finalColor = mix(finalColor, uFresnelColor, fresnel * uFresnelStrength);
 
     gl_FragColor = vec4(vec3(finalColor), 1.0);
 
