@@ -28,6 +28,14 @@ const ShadedRiverMaterial = shaderMaterial(
         uFresnelColor: new THREE.Color('#ffffff'),
         uFresnelPower: 3.0,
         uFresnelStrength: 0.6,
+        uFoamColor: new THREE.Color('#ffffff'),
+        uFoamMin: 0.12,
+        uFoamMax: 0.28,
+        uFoamNoiseScale: 6.0,
+        uFoamSpeed: 0.03,
+        uFoamFrequency: 8.0,
+        uFoamDistortion: 0.1,
+        uFoamStrength: 0.8,
     },
     vertexShader,
     fragmentShader
@@ -42,6 +50,11 @@ function SakuraScene() {
         './models/Spring/SpringTerrainDepthMapFixed.jpg'
     )
     const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
+
+    // Repeat wrapping so the scaled/scrolling foam & ripple UVs tile instead of
+    // clamping to a flat edge pixel
+    // eslint-disable-next-line
+    perlinNoise.wrapS = perlinNoise.wrapT = THREE.RepeatWrapping
 
     // eslint-disable-next-line
     bakedTexture.flipY = false
@@ -58,8 +71,28 @@ function SakuraScene() {
         edgeColor: '#dbd497',
         depthColor: '#23938a',
         fresnelColor: '#ffffff',
-        fresnelPower: { value: 3.0, min: 0.5, max: 10, step: 0.1 },
+        fresnelPower: { value: 6.0, min: 0.5, max: 10, step: 0.1 },
         fresnelStrength: { value: 0.6, min: 0, max: 1, step: 0.01 },
+    })
+
+    const {
+        foamColor,
+        foamMin,
+        foamMax,
+        foamNoiseScale,
+        foamSpeed,
+        foamFrequency,
+        foamDistortion,
+        foamStrength,
+    } = useControls('Foam', {
+        foamColor: '#ffffff',
+        foamMin: { value: 0.31, min: 0, max: 0.5, step: 0.005 },
+        foamMax: { value: 0.43, min: 0, max: 0.5, step: 0.005 },
+        foamNoiseScale: { value: 6.0, min: 0.5, max: 30, step: 0.5 },
+        foamSpeed: { value: 0.04, min: 0, max: 0.3, step: 0.005 },
+        foamFrequency: { value: 15.0, min: 1, max: 30, step: 0.5 },
+        foamDistortion: { value: 0.09, min: 0, max: 0.5, step: 0.005 },
+        foamStrength: { value: 0.66, min: 0, max: 1, step: 0.01 },
     })
 
     const riverMaterialRef = useRef(null)
@@ -77,6 +110,26 @@ function SakuraScene() {
         riverMaterialRef.current.uFresnelPower = fresnelPower
         riverMaterialRef.current.uFresnelStrength = fresnelStrength
     }, [edgeColor, depthColor, fresnelColor, fresnelPower, fresnelStrength])
+
+    useEffect(() => {
+        riverMaterialRef.current.uFoamColor = new THREE.Color(foamColor)
+        riverMaterialRef.current.uFoamMin = foamMin
+        riverMaterialRef.current.uFoamMax = foamMax
+        riverMaterialRef.current.uFoamNoiseScale = foamNoiseScale
+        riverMaterialRef.current.uFoamSpeed = foamSpeed
+        riverMaterialRef.current.uFoamFrequency = foamFrequency
+        riverMaterialRef.current.uFoamDistortion = foamDistortion
+        riverMaterialRef.current.uFoamStrength = foamStrength
+    }, [
+        foamColor,
+        foamMin,
+        foamMax,
+        foamNoiseScale,
+        foamSpeed,
+        foamFrequency,
+        foamDistortion,
+        foamStrength,
+    ])
 
     return (
         <group rotation-y={Math.PI / 1.2} position-y={-0.5} dispose={null}>
