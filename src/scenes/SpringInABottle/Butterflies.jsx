@@ -8,15 +8,61 @@ import { SEASONS, useStencil } from './utils/stencilBuffer'
 export function Butterflies({ store }) {
     const stencil = useStencil(SEASONS.spring)
 
-    const { color, metalness, roughness } = useControls(
+    const {
+        color,
+        metalness,
+        roughness,
+        orbitRadius,
+        centerX,
+        centerY,
+        centerZ,
+        angularSpeed,
+        bobAmplitude,
+        bobFrequency,
+        headingOffset,
+    } = useControls(
         'Butterfly',
         {
             color: '#9bb7f5',
             metalness: { value: 0.5, min: 0, max: 1, step: 0.01 },
             roughness: { value: 0.1, min: 0, max: 1, step: 0.01 },
+            orbitRadius: { value: 0.75, min: 0, max: 1.5, step: 0.01 },
+            centerX: { value: -0.1, min: -1, max: 1, step: 0.01 },
+            centerY: { value: 0.99, min: 0, max: 2, step: 0.01 },
+            centerZ: { value: -0.1, min: -1, max: 1, step: 0.01 },
+            angularSpeed: { value: 0.6, min: 0, max: 3, step: 0.01 },
+            bobAmplitude: { value: 0.04, min: 0, max: 0.5, step: 0.01 },
+            bobFrequency: { value: 5, min: 0, max: 5, step: 0.01 },
+            headingOffset: {
+                value: Math.PI,
+                min: -Math.PI,
+                max: Math.PI,
+                step: 0.01,
+            },
         },
         { store }
     )
+
+    const sharedOrbit = {
+        centerX,
+        centerY,
+        centerZ,
+        radius: orbitRadius,
+        angularSpeed,
+        bobAmplitude,
+        bobFrequency,
+        headingOffset,
+    }
+
+    const butterflyOrbitA = { ...sharedOrbit, phaseOffset: 0 }
+
+    const butterflyOrbitB = {
+        ...sharedOrbit,
+        phaseOffset: 4,
+        radius: orbitRadius * 0.7,
+        centerY: centerY + 0.3,
+        centerX: centerX + 0.15,
+    }
 
     const wingMaterial = useMemo(
         () =>
@@ -35,12 +81,8 @@ export function Butterflies({ store }) {
 
     return (
         <>
-            <ButterflyModel position={[0.7, 1, 0]} material={wingMaterial} />
-            <ButterflyModel
-                position={[-0.2, 1.3, -0.4]}
-                rotation={[0, Math.PI, 0]}
-                material={wingMaterial}
-            />
+            <ButterflyModel orbit={butterflyOrbitA} material={wingMaterial} />
+            <ButterflyModel orbit={butterflyOrbitB} material={wingMaterial} />
         </>
     )
 }
