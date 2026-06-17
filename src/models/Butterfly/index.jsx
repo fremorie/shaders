@@ -1,11 +1,14 @@
-import { Canvas } from '@react-three/fiber'
+import { Canvas, useGraph } from '@react-three/fiber'
 import { OrbitControls, useAnimations, useGLTF } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
-import { useEffect, useRef } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
+import { SkeletonUtils } from 'three-stdlib'
 
 const ButterflyModel = () => {
     const group = useRef(null)
-    const { nodes, animations } = useGLTF('./models/Butterfly.glb')
+    const { scene, animations } = useGLTF('./models/Butterfly.glb')
+    const clonedScene = useMemo(() => SkeletonUtils.clone(scene), [scene])
+    const { nodes } = useGraph(clonedScene)
     const { actions } = useAnimations(animations, group)
 
     useEffect(() => {
