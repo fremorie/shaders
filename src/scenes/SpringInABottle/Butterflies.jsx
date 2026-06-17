@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import * as THREE from 'three'
 import { useControls } from 'leva'
 
@@ -24,6 +24,10 @@ export function Butterflies({ store }) {
             }),
         [color, metalness, roughness]
     )
+
+    useEffect(() => {
+        return () => wingMaterial.dispose()
+    }, [wingMaterial])
 
     return (
         <>

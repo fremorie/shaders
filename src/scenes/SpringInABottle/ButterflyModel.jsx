@@ -36,10 +36,7 @@ export const ButterflyModel = ({ position, material, rotation }) => {
         >
             <group name="Scene">
                 <group name="Armature" position={[0, 0.015, 0.017]}>
-                    <primitive
-                        object={nodes.ButterflyBody}
-                        material={material}
-                    />
+                    <primitive object={nodes.ButterflyBody} />
                     <primitive object={nodes.UpperWingR} />
                     <primitive object={nodes.LowerWingR} />
                     <primitive object={nodes.UpperWingL} />
