@@ -1,52 +1,70 @@
-// Do not let the butterfly fly out of the bottle
-const MAX_X = 0.8
-const MAX_Z = 0.8
+// Bottle bounds: the butterfly can never fly past these
+const MAX_X = 0.9
+const MAX_Z = 0.9
 const MAX_Y = 1.8
 
-function bounded(value, max) {
+// How far ahead on the path we peek to work out which way the butterfly faces
+const LOOK_AHEAD = 0.05
+
+function clampAxis(value, max) {
     return value > 0 ? Math.min(max, value) : Math.max(-max, value)
 }
 
-function computeButterflyPosition(elapsedTime, orbit) {
-    const angle = elapsedTime * orbit.angularSpeed + orbit.phaseOffset
-    const { seed = 0 } = orbit
+function breathingRadius(elapsedTime, orbit, seed) {
+    const slow = Math.sin(elapsedTime * orbit.wobbleSpeed + seed)
+    const fast = Math.sin(elapsedTime * orbit.wobbleSpeed * 1.7 + seed * 2)
 
-    const radius =
+    return (
         orbit.radius +
-        Math.sin(elapsedTime * orbit.wobbleSpeed + seed) * orbit.wobbleAmount +
-        Math.sin(elapsedTime * orbit.wobbleSpeed * 1.7 + seed * 2) *
-            orbit.wobbleAmount *
-            0.5
+        slow * orbit.wobbleAmount +
+        fast * orbit.wobbleAmount * 0.5
+    )
+}
 
-    const driftX =
-        Math.sin(elapsedTime * orbit.driftSpeed + seed) * orbit.driftAmount
-    const driftZ =
-        Math.cos(elapsedTime * orbit.driftSpeed * 0.8 + seed) *
-        orbit.driftAmount
+function centerDrift(elapsedTime, orbit, seed) {
+    return {
+        x: Math.sin(elapsedTime * orbit.driftSpeed + seed) * orbit.driftAmount,
+        z:
+            Math.cos(elapsedTime * orbit.driftSpeed * 0.8 + seed) *
+            orbit.driftAmount,
+    }
+}
 
-    const x = orbit.centerX + driftX + radius * Math.cos(angle)
-    const y =
-        orbit.centerY +
-        Math.sin(elapsedTime * orbit.bobFrequency + orbit.phaseOffset) *
-            orbit.bobAmplitude +
-        Math.sin(elapsedTime * orbit.bobFrequency * 0.5 + seed) *
-            orbit.bobAmplitude *
-            0.5
-    const z = orbit.centerZ + driftZ + radius * Math.sin(angle)
+function verticalBob(elapsedTime, orbit, seed) {
+    const quick = Math.sin(elapsedTime * orbit.bobFrequency + orbit.phaseOffset)
+    const slow = Math.sin(elapsedTime * orbit.bobFrequency * 0.5 + seed)
 
-    return { x, y, z }
+    return quick * orbit.bobAmplitude + slow * orbit.bobAmplitude * 0.5
+}
+
+function computeButterflyPosition(elapsedTime, orbit) {
+    const seed = orbit.seed ?? 0
+    const angle = elapsedTime * orbit.angularSpeed + orbit.phaseOffset
+
+    const radius = breathingRadius(elapsedTime, orbit, seed)
+    const drift = centerDrift(elapsedTime, orbit, seed)
+    const bob = verticalBob(elapsedTime, orbit, seed)
+
+    return {
+        x: orbit.centerX + drift.x + radius * Math.cos(angle),
+        y: orbit.centerY + bob,
+        z: orbit.centerZ + drift.z + radius * Math.sin(angle),
+    }
 }
 
 export function setButterflyNextPosition(elapsedTime, groupRef, orbit) {
     if (!groupRef.current) return
 
     const position = computeButterflyPosition(elapsedTime, orbit)
-    const positionAhead = computeButterflyPosition(elapsedTime + 0.05, orbit)
+    const positionAhead = computeButterflyPosition(
+        elapsedTime + LOOK_AHEAD,
+        orbit
+    )
 
     groupRef.current.position.set(
-        bounded(position.x, MAX_X),
-        bounded(position.y, MAX_Y),
-        bounded(position.z, MAX_Z)
+        clampAxis(position.x, MAX_X),
+        clampAxis(position.y, MAX_Y),
+        clampAxis(position.z, MAX_Z)
     )
 
     groupRef.current.rotation.y =
