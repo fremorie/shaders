@@ -34,7 +34,7 @@ export function CherryBlossomPetals({ store }) {
         }
     })
 
-    const petalsCount = 70
+    const petalsCount = 30
     const { positions, seeds, sizes } = useMemo(
         () => generateCherryBlossomPetalPositions(petalsCount),
         []
