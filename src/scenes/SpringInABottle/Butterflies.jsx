@@ -20,13 +20,17 @@ export function Butterflies({ store }) {
         bobAmplitude,
         bobFrequency,
         headingOffset,
+        wobbleAmount,
+        wobbleSpeed,
+        driftAmount,
+        driftSpeed,
     } = useControls(
         'Butterfly',
         {
             color: '#9bb7f5',
             metalness: { value: 0.5, min: 0, max: 1, step: 0.01 },
             roughness: { value: 0.1, min: 0, max: 1, step: 0.01 },
-            orbitRadius: { value: 0.75, min: 0, max: 1.5, step: 0.01 },
+            orbitRadius: { value: 0.5, min: 0, max: 1.5, step: 0.01 },
             centerX: { value: -0.1, min: -1, max: 1, step: 0.01 },
             centerY: { value: 0.99, min: 0, max: 2, step: 0.01 },
             centerZ: { value: -0.1, min: -1, max: 1, step: 0.01 },
@@ -39,6 +43,10 @@ export function Butterflies({ store }) {
                 max: Math.PI,
                 step: 0.01,
             },
+            wobbleAmount: { value: 0.12, min: 0, max: 0.5, step: 0.01 },
+            wobbleSpeed: { value: 0.5, min: 0, max: 3, step: 0.01 },
+            driftAmount: { value: 0.1, min: 0, max: 0.5, step: 0.01 },
+            driftSpeed: { value: 0.3, min: 0, max: 3, step: 0.01 },
         },
         { store }
     )
@@ -52,13 +60,18 @@ export function Butterflies({ store }) {
         bobAmplitude,
         bobFrequency,
         headingOffset,
+        wobbleAmount,
+        wobbleSpeed,
+        driftAmount,
+        driftSpeed,
     }
 
-    const butterflyOrbitA = { ...sharedOrbit, phaseOffset: 0 }
+    const butterflyOrbitA = { ...sharedOrbit, phaseOffset: 0, seed: 0 }
 
     const butterflyOrbitB = {
         ...sharedOrbit,
         phaseOffset: 4,
+        seed: 13.7,
         radius: orbitRadius * 0.7,
         centerY: centerY + 0.3,
         centerX: centerX + 0.15,
