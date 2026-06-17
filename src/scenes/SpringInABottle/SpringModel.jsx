@@ -27,7 +27,7 @@ export function SpringModel() {
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
     const depthMap = useTexture(
-        './models/Spring/SpringTerrainDepthMapFixed.jpg'
+        './models/Spring/SpringTerrainDepthMapFixed2.jpg'
     )
     const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
 
