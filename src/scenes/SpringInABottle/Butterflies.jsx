@@ -3,8 +3,11 @@ import * as THREE from 'three'
 import { useControls } from 'leva'
 
 import { ButterflyModel } from './ButterflyModel'
+import { SEASONS, useStencil } from './utils/stencilBuffer'
 
 export function Butterflies({ store }) {
+    const stencil = useStencil(SEASONS.spring)
+
     const { color, metalness, roughness } = useControls(
         'Butterfly',
         {
@@ -21,8 +24,9 @@ export function Butterflies({ store }) {
                 color,
                 metalness,
                 roughness,
+                ...stencil,
             }),
-        [color, metalness, roughness]
+        [color, metalness, roughness, stencil]
     )
 
     useEffect(() => {
