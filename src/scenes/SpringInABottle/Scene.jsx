@@ -1,11 +1,11 @@
 import { WinterScene } from './WinterScene'
 import { SpringScene } from './SpringScene'
 
-export function Scene() {
+export function Scene({ store }) {
     return (
         <>
             <WinterScene />
-            <SpringScene />
+            <SpringScene store={store} />
         </>
     )
 }

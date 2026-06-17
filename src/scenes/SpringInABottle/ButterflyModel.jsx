@@ -3,7 +3,7 @@ import { useAnimations, useGLTF } from '@react-three/drei'
 import { useGraph } from '@react-three/fiber'
 import { SkeletonUtils } from 'three-stdlib'
 
-export const ButterflyModel = (props) => {
+export const ButterflyModel = ({ position, material, rotation }) => {
     const group = useRef(null)
     const { scene, animations } = useGLTF('./models/Butterfly.glb')
     const clonedScene = useMemo(() => SkeletonUtils.clone(scene), [scene])
@@ -18,11 +18,28 @@ export const ButterflyModel = (props) => {
         }
     }, [actions?.ArmatureAction])
 
+    useEffect(() => {
+        if (!material) return
+        Object.values(nodes).forEach((node) => {
+            if (node.isMesh) {
+                node.material = material
+            }
+        })
+    }, [nodes, material])
+
     return (
-        <group ref={group} {...props} dispose={null}>
+        <group
+            ref={group}
+            position={position}
+            rotation={rotation}
+            dispose={null}
+        >
             <group name="Scene">
                 <group name="Armature" position={[0, 0.015, 0.017]}>
-                    <primitive object={nodes.ButterflyBody} />
+                    <primitive
+                        object={nodes.ButterflyBody}
+                        material={material}
+                    />
                     <primitive object={nodes.UpperWingR} />
                     <primitive object={nodes.LowerWingR} />
                     <primitive object={nodes.UpperWingL} />
