@@ -28,7 +28,7 @@ export function Butterflies({ store }) {
         'Butterfly',
         {
             color: '#9bb7f5',
-            metalness: { value: 0.5, min: 0, max: 1, step: 0.01 },
+            metalness: { value: 0, min: 0, max: 1, step: 0.01 },
             roughness: { value: 0.1, min: 0, max: 1, step: 0.01 },
             orbitRadius: { value: 0.7, min: 0, max: 1.5, step: 0.01 },
             centerX: { value: -0.3, min: -1, max: 1, step: 0.01 },
