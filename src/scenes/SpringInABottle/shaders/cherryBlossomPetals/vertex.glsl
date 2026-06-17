@@ -1,39 +1,46 @@
 uniform float uTime;
 
+attribute float aSeed;
+attribute float aSize;
+
 varying float vRotation;
+varying float vTumble;
 varying vec4 vPosition;
 
-float random(vec3 p) {
-    return fract(sin(dot(p, vec3(12.9898, 78.233, 45.164))) * 43758.5453);
-}
-
 void main() {
-    vec4 modelPosition = modelMatrix * vec4(position, 1);
+    vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+
+    float phase = aSeed * 6.2831853;
 
     // Falling down
-    float speed = mix(0.5, 1.0, random(position));
-    modelPosition.y -= uTime * speed;
+    float fallSpeed = mix(0.5, 1.0, aSeed);
+    modelPosition.y -= uTime * fallSpeed;
 
     // Loop back to top
     modelPosition.y = mod(modelPosition.y + 1.8, 1.8);
 
     // Wind
-    float offset = random(position) * 10.0;
-    modelPosition.x += sin(uTime + offset) * 0.3;
-    modelPosition.z += cos(uTime + offset) * 0.3;
+    float swaySlow = sin(uTime * 6.0 + phase);
+    float swayFast = sin(uTime * 14.0 + phase * 1.7);
+    modelPosition.x += swaySlow * 0.28 + swayFast * 0.06;
+    modelPosition.z += cos(uTime * 5.5 + phase) * 0.24 + swayFast * 0.05;
 
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
 
     gl_Position = projectedPosition;
-    gl_PointSize = 70.0;
+
+    gl_PointSize = 70.0 * aSize;
     gl_PointSize *= 1.0 / -viewPosition.z;
 
     if (gl_PointSize < 1.0) {
         gl_Position = vec4(9999.9);
     }
 
+    float spinSpeed = mix(8.0, 16.0, aSeed);
+    vRotation = uTime * spinSpeed + phase;
+
     // Varyings
-    vRotation = sin(uTime) * 10.0;
+    vTumble = sin(uTime * 9.0 + phase);
     vPosition = modelPosition;
 }

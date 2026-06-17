@@ -7,7 +7,7 @@ import { useControls, folder } from 'leva'
 import vertexShader from './shaders/cherryBlossomPetals/vertex.glsl'
 import fragmentShader from './shaders/cherryBlossomPetals/fragment.glsl'
 import { SEASONS, useStencil } from './utils/stencilBuffer'
-import { generateCherryBlossomPetalPositions } from './utils/generateCherryBlossomPetalPositions.js'
+import { generateCherryBlossomPetalPositions } from './utils/generateCherryBlossomPetalPositions'
 
 const PetalMaterial = shaderMaterial(
     {
@@ -34,8 +34,8 @@ export function CherryBlossomPetals({ store }) {
         }
     })
 
-    const petalsCount = 100
-    const petalsPositions = useMemo(
+    const petalsCount = 70
+    const { positions, seeds, sizes } = useMemo(
         () => generateCherryBlossomPetalPositions(petalsCount),
         []
     )
@@ -62,13 +62,26 @@ export function CherryBlossomPetals({ store }) {
                     attach="attributes-position"
                     count={petalsCount}
                     itemSize={3} // x, y, z
-                    array={petalsPositions}
+                    array={positions}
+                />
+                <bufferAttribute
+                    attach="attributes-aSeed"
+                    count={petalsCount}
+                    itemSize={1}
+                    array={seeds}
+                />
+                <bufferAttribute
+                    attach="attributes-aSize"
+                    count={petalsCount}
+                    itemSize={1}
+                    array={sizes}
                 />
             </bufferGeometry>
             <petalMaterial
                 ref={petalMaterialRef}
                 key={PetalMaterial.key}
                 uTexture={petalTexture}
+                alphaToCoverage
                 {...stencil}
             />
         </points>

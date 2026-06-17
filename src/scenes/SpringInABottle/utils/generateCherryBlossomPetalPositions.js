@@ -4,6 +4,8 @@ export function generateCherryBlossomPetalPositions(
     sceneHeight = 1.7
 ) {
     const positions = new Float32Array(count * 3)
+    const seeds = new Float32Array(count)
+    const sizes = new Float32Array(count)
 
     for (let i = 0; i < count; i++) {
         const i3 = i * 3
@@ -18,7 +20,11 @@ export function generateCherryBlossomPetalPositions(
         positions[i3] = x
         positions[i3 + 1] = Math.random() * sceneHeight
         positions[i3 + 2] = z
+
+        seeds[i3] = Math.random()
+
+        sizes[i3] = 0.6 + Math.random() * 0.8
     }
 
-    return positions
+    return { positions, seeds, sizes }
 }
