@@ -26,6 +26,7 @@ import { WinterV3 } from './models/WinterV3'
 import { WinterSceneBaked } from './models/WinterSceneBaked'
 import { GrassPage } from './components/Grass/Page'
 import { Butterfly } from './models/Butterfly'
+import { DistanceFieldShaderPage } from './components/DistanceField/Page.jsx'
 
 export const ROUTES = [
     {
@@ -188,6 +189,12 @@ export const ROUTES = [
         path: '/shaders/colored-gradient-stripes',
         label: 'Colored gradient stripes',
         element: <ColoredGradientStripesShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/distance-field',
+        label: 'Distance Field',
+        element: <DistanceFieldShaderPage />,
         section: 'Basics',
     },
 
