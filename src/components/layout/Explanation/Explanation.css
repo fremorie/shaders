@@ -10,6 +10,14 @@
     max-width: 600px;
 }
 
+.explanation li {
+    margin-bottom: 8px;
+}
+
+.explanation li b {
+    font-weight: 500;
+}
+
 .explanation a {
     font-weight: bold;
     color: lightblue;
