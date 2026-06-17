@@ -10,6 +10,7 @@ import { CircularMask } from './CircularMask'
 import { MagicGlass } from './MagicGlass'
 import { CAMERA_POSITION } from './utils/camera'
 import { useDebug } from './hooks/useDebug'
+import { CorkModel } from './CorkModel'
 
 export function Experience({ store }) {
     const debug = useDebug()
@@ -62,6 +63,7 @@ export function Experience({ store }) {
                     rotation-y={-2.8}
                 >
                     <BottleModel store={store} />
+                    <CorkModel />
                     <Scene store={store} />
                     <CircularMask />
                     <MagicGlass />
