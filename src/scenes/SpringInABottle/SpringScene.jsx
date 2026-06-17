@@ -4,7 +4,7 @@ import { Butterflies } from './Butterflies'
 export function SpringScene({ store }) {
     return (
         <>
-            <SpringModel />
+            <SpringModel store={store} />
             <Butterflies store={store} />
         </>
     )

@@ -1,7 +1,8 @@
 import { useGLTF, useTexture, shaderMaterial } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import { useControls } from 'leva'
 
 import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
@@ -14,6 +15,9 @@ const RiverMaterial = shaderMaterial(
         uDepthColor: new THREE.Color('#23938a'),
         uDepthMap: null,
         uPerlinNoise: null,
+        uFresnelColor: new THREE.Color('#ffffff'),
+        uFresnelPower: 3.0,
+        uFresnelStrength: 0.6,
     },
     vertexShader,
     fragmentShader
@@ -21,7 +25,7 @@ const RiverMaterial = shaderMaterial(
 
 extend({ RiverMaterial })
 
-export function SpringModel() {
+export function SpringModel({ store }) {
     const stencil = useStencil(SEASONS.spring)
 
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
@@ -43,6 +47,22 @@ export function SpringModel() {
             riverMaterialRef.current.uTime += delta
         }
     })
+
+    const { fresnelColor, fresnelPower, fresnelStrength } = useControls(
+        'River',
+        {
+            fresnelColor: '#ffffff',
+            fresnelPower: { value: 6.0, min: 0.5, max: 10, step: 0.1 },
+            fresnelStrength: { value: 0.88, min: 0, max: 1, step: 0.01 },
+        },
+        { store }
+    )
+
+    useEffect(() => {
+        riverMaterialRef.current.uFresnelColor = new THREE.Color(fresnelColor)
+        riverMaterialRef.current.uFresnelPower = fresnelPower
+        riverMaterialRef.current.uFresnelStrength = fresnelStrength
+    }, [fresnelColor, fresnelPower, fresnelStrength])
 
     return (
         <group dispose={null}>
