@@ -13,8 +13,8 @@ const PetalMaterial = shaderMaterial(
     {
         uTime: 0,
         uTexture: null,
-        uDarkColor: new THREE.Color('#E9B1CD'),
-        uLightColor: new THREE.Color('#e8d4de'),
+        uDarkColor: new THREE.Color('#c89580'),
+        uLightColor: new THREE.Color('#e5d9d1'),
     },
     vertexShader,
     fragmentShader
@@ -43,8 +43,8 @@ export function CherryBlossomPetals({ store }) {
     const { darkColor, lightColor } = useControls(
         {
             'Cherry blossom petals': folder({
-                darkColor: '#E9B1CD',
-                lightColor: '#e8d4de',
+                darkColor: '#c89580',
+                lightColor: '#e5d9d1',
             }),
         },
         { store }
