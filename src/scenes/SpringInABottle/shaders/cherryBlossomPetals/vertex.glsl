@@ -28,6 +28,13 @@ void main() {
     modelPosition.x += swaySlow * 0.28 + swayFast * 0.06;
     modelPosition.z += cos(uTime * 5.5 + phase) * 0.24 + swayFast * 0.05;
 
+    // Keep petals contained within the bottle radius on XZ
+    float containmentRadius = 0.9;
+    float horizontalRadius = length(modelPosition.xz);
+    if (horizontalRadius > containmentRadius) {
+        modelPosition.xz *= containmentRadius / horizontalRadius;
+    }
+
     vec4 viewPosition = viewMatrix * modelPosition;
     vec4 projectedPosition = projectionMatrix * viewPosition;
 
