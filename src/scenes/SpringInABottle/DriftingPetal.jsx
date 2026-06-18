@@ -81,7 +81,6 @@ export function DriftingPetal({ store }) {
                 y,
                 z,
                 duration: 2,
-                delay: index < 2 ? 1 : 0,
                 ease: 'none',
             })
         })
