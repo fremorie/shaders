@@ -35,17 +35,17 @@ export function Experience({ store }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [levaControls.x, levaControls.y, levaControls.z])
 
-    useEffect(() => {
-        gsap.to(camera.position, {
-            x: CAMERA_POSITION.final[0],
-            y: CAMERA_POSITION.final[1],
-            z: CAMERA_POSITION.final[2],
-            duration: 7,
-            delay: 1,
-            ease: 'power1.out',
-        })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    // useEffect(() => {
+    //     gsap.to(camera.position, {
+    //         x: CAMERA_POSITION.final[0],
+    //         y: CAMERA_POSITION.final[1],
+    //         z: CAMERA_POSITION.final[2],
+    //         duration: 7,
+    //         delay: 1,
+    //         ease: 'power1.out',
+    //     })
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
 
     return (
         <>

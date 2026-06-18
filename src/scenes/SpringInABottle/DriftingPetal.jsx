@@ -1,5 +1,5 @@
 import { shaderMaterial, useTexture } from '@react-three/drei'
-import { extend } from '@react-three/fiber'
+import { extend, useFrame } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import { folder, useControls } from 'leva'
 import * as THREE from 'three'
@@ -7,7 +7,12 @@ import gsap from 'gsap'
 
 import vertexShader from './shaders/driftingPetal/vertex.glsl'
 import fragmentShader from './shaders/driftingPetal/fragment.glsl'
+
+import ripplesVertexShader from './shaders/petalRipples/vertex.glsl'
+import ripplesFragmentShader from './shaders/petalRipples/fragment.glsl'
+
 import { SEASONS, useStencil } from './utils/stencilBuffer'
+import { petalAnimationConfig } from './utils/driftingPetal'
 
 const DriftingPetalMaterial = shaderMaterial(
     {
@@ -22,10 +27,26 @@ const DriftingPetalMaterial = shaderMaterial(
 
 extend({ DriftingPetalMaterial })
 
+const DriftingPetalRipplesMaterial = shaderMaterial(
+    {
+        uTime: 0,
+        uPerlinNoise: null,
+    },
+    ripplesVertexShader,
+    ripplesFragmentShader
+)
+
+extend({ DriftingPetalRipplesMaterial })
+
 export function DriftingPetal({ store }) {
     const stencil = useStencil(SEASONS.spring)
+
     const petalTexture = useTexture('./textures/petal/petal.png')
+    const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
+
     const driftingPetalMaterialRef = useRef(null)
+    const driftingPetalRipplesMaterialRef = useRef(null)
+
     const petalMeshRef = useRef(null)
     const petalGroupRef = useRef(null)
 
@@ -48,51 +69,38 @@ export function DriftingPetal({ store }) {
         driftingPetalMaterialRef.current.uLightColor.set(lightColor)
     }, [lightColor, darkColor])
 
-    const petalTrajectory = [
-        [0.2, positionY, 1.2],
-        [0.14, positionY, 1],
-        [0.07, positionY, 0.85],
-        [0, positionY, 0.64],
-
-        [0, positionY, 0.5],
-        [-0.1, positionY, 0.32],
-        [-0.2, positionY, 0.14],
-        [-0.4, positionY, -0.1],
-
-        [-0.5, positionY, -0.3],
-        [-0.6, positionY, -0.6],
-        [-0.6, positionY, -0.8],
-        [-0.9, positionY, -0.9],
-        [-1.1, positionY, -1.1],
-    ]
-
     const petalPosition = {
         x: 0.2,
         y: 0.51,
         z: 1.3,
     }
 
-    useEffect(() => {
-        const timeline = gsap.timeline({ repeat: -1 })
+    // useEffect(() => {
+    //     const timeline = gsap.timeline({ repeat: -1 })
+    //
+    //     petalAnimationConfig.trajectoryA.forEach(({x, z, duration}) => {
+    //         timeline.to(petalGroupRef.current.position, {
+    //             x,
+    //             z,
+    //             duration,
+    //             ease: 'none',
+    //         })
+    //     })
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
 
-        petalTrajectory.forEach(([x, y, z], index) => {
-            timeline.to(petalGroupRef.current.position, {
-                x,
-                y,
-                z,
-                duration: 2,
-                ease: 'none',
-            })
-        })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    useFrame((state, delta) => {
+        if (driftingPetalRipplesMaterialRef.current) {
+            driftingPetalRipplesMaterialRef.current.uTime += delta
+        }
+    })
 
     return (
         <group
             ref={petalGroupRef}
             position={[petalPosition.x, petalPosition.y, petalPosition.z]}
         >
-            <mesh ref={petalMeshRef} rotation-x={-Math.PI / 2} scale={0.1}>
+            <mesh ref={petalMeshRef} rotation-x={-Math.PI / 2} scale={0.1} position-y={0.02}>
                 <planeGeometry />
                 <driftingPetalMaterial
                     key={DriftingPetalMaterial}
@@ -100,6 +108,14 @@ export function DriftingPetal({ store }) {
                     uTexture={petalTexture}
                     alphaToCoverage
                     {...stencil}
+                />
+            </mesh>
+            <mesh rotation-x={-Math.PI / 2} scale={0.25} position-y={0.01}>
+                <planeGeometry />
+                <driftingPetalRipplesMaterial
+                    key={DriftingPetalRipplesMaterial}
+                    ref={driftingPetalRipplesMaterialRef}
+                    uPerlinNoise={perlinNoise}
                 />
             </mesh>
         </group>
