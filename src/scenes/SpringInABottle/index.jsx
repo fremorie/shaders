@@ -23,7 +23,7 @@ export function SpringInABottle() {
                 camera={{
                     fov: 45,
                     near: 0.1,
-                    far: 200,
+                    far: 31,
                     position: CAMERA_POSITION.initial,
                 }}
                 gl={{ stencil: true }}
