@@ -38,4 +38,4 @@ export function BottleModel({ position, store }) {
     )
 }
 
-useGLTF.preload('./models/Bottle.glb')
+useGLTF.preload('./models/BottleWithAHole.glb')

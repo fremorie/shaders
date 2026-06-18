@@ -25,3 +25,4 @@ export function CorkModel(props) {
 }
 
 useGLTF.preload('./models/Cork/Cork.glb')
+useTexture.preload('./models/Cork/baked.jpg')

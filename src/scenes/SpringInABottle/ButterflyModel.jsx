@@ -51,3 +51,5 @@ export const ButterflyModel = ({ orbit, material }) => {
         </group>
     )
 }
+
+useGLTF.preload('./models/Butterfly.glb')

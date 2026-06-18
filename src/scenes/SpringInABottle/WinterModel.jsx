@@ -62,3 +62,5 @@ export function WinterModel() {
 }
 
 useGLTF.preload('./models/Winter/WinterMerged2.glb')
+useTexture.preload('./models/Winter/BakedWinter.jpg')
+useTexture.preload('./textures/perlinNoise/perlin.png')

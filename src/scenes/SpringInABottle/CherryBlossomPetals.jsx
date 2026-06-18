@@ -87,3 +87,5 @@ export function CherryBlossomPetals({ store }) {
         </points>
     )
 }
+
+useTexture.preload('./textures/petal/petal.png')

@@ -5,6 +5,7 @@ import { Perf } from 'r3f-perf'
 import { Suspense } from 'react'
 
 import { Experience } from './Experience'
+import { FadeIn } from './FadeIn'
 import { CAMERA_POSITION } from './utils/camera'
 import { useDebug } from './hooks/useDebug'
 import { Explanation } from '../../components/layout/Explanation/Explanation'
@@ -29,7 +30,7 @@ export function SpringInABottle() {
             >
                 <OrbitControls
                     makeDefault
-                    maxDistance={10}
+                    maxDistance={30}
                     minDistance={2}
                     target={[0, 1.2, 0]}
                 />
@@ -43,7 +44,13 @@ export function SpringInABottle() {
                 </Suspense>
             </Canvas>
 
-            <Loader />
+            <FadeIn />
+
+            <Loader
+                containerStyles={{
+                    zIndex: 2,
+                }}
+            />
 
             <Explanation title="Credits">
                 <ul>

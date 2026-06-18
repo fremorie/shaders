@@ -1,4 +1,4 @@
-import { Environment, Float } from '@react-three/drei'
+import { Environment, Float, useEnvironment } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import { useEffect } from 'react'
 import gsap from 'gsap'
@@ -11,6 +11,12 @@ import { MagicGlass } from './MagicGlass'
 import { CAMERA_POSITION } from './utils/camera'
 import { useDebug } from './hooks/useDebug'
 import { CorkModel } from './CorkModel'
+
+const ENVIRONMENT_FILES = [
+    './environmentMaps/veniceSunset/venice_sunset_1k.hdr',
+]
+
+useEnvironment.preload({ files: ENVIRONMENT_FILES })
 
 export function Experience({ store }) {
     const debug = useDebug()
@@ -41,7 +47,6 @@ export function Experience({ store }) {
             y: CAMERA_POSITION.final[1],
             z: CAMERA_POSITION.final[2],
             duration: 7,
-            delay: 1,
             ease: 'power1.out',
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -50,7 +55,7 @@ export function Experience({ store }) {
     return (
         <>
             <Environment
-                files={['./environmentMaps/veniceSunset/venice_sunset_1k.hdr']}
+                files={ENVIRONMENT_FILES}
                 background={true}
                 backgroundBlurriness={0.5}
                 backgroundIntensity={0.5}

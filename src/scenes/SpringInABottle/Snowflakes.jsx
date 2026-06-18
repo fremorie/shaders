@@ -7,7 +7,7 @@ import vertexShader from './shaders/snowflakes/vertex.glsl'
 import fragmentShader from './shaders/snowflakes/fragment.glsl'
 import { generateSnowflakePositions } from './utils/generateSnowflakePositions'
 import { SEASONS, useStencil } from './utils/stencilBuffer'
-import { RENDER_ORDER } from './utils/renderOrder.js'
+import { RENDER_ORDER } from './utils/renderOrder'
 
 const SnowflakeMaterial = shaderMaterial(
     {
@@ -60,3 +60,5 @@ export function Snowflakes() {
         </points>
     )
 }
+
+useTexture.preload('./textures/snowflake/snowflake.png')
