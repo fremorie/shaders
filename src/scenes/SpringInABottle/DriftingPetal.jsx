@@ -44,10 +44,8 @@ export function DriftingPetal({ store }) {
         )
 
     useEffect(() => {
-        driftingPetalMaterialRef.current.uDarkColor = new THREE.Color(darkColor)
-        driftingPetalMaterialRef.current.uLightColor = new THREE.Color(
-            lightColor
-        )
+        driftingPetalMaterialRef.current.uDarkColor.set(darkColor)
+        driftingPetalMaterialRef.current.uLightColor.set(lightColor)
     }, [lightColor, darkColor])
 
     const petalTrajectory = [
@@ -75,111 +73,20 @@ export function DriftingPetal({ store }) {
     }
 
     useEffect(() => {
-        const tl = gsap.timeline({ repeat: -1 })
+        const timeline = gsap.timeline({ repeat: -1 })
 
-        tl.to(petalGroupRef.current.position, {
-            x: petalTrajectory[0][0],
-            y: petalTrajectory[0][1],
-            z: petalTrajectory[0][2],
-            duration: 2,
-            delay: 1,
-            ease: 'none',
+        petalTrajectory.forEach(([x, y, z], index) => {
+            timeline.to(petalGroupRef.current.position, {
+                x,
+                y,
+                z,
+                duration: 2,
+                delay: index < 2 ? 1 : 0,
+                ease: 'none',
+            })
         })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[1][0],
-                y: petalTrajectory[1][1],
-                z: petalTrajectory[1][2],
-                duration: 2,
-                delay: 1,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[2][0],
-                y: petalTrajectory[2][1],
-                z: petalTrajectory[2][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[3][0],
-                y: petalTrajectory[3][1],
-                z: petalTrajectory[3][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[4][0],
-                y: petalTrajectory[4][1],
-                z: petalTrajectory[4][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[5][0],
-                y: petalTrajectory[5][1],
-                z: petalTrajectory[5][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[6][0],
-                y: petalTrajectory[6][1],
-                z: petalTrajectory[6][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[7][0],
-                y: petalTrajectory[7][1],
-                z: petalTrajectory[7][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[8][0],
-                y: petalTrajectory[8][1],
-                z: petalTrajectory[8][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[9][0],
-                y: petalTrajectory[9][1],
-                z: petalTrajectory[9][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[10][0],
-                y: petalTrajectory[10][1],
-                z: petalTrajectory[10][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[11][0],
-                y: petalTrajectory[11][1],
-                z: petalTrajectory[11][2],
-                duration: 2,
-                ease: 'none',
-            })
-            .to(petalGroupRef.current.position, {
-                x: petalTrajectory[12][0],
-                y: petalTrajectory[12][1],
-                z: petalTrajectory[12][2],
-                duration: 2,
-                ease: 'none',
-            })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    // useFrame((state) => {
-    //     const elapsedTime = state.clock.elapsedTime
-    //
-    //     if (petalMeshRef.current) {
-    //         petalMeshRef.current.rotation.y = Math.sin(elapsedTime)
-    //     }
-    // })
 
     return (
         <group
