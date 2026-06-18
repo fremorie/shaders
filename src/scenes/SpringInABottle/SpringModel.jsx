@@ -52,7 +52,7 @@ export function SpringModel({ store }) {
         'River',
         {
             fresnelColor: '#ffffff',
-            fresnelPower: { value: 6.0, min: 0.5, max: 10, step: 0.1 },
+            fresnelPower: { value: 4.2, min: 0.5, max: 10, step: 0.1 },
             fresnelStrength: { value: 0.88, min: 0, max: 1, step: 0.01 },
         },
         { store }
