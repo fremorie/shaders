@@ -9,7 +9,7 @@ export function SpringScene({ store }) {
             <SpringModel store={store} />
             <Butterflies store={store} />
             <CherryBlossomPetals store={store} />
-            <DriftingPetal />
+            <DriftingPetal store={store} />
         </>
     )
 }
