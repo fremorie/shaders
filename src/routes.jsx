@@ -68,7 +68,7 @@ export const ROUTES = [
 
     // Scenes
     {
-        path: '/shaders/terrarium',
+        path: '/shaders/spring-in-a-bottle',
         label: 'Terrarium',
         element: <SpringInABottle />,
         section: 'Scenes',

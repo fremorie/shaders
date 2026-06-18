@@ -66,16 +66,6 @@ export function SpringInABottle() {
                         </a>
                     </li>
                     <li>
-                        <b>Perlin noise texture:&nbsp;</b>
-                        Created with{' '}
-                        <a
-                            target="_blank"
-                            href="https://github.com/blackears/PerlinNoiseMaker"
-                        >
-                            Perlin Noise Maker
-                        </a>
-                    </li>
-                    <li>
                         <b>Cherry blossom petal texture:</b> AI-generated
                     </li>
                 </ul>
