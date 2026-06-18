@@ -18,7 +18,7 @@ void main() {
 
     // Loop back to top
     float groundLevel = 0.5;
-    float topLevel = 1.8;
+    float topLevel = 2.0;
     modelPosition.y =
         groundLevel + mod(modelPosition.y - groundLevel, topLevel - groundLevel);
 

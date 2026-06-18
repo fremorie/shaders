@@ -1,7 +1,7 @@
 export function generateCherryBlossomPetalPositions(
     count = 5000,
     sceneRadius = 0.8,
-    sceneHeight = 1.8
+    sceneHeight = 2
 ) {
     const positions = new Float32Array(count * 3)
     const seeds = new Float32Array(count)
