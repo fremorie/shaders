@@ -43,7 +43,6 @@ export function DriftingPetal({ store }) {
     const stencil = useStencil(SEASONS.spring)
 
     const petalTexture = useTexture('./textures/petal/petal.png')
-    const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
 
     const driftingPetalMaterialRef = useRef(null)
     const driftingPetalRipplesMaterialRef = useRef(null)
@@ -51,19 +50,18 @@ export function DriftingPetal({ store }) {
     const petalMeshRef = useRef(null)
     const petalGroupRef = useRef(null)
 
-    const { darkColor, lightColor, positionX, positionY, positionZ } =
-        useControls(
-            {
-                'Drifting petal': folder({
-                    darkColor: '#c89580',
-                    lightColor: '#e5d9d1',
-                    positionX: { value: 0, min: -1, max: 1, step: 0.01 },
-                    positionY: { value: 0.51, min: -1, max: 1, step: 0.01 },
-                    positionZ: { value: 0, min: -1, max: 1, step: 0.01 },
-                }),
-            },
-            { store }
-        )
+    const { darkColor, lightColor } = useControls(
+        {
+            'Drifting petal': folder({
+                darkColor: '#c89580',
+                lightColor: '#e5d9d1',
+                positionX: { value: 0, min: -1, max: 1, step: 0.01 },
+                positionY: { value: 0.51, min: -1, max: 1, step: 0.01 },
+                positionZ: { value: 0, min: -1, max: 1, step: 0.01 },
+            }),
+        },
+        { store }
+    )
 
     useEffect(() => {
         driftingPetalMaterialRef.current.uDarkColor.set(darkColor)
@@ -79,7 +77,7 @@ export function DriftingPetal({ store }) {
     useEffect(() => {
         const timeline = gsap.timeline({ repeat: -1 })
 
-        petalAnimationConfig.trajectoryA.forEach(({x, z, duration}) => {
+        petalAnimationConfig.trajectoryA.forEach(({ x, z, duration }) => {
             timeline.to(petalGroupRef.current.position, {
                 x,
                 z,
@@ -87,7 +85,6 @@ export function DriftingPetal({ store }) {
                 ease: 'none',
             })
         })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useFrame((state, delta) => {
@@ -102,7 +99,12 @@ export function DriftingPetal({ store }) {
             position={[petalPosition.x, petalPosition.y, petalPosition.z]}
             scale={0.5}
         >
-            <mesh ref={petalMeshRef} rotation-x={-Math.PI / 2} scale={0.1} position-y={0.02}>
+            <mesh
+                ref={petalMeshRef}
+                rotation-x={-Math.PI / 2}
+                scale={0.1}
+                position-y={0.02}
+            >
                 <planeGeometry />
                 <driftingPetalMaterial
                     key={DriftingPetalMaterial}
@@ -112,15 +114,15 @@ export function DriftingPetal({ store }) {
                     {...stencil}
                 />
             </mesh>
-            <mesh rotation-x={-Math.PI / 2} scale={0.2} position-y={0.01}>
-                <planeGeometry />
-                <driftingPetalRipplesMaterial
-                    key={DriftingPetalRipplesMaterial}
-                    ref={driftingPetalRipplesMaterialRef}
-                    uPerlinNoise={perlinNoise}
-                    uShapeTexture={petalTexture}
-                />
-            </mesh>
+            {/*<mesh rotation-x={-Math.PI / 2} scale={0.2} position-y={0.01}>*/}
+            {/*    <planeGeometry />*/}
+            {/*    <driftingPetalRipplesMaterial*/}
+            {/*        key={DriftingPetalRipplesMaterial}*/}
+            {/*        ref={driftingPetalRipplesMaterialRef}*/}
+            {/*        uPerlinNoise={perlinNoise}*/}
+            {/*        uShapeTexture={petalTexture}*/}
+            {/*    />*/}
+            {/*</mesh>*/}
         </group>
     )
 }
