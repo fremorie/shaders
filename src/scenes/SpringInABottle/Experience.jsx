@@ -11,6 +11,8 @@ import { MagicGlass } from './MagicGlass'
 import { CAMERA_POSITION } from './utils/camera'
 import { useDebug } from './hooks/useDebug'
 import { CorkModel } from './CorkModel'
+import { Rope } from './Rope.jsx'
+import { BottleLabel } from './BottleLabel.jsx'
 
 const ENVIRONMENT_FILES = [
     './environmentMaps/veniceSunset/venice_sunset_1k.hdr',
@@ -72,6 +74,8 @@ export function Experience({ store }) {
                     <Scene store={store} />
                     <CircularMask />
                     <MagicGlass />
+                    <Rope />
+                    <BottleLabel />
                 </group>
             </Float>
         </>

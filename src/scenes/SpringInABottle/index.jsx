@@ -75,6 +75,15 @@ export function SpringInABottle() {
                     <li>
                         <b>Cherry blossom petal texture:</b> AI-generated
                     </li>
+                    <li>
+                        <b>Ring matcap texture:&nbsp;</b>
+                        <a
+                            target="_blank"
+                            href="https://github.com/nidorx/matcaps/blob/1b1e43a338335b6401034d48488298966755d717/PAGE-4.md#331a0b_b17038_7d4e28_5b351a"
+                        >
+                            nidorx/matcaps
+                        </a>
+                    </li>
                 </ul>
             </Explanation>
         </>
