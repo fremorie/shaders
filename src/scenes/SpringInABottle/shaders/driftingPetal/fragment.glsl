@@ -4,6 +4,7 @@ uniform vec3 uLightColor;
 uniform vec3 uDarkColor;
 
 varying vec2 vUv;
+varying vec3 vPosition;
 
 void main() {
     float mask = texture2D(uTexture, vUv).r;
