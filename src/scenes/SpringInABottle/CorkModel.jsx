@@ -16,7 +16,6 @@ export function CorkModel(props) {
             <mesh
                 geometry={nodes.Cork.geometry}
                 position={[-0.023, 2.426, 0.011]}
-                scale={0.99}
             >
                 <meshBasicMaterial map={bakedTexture} />
             </mesh>
