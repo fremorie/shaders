@@ -5,7 +5,7 @@ export function Bottle({ store }) {
     return (
         <RigidBody
             type="fixed"
-            colliders="hull"
+            colliders="trimesh"
             restitution={0.2}
             friction={0}
             position={[0.023, 0, -0.011]}

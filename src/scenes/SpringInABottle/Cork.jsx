@@ -1,8 +1,7 @@
 import { CorkModel } from './CorkModel'
 import { useCursor } from '@react-three/drei'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { RigidBody } from '@react-three/rapier'
-import gsap from 'gsap'
 
 export function Cork() {
     const corkRef = useRef(null)
@@ -10,27 +9,27 @@ export function Cork() {
     const [hovered, setHovered] = useState(false)
     useCursor(hovered, 'pointer')
 
-    const [clicked, setClicked] = useState(false)
+    const throwAwayCork = () => {
+        const mass = corkRef.current.mass()
 
-    const handleClick = () => {
-        setClicked(true)
+        corkRef.current.applyImpulse({ x: -0.1, y: 0.3 * mass, z: 0.3 }, true)
+        corkRef.current.applyTorqueImpulse({ x: 0, y: 0.1, z: 0 }, true)
     }
 
-    useEffect(() => {
-        if (clicked && corkRef.current) {
-        }
-    })
+    const handleClick = () => {
+        throwAwayCork()
+    }
 
     return (
         <RigidBody
-            type="fixed"
             colliders="hull"
             restitution={0.2}
             friction={0}
             position={[0.023, 0, -0.011]}
+            ref={corkRef}
+            gravityScale={0.3}
         >
             <CorkModel
-                ref={corkRef}
                 onPointerOver={() => setHovered(true)}
                 onPointerOut={() => setHovered(false)}
                 onClick={handleClick}

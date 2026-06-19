@@ -76,7 +76,7 @@ export function Experience({ store }) {
                     <Rope />
                     <BottleLabel />
 
-                    <Physics debug>
+                    <Physics debug={debug}>
                         <Bottle store={store} />
                         <Cork />
                     </Physics>
