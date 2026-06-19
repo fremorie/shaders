@@ -3,16 +3,17 @@ import { useThree } from '@react-three/fiber'
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { folder, useControls } from 'leva'
+import { Physics } from '@react-three/rapier'
 
 import { Scene } from './Scene'
-import { BottleModel } from './BottleModel'
 import { CircularMask } from './CircularMask'
 import { MagicGlass } from './MagicGlass'
 import { CAMERA_POSITION } from './utils/camera'
 import { useDebug } from './hooks/useDebug'
-import { CorkModel } from './CorkModel'
-import { Rope } from './Rope.jsx'
-import { BottleLabel } from './BottleLabel.jsx'
+import { Rope } from './Rope'
+import { BottleLabel } from './BottleLabel'
+import { Cork } from './Cork'
+import { Bottle } from './Bottle'
 
 const ENVIRONMENT_FILES = [
     './environmentMaps/veniceSunset/venice_sunset_1k.hdr',
@@ -69,13 +70,16 @@ export function Experience({ store }) {
                     // the sun from the environment map casts shadows.
                     rotation-y={-2.8}
                 >
-                    <BottleModel store={store} />
-                    <CorkModel />
                     <Scene store={store} />
                     <CircularMask />
                     <MagicGlass />
                     <Rope />
                     <BottleLabel />
+
+                    <Physics debug>
+                        <Bottle store={store} />
+                        <Cork />
+                    </Physics>
                 </group>
             </Float>
         </>
