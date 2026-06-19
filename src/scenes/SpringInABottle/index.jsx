@@ -83,6 +83,8 @@ export function SpringInABottle() {
                         >
                             nidorx/matcaps
                         </a>
+                        <br />
+                        <i>(original author unknown)</i>
                     </li>
                 </ul>
             </Explanation>
