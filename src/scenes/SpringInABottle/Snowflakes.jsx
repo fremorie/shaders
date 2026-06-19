@@ -6,7 +6,8 @@ import { shaderMaterial, useTexture } from '@react-three/drei'
 import vertexShader from './shaders/snowflakes/vertex.glsl'
 import fragmentShader from './shaders/snowflakes/fragment.glsl'
 import { generateSnowflakePositions } from './utils/generateSnowflakePositions'
-import { SEASONS, useStencil } from './utils/stencilBuffer'
+import { useStencil } from './utils/stencilBuffer'
+import { SEASONS } from './store/useSceneState'
 import { RENDER_ORDER } from './utils/renderOrder'
 
 const SnowflakeMaterial = shaderMaterial(

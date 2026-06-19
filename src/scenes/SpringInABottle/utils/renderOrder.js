@@ -1,4 +1,4 @@
 export const RENDER_ORDER = {
-    bottle: 1,
-    snowflakes: 2,
+    bottle: 2,
+    snowflakes: 1,
 }

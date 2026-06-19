@@ -11,7 +11,8 @@ import fragmentShader from './shaders/driftingPetal/fragment.glsl'
 import ripplesVertexShader from './shaders/petalRipples/vertex.glsl'
 import ripplesFragmentShader from './shaders/petalRipples/fragment.glsl'
 
-import { SEASONS, useStencil } from './utils/stencilBuffer'
+import { useStencil } from './utils/stencilBuffer'
+import { SEASONS } from './store/useSceneState'
 import { petalAnimationConfig } from './utils/driftingPetal'
 
 const DriftingPetalMaterial = shaderMaterial(

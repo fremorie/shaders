@@ -3,8 +3,12 @@ import { useCursor } from '@react-three/drei'
 import { useRef, useState } from 'react'
 import { RigidBody } from '@react-three/rapier'
 
+import useSceneState from './store/useSceneState'
+
 export function Cork() {
     const corkRef = useRef(null)
+
+    const openBottleAction = useSceneState((state) => state.openBottle)
 
     const [hovered, setHovered] = useState(false)
     useCursor(hovered, 'pointer')
@@ -18,6 +22,7 @@ export function Cork() {
 
     const handleClick = () => {
         throwAwayCork()
+        openBottleAction()
     }
 
     return (

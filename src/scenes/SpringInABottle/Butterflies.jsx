@@ -3,7 +3,8 @@ import * as THREE from 'three'
 import { useControls } from 'leva'
 
 import { ButterflyModel } from './ButterflyModel'
-import { SEASONS, useStencil } from './utils/stencilBuffer'
+import { useStencil } from './utils/stencilBuffer'
+import { SEASONS } from './store/useSceneState'
 
 export function Butterflies({ store }) {
     const stencil = useStencil(SEASONS.spring)

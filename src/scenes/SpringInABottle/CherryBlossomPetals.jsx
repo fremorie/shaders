@@ -6,7 +6,8 @@ import { useControls, folder } from 'leva'
 
 import vertexShader from './shaders/cherryBlossomPetals/vertex.glsl'
 import fragmentShader from './shaders/cherryBlossomPetals/fragment.glsl'
-import { SEASONS, useStencil } from './utils/stencilBuffer'
+import { useStencil } from './utils/stencilBuffer'
+import { SEASONS } from './store/useSceneState'
 import { generateCherryBlossomPetalPositions } from './utils/generateCherryBlossomPetalPositions'
 
 const PetalMaterial = shaderMaterial(

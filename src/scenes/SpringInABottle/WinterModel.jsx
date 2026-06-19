@@ -1,7 +1,8 @@
 import { shaderMaterial, useGLTF, useTexture } from '@react-three/drei'
 import { extend } from '@react-three/fiber'
 
-import { SEASONS, useStencil } from './utils/stencilBuffer'
+import { useStencil } from './utils/stencilBuffer'
+import { SEASONS } from './store/useSceneState'
 import vertexShader from './shaders/snow/vertex.glsl'
 import fragmentShader from './shaders/snow/fragment.glsl'
 

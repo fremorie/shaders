@@ -6,7 +6,8 @@ import { useControls } from 'leva'
 
 import vertexShader from './shaders/river/vertex.glsl'
 import fragmentShader from './shaders/river/fragment.glsl'
-import { SEASONS, useStencil } from './utils/stencilBuffer'
+import { useStencil } from './utils/stencilBuffer'
+import { SEASONS } from './store/useSceneState'
 
 const RiverMaterial = shaderMaterial(
     {

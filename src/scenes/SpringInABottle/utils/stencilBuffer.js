@@ -1,26 +1,14 @@
 import { useMask } from '@react-three/drei'
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
+
+import useSceneState from '../store/useSceneState'
 
 export const MASK_ID = 1
 
-export const SEASONS = {
-    winter: 'winter',
-    spring: 'spring',
-}
-
-export function useSeason() {
-    const [mainSeason, setMainSeason] = useState(SEASONS.spring)
-
-    return {
-        setMainSeason,
-        mainSeason,
-    }
-}
-
 export function useStencil(season) {
-    const { mainSeason } = useSeason()
+    const activeSeason = useSceneState((state) => state.activeSeason)
 
-    const inverse = season === mainSeason
+    const inverse = season === activeSeason
     const stencil = useMask(MASK_ID, inverse)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
