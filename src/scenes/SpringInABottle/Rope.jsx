@@ -15,26 +15,16 @@ export function Rope(props) {
     return (
         <group {...props} dispose={null}>
             <mesh
-                geometry={nodes.Rope002.geometry}
-                position={[-0.025, 2.217, 0.008]}
-                rotation={[0, 1.329, 0]}
-                scale={0.022}
-            >
-                <meshBasicMaterial map={bakedRopeTexture} />
-            </mesh>
-            <mesh
-                geometry={nodes.Rope001.geometry}
+                name="merged002"
+                geometry={nodes.merged002.geometry}
                 position={[-0.025, 2.293, 0.008]}
-                rotation={[-Math.PI, 0.026, -Math.PI]}
-                scale={0.022}
             >
                 <meshBasicMaterial map={bakedRopeTexture} />
             </mesh>
             <mesh
-                geometry={nodes.Ring.geometry}
+                name="Ring002"
+                geometry={nodes.Ring002.geometry}
                 position={[0.009, 2.246, 0.495]}
-                rotation={[0, 0, -1.638]}
-                scale={[0.089, 0.128, 0.082]}
             >
                 <meshMatcapMaterial matcap={ringMatcap} />
             </mesh>

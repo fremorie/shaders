@@ -13,10 +13,8 @@ export function BottleLabel(props) {
     return (
         <group {...props} dispose={null}>
             <mesh
-                geometry={nodes.Cube001.geometry}
+                geometry={nodes.BottleLabel.geometry}
                 position={[0, 2.043, 0.914]}
-                rotation={[0.535, -1.569, 1.628]}
-                scale={[0.009, 0.445, 0.32]}
             >
                 <meshBasicMaterial map={bakedTexture} />
             </mesh>
