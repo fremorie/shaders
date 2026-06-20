@@ -16,7 +16,11 @@ export function SpringInABottle() {
 
     return (
         <>
-            <LevaPanel store={store} hidden={!debug} />
+            <LevaPanel
+                store={store}
+                hidden={!debug}
+                theme={{ sizes: { rootWidth: '350px' } }}
+            />
 
             <Canvas
                 flat

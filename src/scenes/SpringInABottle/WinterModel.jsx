@@ -33,6 +33,16 @@ const WinterRiverMaterial = shaderMaterial(
         uFresnelColor: new THREE.Color('#ffffff'),
         uFresnelPower: 4.2,
         uFresnelStrength: 0.88,
+        uCrackColor: new THREE.Color('#dff6ff'),
+        uCrackScale: 14.0,
+        uCrackWidth: 0.04,
+        uCrackStrength: 0.6,
+        uBubbleColor: new THREE.Color('#eaffff'),
+        uBubbleScale: 40.0,
+        uBubbleSize: 0.08,
+        uBubbleStrength: 0.7,
+        uFrostColor: new THREE.Color('#ffffff'),
+        uFrostStrength: 0.5,
     },
     riverVertexShader,
     riverFragmentShader
@@ -56,20 +66,69 @@ export function WinterModel({ store }) {
     depthMap.flipY = false
 
     const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
+    // eslint-disable-next-line
+    perlinNoise.wrapS = perlinNoise.wrapT = THREE.RepeatWrapping
 
-    const { edgeColor, depthColor } = useControls(
+    const {
+        edgeColor,
+        depthColor,
+        crackColor,
+        crackScale,
+        crackWidth,
+        crackStrength,
+        bubbleColor,
+        bubbleScale,
+        bubbleSize,
+        bubbleStrength,
+        frostColor,
+        frostStrength,
+    } = useControls(
         'Winter River',
         {
             edgeColor: '#66e8ff',
             depthColor: '#236194',
+            crackColor: '#dff6ff',
+            crackScale: { value: 20.0, min: 1, max: 60, step: 1 },
+            crackWidth: { value: 0.04, min: 0.0, max: 0.2, step: 0.001 },
+            crackStrength: { value: 0.26, min: 0.0, max: 1.0, step: 0.01 },
+            bubbleColor: '#eaffff',
+            bubbleScale: { value: 40.0, min: 1, max: 120, step: 1 },
+            bubbleSize: { value: 0.08, min: 0.0, max: 0.4, step: 0.001 },
+            bubbleStrength: { value: 0.7, min: 0.0, max: 1.0, step: 0.01 },
+            frostColor: '#ffffff',
+            frostStrength: { value: 0.13, min: 0.0, max: 1.0, step: 0.01 },
         },
         { store }
     )
 
     useEffect(() => {
-        winterRiverMaterialRef.current.uEdgeColor = new THREE.Color(edgeColor)
-        winterRiverMaterialRef.current.uDepthColor = new THREE.Color(depthColor)
-    }, [edgeColor, depthColor])
+        const material = winterRiverMaterialRef.current
+        material.uEdgeColor = new THREE.Color(edgeColor)
+        material.uDepthColor = new THREE.Color(depthColor)
+        material.uCrackColor = new THREE.Color(crackColor)
+        material.uCrackScale = crackScale
+        material.uCrackWidth = crackWidth
+        material.uCrackStrength = crackStrength
+        material.uBubbleColor = new THREE.Color(bubbleColor)
+        material.uBubbleScale = bubbleScale
+        material.uBubbleSize = bubbleSize
+        material.uBubbleStrength = bubbleStrength
+        material.uFrostColor = new THREE.Color(frostColor)
+        material.uFrostStrength = frostStrength
+    }, [
+        edgeColor,
+        depthColor,
+        crackColor,
+        crackScale,
+        crackWidth,
+        crackStrength,
+        bubbleColor,
+        bubbleScale,
+        bubbleSize,
+        bubbleStrength,
+        frostColor,
+        frostStrength,
+    ])
 
     return (
         <group dispose={null}>
@@ -81,6 +140,7 @@ export function WinterModel({ store }) {
                     ref={winterRiverMaterialRef}
                     key={WinterRiverMaterial.key}
                     uDepthMap={depthMap}
+                    uPerlinNoise={perlinNoise}
                     {...stencil}
                 />
             </mesh>

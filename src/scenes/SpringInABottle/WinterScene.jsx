@@ -1,10 +1,10 @@
 import { WinterModel } from './WinterModel'
 import { Snowflakes } from './Snowflakes'
 
-export function WinterScene() {
+export function WinterScene({ store }) {
     return (
         <>
-            <WinterModel />
+            <WinterModel store={store} />
             <Snowflakes />
         </>
     )
