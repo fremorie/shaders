@@ -1,5 +1,5 @@
 import { shaderMaterial, useGLTF, useTexture } from '@react-three/drei'
-import { extend } from '@react-three/fiber'
+import { extend, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 import { useControls } from 'leva'
 import { useEffect, useRef } from 'react'
@@ -43,6 +43,10 @@ const WinterRiverMaterial = shaderMaterial(
         uBubbleStrength: 0.7,
         uFrostColor: new THREE.Color('#ffffff'),
         uFrostStrength: 0.5,
+        uWaterColor: new THREE.Color('#15466e'),
+        uFlowSpeed: 0.05,
+        uFlowStrength: 0.6,
+        uFreezeLevel: 0.2,
     },
     riverVertexShader,
     riverFragmentShader
@@ -82,6 +86,10 @@ export function WinterModel({ store }) {
         bubbleStrength,
         frostColor,
         frostStrength,
+        waterColor,
+        flowSpeed,
+        flowStrength,
+        freezeLevel,
     } = useControls(
         'Winter River',
         {
@@ -96,7 +104,11 @@ export function WinterModel({ store }) {
             bubbleSize: { value: 0.08, min: 0.0, max: 0.4, step: 0.001 },
             bubbleStrength: { value: 0.7, min: 0.0, max: 1.0, step: 0.01 },
             frostColor: '#ffffff',
-            frostStrength: { value: 0.13, min: 0.0, max: 1.0, step: 0.01 },
+            frostStrength: { value: 0.2, min: 0.0, max: 1.0, step: 0.01 },
+            waterColor: '#15466e',
+            flowSpeed: { value: 0.05, min: 0.0, max: 0.5, step: 0.001 },
+            flowStrength: { value: 0.35, min: 0.0, max: 1.0, step: 0.01 },
+            freezeLevel: { value: 0.17, min: 0.0, max: 0.5, step: 0.001 },
         },
         { store }
     )
@@ -115,6 +127,10 @@ export function WinterModel({ store }) {
         material.uBubbleStrength = bubbleStrength
         material.uFrostColor = new THREE.Color(frostColor)
         material.uFrostStrength = frostStrength
+        material.uWaterColor = new THREE.Color(waterColor)
+        material.uFlowSpeed = flowSpeed
+        material.uFlowStrength = flowStrength
+        material.uFreezeLevel = freezeLevel
     }, [
         edgeColor,
         depthColor,
@@ -128,7 +144,15 @@ export function WinterModel({ store }) {
         bubbleStrength,
         frostColor,
         frostStrength,
+        waterColor,
+        flowSpeed,
+        flowStrength,
+        freezeLevel,
     ])
+
+    useFrame((state) => {
+        winterRiverMaterialRef.current.uTime = state.clock.elapsedTime
+    })
 
     return (
         <group dispose={null}>

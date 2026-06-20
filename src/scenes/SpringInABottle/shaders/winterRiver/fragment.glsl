@@ -23,6 +23,11 @@ uniform float uBubbleStrength;
 uniform vec3 uFrostColor;
 uniform float uFrostStrength;
 
+uniform vec3 uWaterColor;
+uniform float uFlowSpeed;
+uniform float uFlowStrength;
+uniform float uFreezeLevel;
+
 varying vec2 vUv;
 varying vec3 vWorldPosition;
 varying vec3 vWorldNormal;
@@ -52,6 +57,16 @@ void main() {
     float bubbleDistance = voronoi(vUv * uBubbleScale).x;
     float bubble = 1.0 - smoothstep(0.0, uBubbleSize, bubbleDistance);
     finalColor = mix(finalColor, uBubbleColor, bubble * uBubbleStrength * depth);
+
+    // Flowing water in the deep
+    vec2 flowCoordinates = vUv * 4.0 + vec2(uTime * uFlowSpeed, uTime * uFlowSpeed * 0.5);
+    float flowNoise = texture2D(uPerlinNoise, flowCoordinates).r;
+    float counterFlowNoise = texture2D(uPerlinNoise, vUv * 6.0 - vec2(uTime * uFlowSpeed * 0.7, 0.0)).r;
+    float ripple = flowNoise * counterFlowNoise;
+    vec3 waterColor = mix(uWaterColor, uEdgeColor, ripple * uFlowStrength);
+    waterColor += pow(ripple, 4.0) * uFlowStrength;
+    float openWaterMask = 1.0 - smoothstep(0.0, uFreezeLevel, depth);
+    finalColor = mix(finalColor, waterColor, openWaterMask);
 
     // Fresnel
     vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
