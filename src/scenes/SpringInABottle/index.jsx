@@ -86,6 +86,15 @@ export function SpringInABottle() {
                         <br />
                         <i>(original author unknown)</i>
                     </li>
+                    <li>
+                        <b>Voronoi 3d implementation:&nbsp;</b>
+                        <a
+                            target="_blank"
+                            href="https://github.com/MaxBittker/glsl-voronoi-noise/blob/76089081d7154629eec8641fe12e7642b56f4312/3d.glsl#L17"
+                        >
+                            MaxBittker/glsl-voronoi-noise
+                        </a>
+                    </li>
                 </ul>
             </Explanation>
         </>
