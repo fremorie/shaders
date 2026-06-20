@@ -72,7 +72,7 @@ export function Experience({ store }) {
                 >
                     <Scene store={store} />
                     <CircularMask />
-                    <MagicGlass />
+                    <MagicGlass store={store} />
                     <Rope />
                     <BottleLabel />
 
