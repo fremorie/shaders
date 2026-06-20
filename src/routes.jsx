@@ -26,7 +26,9 @@ import { WinterV3 } from './models/WinterV3'
 import { WinterSceneBaked } from './models/WinterSceneBaked'
 import { GrassPage } from './components/Grass/Page'
 import { Butterfly } from './models/Butterfly'
-import { DistanceFieldShaderPage } from './components/DistanceField/Page.jsx'
+import { DistanceFieldShaderPage } from './components/DistanceField/Page'
+import { TerrariumPhysicalMaterial } from './other/TerrariumPhysicalMaterial'
+import { TerrariumTransmissionMaterial } from './other/TerrariumTransmissionMaterial'
 
 export const ROUTES = [
     {
@@ -210,5 +212,19 @@ export const ROUTES = [
         label: 'Ray marching: Sphere',
         element: <SDFSphereShaderPage />,
         section: 'Basics',
+    },
+
+    // Other
+    {
+        path: '/shaders/terrarium-physical-material',
+        label: 'Stencil buffer: MeshPhysicalMaterial',
+        element: <TerrariumPhysicalMaterial />,
+        section: 'Other',
+    },
+    {
+        path: '/shaders/terrarium-transmission-material',
+        label: 'Stencil buffer: MeshTransmissionMaterial',
+        element: <TerrariumTransmissionMaterial />,
+        section: 'Other',
     },
 ]
