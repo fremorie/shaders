@@ -1,5 +1,5 @@
 /**
- * Copied from https://github.com/fremorie/drei/blob/c9d3d0dc9473f026c83965a7eb8c7f7a1a1bf0ae/src/core/MeshTransmissionMaterial.tsx#L1
+ * Copied from https://github.com/fremorie/drei/blob/0569c1f64ef139cc4823f00a5ab72b6d36b2d282/src/core/MeshTransmissionMaterial.tsx#L1
  */
 
 import * as THREE from 'three'
