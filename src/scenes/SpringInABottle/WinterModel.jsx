@@ -45,7 +45,7 @@ export function WinterModel({ store }) {
 
     const winterRiverMaterialRef = useRef(null)
 
-    const { nodes } = useGLTF('./models/Winter/WinterMerged2.glb')
+    const { nodes } = useGLTF('./models/Winter/WinterFixedUVs.glb')
     const bakedTexture = useTexture('./models/Winter/BakedWinter.jpg')
     const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapFixed2.jpg'
@@ -74,7 +74,7 @@ export function WinterModel({ store }) {
     return (
         <group dispose={null}>
             <mesh
-                geometry={nodes.river002.geometry}
+                geometry={nodes.river001.geometry}
                 position={[-0.251, 0.508, 0.127]}
             >
                 <winterRiverMaterial
@@ -85,8 +85,8 @@ export function WinterModel({ store }) {
                 />
             </mesh>
             <mesh
-                geometry={nodes.snow001.geometry}
-                position={[0.859, 0.707, -0.054]}
+                geometry={nodes.snow.geometry}
+                position={[0.005, 0.284, -0.003]}
             >
                 <snowMaterial
                     key={SnowMaterial.key}
@@ -96,8 +96,8 @@ export function WinterModel({ store }) {
                 />
             </mesh>
             <mesh
-                geometry={nodes.winterMerged.geometry}
-                position={[0.316, 0.539, 0.82]}
+                geometry={nodes.merged001.geometry}
+                position={[0.385, 0.863, -0.803]}
             >
                 <meshBasicMaterial map={bakedTexture} {...stencil} />
             </mesh>
@@ -105,7 +105,7 @@ export function WinterModel({ store }) {
     )
 }
 
-useGLTF.preload('./models/Winter/WinterMerged2.glb')
+useGLTF.preload('./models/Winter/WinterFixedUVs.glb')
 useTexture.preload('./models/Winter/BakedWinter.jpg')
 useTexture.preload('./textures/perlinNoise/perlin.png')
 useTexture.preload('./models/Spring/SpringTerrainDepthMapFixed2.jpg')

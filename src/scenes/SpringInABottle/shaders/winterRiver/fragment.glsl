@@ -14,14 +14,14 @@ varying vec3 vWorldPosition;
 varying vec3 vWorldNormal;
 
 void main() {
-    vec2 uv = (vUv - 0.5) * 2.0;
+    //vec2 uv = (vUv - 0.5) * 2.0;
 
     // Final color
     vec3 finalColor = vec3(1.0, 1.0, 1.0);
 
     // Water color based on depth
-    float depthMap = texture2D(uDepthMap, uv).r;
-    finalColor = mix(uDepthColor, uEdgeColor, pow(depthMap, 1.5));
+    float depthMap = texture2D(uDepthMap, vUv).r;
+    finalColor = mix(uDepthColor, uEdgeColor, pow(depthMap, 1.7));
 
     // Fresnel
     vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
