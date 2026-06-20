@@ -36,6 +36,7 @@ export function BottleModel({ position, store }) {
                     iridescence={controls.iridescence}
                     thickness={controls.thickness}
                     stencilBuffer={true}
+                    samples={1}
                 />
             </mesh>
         </group>
