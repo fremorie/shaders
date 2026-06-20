@@ -11,8 +11,7 @@ void main() {
     vec2 uv = (vUv - 0.5) * 2.0;
 
     float distanceToCenter = length(uv);
-    float strength = 1.0 / distanceToCenter - 0.5;
-    float alpha = 1.0 - strength;
+    float alpha = smoothstep(0.7, 1.0, distanceToCenter);
 
     gl_FragColor = vec4(finalColor, alpha);
 
