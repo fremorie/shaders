@@ -28,6 +28,9 @@ export function Experience({ store }) {
 
     const levaControls = useControls(
         {
+            Physics: folder({
+                showColliders: false,
+            }),
             Camera: folder({
                 x: { value: CAMERA_POSITION.initial[0], min: -20, max: 20 },
                 y: { value: CAMERA_POSITION.initial[1], min: -20, max: 20 },
@@ -76,7 +79,7 @@ export function Experience({ store }) {
                     <Rope />
                     <BottleLabel />
 
-                    <Physics debug={debug}>
+                    <Physics debug={debug && levaControls.showColliders}>
                         <Bottle store={store} />
                         <Cork />
                     </Physics>

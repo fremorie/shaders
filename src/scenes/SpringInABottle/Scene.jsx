@@ -4,7 +4,7 @@ import { SpringScene } from './SpringScene'
 export function Scene({ store }) {
     return (
         <>
-            <WinterScene />
+            <WinterScene store={store} />
             <SpringScene store={store} />
         </>
     )
