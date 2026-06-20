@@ -2,11 +2,12 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useGLTF, shaderMaterial, useMask } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
+import { useControls } from 'leva'
 
 import vertexShader from './shaders/magicGlass/vertex.glsl'
 import fragmentShader from './shaders/magicGlass/fragment.glsl'
 import { MASK_ID } from './utils/stencilBuffer'
-import { useControls } from 'leva'
+import useSceneState, { SEASONS } from './store/useSceneState'
 
 const MagicGlassMaterial = shaderMaterial(
     {
@@ -22,6 +23,8 @@ const MagicGlassMaterial = shaderMaterial(
 extend({ MagicGlassMaterial })
 
 export function MagicGlass({ store }) {
+    const activeSeason = useSceneState((state) => state.activeSeason)
+
     const { nodes } = useGLTF('./models/MagicGlass.glb')
     const stencil = useMask(MASK_ID)
 
@@ -45,6 +48,13 @@ export function MagicGlass({ store }) {
             magicGlassMaterialRef.current.uTime += delta
         }
     })
+
+    useEffect(() => {
+        if (activeSeason === SEASONS.winter) {
+            magicGlassMaterialRef.current.uColorStart.set('#ffffff')
+            magicGlassMaterialRef.current.uColorEnd.set('#f5cf1d')
+        }
+    }, [activeSeason])
 
     return (
         <group dispose={null}>
