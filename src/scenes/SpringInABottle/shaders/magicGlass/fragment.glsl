@@ -133,13 +133,13 @@ void main() {
     vec2 uv = (vUv - 0.5) * 2.0;
 
     // Displace the UV
-    vec2 displacedUv = vUv + voronoi3d(vec3(vUv * 25.0, uTime * 0.1)).xy;
+    vec2 displacedUv = vUv + voronoi3d(vec3(vUv * 15.0, uTime * 0.1)).xy;
 
     // Perlin noise
     float strength = voronoi3d(vec3(displacedUv * 5.0, uTime * 0.2)).x;
 
     // Outer glow
-    float outerGlow = distance(vUv, vec2(0.5)) * 5.0 - 3.;
+    float outerGlow = distance(vUv, vec2(0.5)) * 5.0 - 3.2;
     strength += outerGlow;
     strength += step(- 0.2, strength) * 0.8;
 
@@ -148,8 +148,8 @@ void main() {
 
     // Alpha
     float distanceToCenter = length(uv);
-    float alpha = smoothstep(0.8, 1.0, distanceToCenter);
-    alpha = smoothstep(0.96, 1.0, color.b);
+    float alpha = smoothstep(0.9, 1.0, distanceToCenter);
+    alpha = smoothstep(0.98, 1.0, color.b);
     alpha = 1.0 - alpha;
 
     gl_FragColor = vec4(color, alpha);
