@@ -2,6 +2,7 @@ import { useGLTF } from '@react-three/drei'
 import { folder, useControls } from 'leva'
 
 import { RENDER_ORDER } from './utils/renderOrder'
+import { MeshTransmissionMaterial } from './utils/MeshTransmissionMaterial'
 
 export function BottleModel({ position, store }) {
     const { nodes } = useGLTF('./models/BottleWithAHole.glb')
@@ -13,6 +14,7 @@ export function BottleModel({ position, store }) {
                 roughness: { value: 0.18, min: 0, max: 1 },
                 reflectivity: { value: 0, min: 0, max: 1 },
                 iridescence: { value: 0, min: 0, max: 1 },
+                thickness: { value: 0, min: 0, max: 1 },
             }),
         },
         { store }
@@ -25,14 +27,14 @@ export function BottleModel({ position, store }) {
                 position={[-0.023, 0.1, 0.011]}
                 renderOrder={RENDER_ORDER.bottle}
             >
-                <meshPhysicalMaterial
+                <MeshTransmissionMaterial
                     transparent
                     depthWrite={true}
-                    transmission={0}
-                    opacity={0.2}
+                    transmission={controls.transmission}
                     roughness={controls.roughness}
                     reflectivity={controls.reflectivity}
                     iridescence={controls.iridescence}
+                    thickness={controls.thickness}
                 />
             </mesh>
         </group>
