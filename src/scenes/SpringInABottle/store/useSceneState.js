@@ -21,7 +21,6 @@ export default create(
                     return {
                         isBottleOpen: true,
                         phase: 'transitionStart',
-                        activeSeason: SEASONS.winter,
                     }
                 })
             },
