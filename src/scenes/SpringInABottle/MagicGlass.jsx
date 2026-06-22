@@ -28,14 +28,18 @@ export function MagicGlass({ store }) {
 
     const magicGlassMaterialRef = useRef(null)
 
-    const { uColorStart, uColorEnd } = useControls(
-        'Magic glass',
-        {
-            uColorStart: '#c8d7eb',
-            uColorEnd: '#8fa1c4',
-        },
-        { store }
-    )
+    const { uColorStart, uColorEnd, positionX, positionY, positionZ } =
+        useControls(
+            'Magic glass',
+            {
+                uColorStart: '#c8d7eb',
+                uColorEnd: '#8fa1c4',
+                positionX: { value: -1.054, min: -1.5, max: 1.2, step: 0.001 },
+                positionY: { value: 1.093, min: -5, max: 5, step: 0.001 },
+                positionZ: { value: 0.001, min: -0.5, max: 0.5, step: 0.001 },
+            },
+            { store }
+        )
     useEffect(() => {
         magicGlassMaterialRef.current.uColorStart.set(uColorStart)
         magicGlassMaterialRef.current.uColorEnd.set(uColorEnd)
@@ -58,7 +62,7 @@ export function MagicGlass({ store }) {
         <group dispose={null}>
             <mesh
                 geometry={nodes.MagicGlas001.geometry}
-                position={[-1.054, 1.093, 0.012]}
+                position={[positionX, positionY, positionZ]}
             >
                 <magicGlassMaterial
                     key={MagicGlassMaterial.key}

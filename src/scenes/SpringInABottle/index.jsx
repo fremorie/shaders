@@ -39,7 +39,7 @@ export function SpringInABottle() {
                     target={[0, 1.2, 0]}
                 />
 
-                {debug && <Perf position="bottom-right" />}
+                {debug && <Perf position="bottom-left" />}
 
                 {debug && <axesHelper args={[2]} />}
 
