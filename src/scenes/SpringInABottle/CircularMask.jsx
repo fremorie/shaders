@@ -10,7 +10,7 @@ export const CircularMask = (props) => {
             <Mask
                 id={MASK_ID}
                 geometry={nodes.MagicGlas001.geometry}
-                position={[-1.054, 1.093, 0.001]}
+                position={[-1.054, 1.093, 0.012]}
             />
         </group>
     )

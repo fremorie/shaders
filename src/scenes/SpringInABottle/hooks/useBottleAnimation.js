@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import gsap from 'gsap'
 
 import useSceneState from '../store/useSceneState'
+import { TRANSITION_HALF_DURATION } from '../utils/transition'
 
 export function useBottleAnimation(bottleRef) {
     const phase = useSceneState((state) => state.phase)
@@ -30,12 +31,13 @@ export function useBottleAnimation(bottleRef) {
 
             timeline.to(bottleRef.current.material, {
                 _transmission: 0,
-                duration: 2,
+                duration: TRANSITION_HALF_DURATION,
                 onComplete,
             })
+
             timeline.to(bottleRef.current.material, {
-                _transmission: 1,
-                duration: 2,
+                _transmission: 0.88,
+                duration: TRANSITION_HALF_DURATION,
             })
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps

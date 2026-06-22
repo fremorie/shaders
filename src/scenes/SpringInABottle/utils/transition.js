@@ -1,0 +1,1 @@
+export const TRANSITION_HALF_DURATION = 0.5

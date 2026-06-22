@@ -1,6 +1,7 @@
 uniform float uTime;
 uniform vec3 uColorStart;
 uniform vec3 uColorEnd;
+uniform float uAlpha;
 
 varying vec2 vUv;
 
@@ -30,6 +31,8 @@ void main() {
     float alpha = smoothstep(0.9, 1.0, distanceToCenter);
     alpha = smoothstep(0.98, 1.0, color.b);
     alpha = 1.0 - alpha;
+
+    alpha = max(alpha, uAlpha);
 
     gl_FragColor = vec4(color, alpha);
 

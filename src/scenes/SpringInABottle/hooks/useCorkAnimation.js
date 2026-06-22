@@ -21,6 +21,9 @@ export function useCorkAnimation(corkRef) {
         isPoppedRef.current = true
 
         gsap.killTweensOf(anchorPosition.current)
+
+        openBottleAction()
+
         const timeline = gsap.timeline()
 
         // Pop up out of the neck first...
@@ -37,7 +40,6 @@ export function useCorkAnimation(corkRef) {
             z: FLOATING_POSITION.z,
             duration: 1.2,
             ease: 'power2.inOut',
-            onComplete: openBottleAction,
         })
     }
 
@@ -45,6 +47,7 @@ export function useCorkAnimation(corkRef) {
         isPoppedRef.current = false
 
         gsap.killTweensOf(anchorPosition.current)
+
         const timeline = gsap.timeline()
 
         timeline.to(anchorPosition.current, {

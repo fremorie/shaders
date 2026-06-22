@@ -3,10 +3,12 @@ import * as THREE from 'three'
 import { useGLTF, shaderMaterial } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
 import { useControls } from 'leva'
+import gsap from 'gsap'
 
 import vertexShader from './shaders/magicGlass/vertex.glsl'
 import fragmentShader from './shaders/magicGlass/fragment.glsl'
-import useSceneState, { SEASONS } from './store/useSceneState'
+import useSceneState from './store/useSceneState'
+import { TRANSITION_HALF_DURATION } from './utils/transition'
 
 const MagicGlassMaterial = shaderMaterial(
     {
@@ -14,6 +16,7 @@ const MagicGlassMaterial = shaderMaterial(
         uPerlinNoise: null,
         uColorStart: new THREE.Color('#c8d7eb'),
         uColorEnd: new THREE.Color('#8fa1c4'),
+        uAlpha: 0,
     },
     vertexShader,
     fragmentShader
@@ -22,7 +25,7 @@ const MagicGlassMaterial = shaderMaterial(
 extend({ MagicGlassMaterial })
 
 export function MagicGlass({ store }) {
-    const activeSeason = useSceneState((state) => state.activeSeason)
+    const phase = useSceneState((state) => state.phase)
 
     const { nodes } = useGLTF('./models/MagicGlass.glb')
 
@@ -36,7 +39,7 @@ export function MagicGlass({ store }) {
                 uColorEnd: '#8fa1c4',
                 positionX: { value: -1.054, min: -1.5, max: 1.2, step: 0.001 },
                 positionY: { value: 1.093, min: -5, max: 5, step: 0.001 },
-                positionZ: { value: 0.001, min: -0.5, max: 0.5, step: 0.001 },
+                positionZ: { value: 0.012, min: -0.5, max: 0.5, step: 0.001 },
             },
             { store }
         )
@@ -51,12 +54,31 @@ export function MagicGlass({ store }) {
         }
     })
 
+    // useEffect(() => {
+    //     if (activeSeason === SEASONS.winter) {
+    //         magicGlassMaterialRef.current.uColorStart.set('#ffffff')
+    //         magicGlassMaterialRef.current.uColorEnd.set('#f5cf1d')
+    //     }
+    // }, [activeSeason])
+
     useEffect(() => {
-        if (activeSeason === SEASONS.winter) {
-            magicGlassMaterialRef.current.uColorStart.set('#ffffff')
-            magicGlassMaterialRef.current.uColorEnd.set('#f5cf1d')
+        if (
+            phase === 'openTransitionStart' ||
+            phase === 'closeTransitionStart'
+        ) {
+            const timeline = gsap.timeline()
+
+            timeline.to(magicGlassMaterialRef.current, {
+                uAlpha: 1,
+                duration: TRANSITION_HALF_DURATION,
+            })
+
+            timeline.to(magicGlassMaterialRef.current, {
+                uAlpha: 0,
+                duration: TRANSITION_HALF_DURATION,
+            })
         }
-    }, [activeSeason])
+    }, [phase])
 
     return (
         <group dispose={null}>
