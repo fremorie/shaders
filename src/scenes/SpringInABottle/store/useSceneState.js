@@ -20,7 +20,16 @@ export default create(
                 set(() => {
                     return {
                         isBottleOpen: true,
-                        phase: 'transitionStart',
+                        phase: 'openTransitionStart',
+                    }
+                })
+            },
+
+            endOpenTransition: () => {
+                set(() => {
+                    return {
+                        isBottleOpen: true,
+                        phase: 'openTransitionEnd',
                         activeSeason: SEASONS.winter,
                     }
                 })
@@ -30,17 +39,16 @@ export default create(
                 set(() => {
                     return {
                         isBottleOpen: false,
-                        phase: 'transitionStart',
-                        activeSeason: SEASONS.spring,
+                        phase: 'closeTransitionStart',
                     }
                 })
             },
 
-            endTransition: () => {
+            endCloseTransition: () => {
                 set(() => {
                     return {
-                        phase: 'transitionEnd',
-                        activeSeason: SEASONS.winter,
+                        phase: 'closeTransitionEnd',
+                        activeSeason: SEASONS.spring,
                     }
                 })
             },

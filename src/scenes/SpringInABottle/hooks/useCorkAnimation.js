@@ -63,7 +63,6 @@ export function useCorkAnimation(corkRef) {
             ease: 'power2.inOut',
             onComplete: closeBottleAction,
         })
-
     }
 
     const handleCorkClick = () => {

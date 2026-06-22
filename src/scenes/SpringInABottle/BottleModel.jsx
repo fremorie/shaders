@@ -1,10 +1,16 @@
 import { useGLTF } from '@react-three/drei'
 import { folder, useControls } from 'leva'
+import { useRef } from 'react'
 
 import { RENDER_ORDER } from './utils/renderOrder'
 import { MeshTransmissionMaterial } from './utils/MeshTransmissionMaterial'
+import { useBottleAnimation } from './hooks/useBottleAnimation'
 
 export function BottleModel({ position, store }) {
+    const bottleRef = useRef(null)
+
+    useBottleAnimation(bottleRef)
+
     const { nodes } = useGLTF('./models/BottleWithAHole.glb')
 
     const controls = useControls(
@@ -26,6 +32,7 @@ export function BottleModel({ position, store }) {
                 geometry={nodes.BottleWithAHole.geometry}
                 position={[-0.023, 0.1, 0.011]}
                 renderOrder={RENDER_ORDER.bottle}
+                ref={bottleRef}
             >
                 <MeshTransmissionMaterial
                     transparent
