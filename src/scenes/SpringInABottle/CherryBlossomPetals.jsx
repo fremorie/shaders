@@ -79,6 +79,7 @@ export function CherryBlossomPetals({ store }) {
                 />
             </bufferGeometry>
             <petalMaterial
+                transparent
                 ref={petalMaterialRef}
                 key={PetalMaterial.key}
                 uTexture={petalTexture}
