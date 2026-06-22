@@ -99,6 +99,15 @@ export function SpringInABottle() {
                             MaxBittker/glsl-voronoi-noise
                         </a>
                     </li>
+                    <li>
+                        <b>Font "Purisa Bold":&nbsp;</b>
+                        <a
+                            target="_blank"
+                            href="https://github.com/tlwg/fonts-tlwg/tree/master"
+                        >
+                            Fonts-TLWG
+                        </a>
+                    </li>
                 </ul>
             </Explanation>
         </>
