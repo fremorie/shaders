@@ -76,8 +76,11 @@ export function Experience({ store }) {
                     <Scene store={store} />
                     <CircularMask />
                     <MagicGlass store={store} />
-                    <Rope />
-                    <BottleLabel />
+
+                    <group rotation-y={0.2}>
+                        <Rope />
+                        <BottleLabel />
+                    </group>
 
                     <Physics debug={debug && levaControls.showColliders}>
                         <Bottle store={store} />
