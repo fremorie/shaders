@@ -21,6 +21,7 @@ export function BottleModel({ position, store }) {
                 reflectivity: { value: 0, min: 0, max: 1 },
                 iridescence: { value: 0, min: 0, max: 1 },
                 thickness: { value: 0, min: 0, max: 1 },
+                color: '#ffffff',
             }),
         },
         { store }
@@ -44,6 +45,7 @@ export function BottleModel({ position, store }) {
                     thickness={controls.thickness}
                     stencilBuffer={true}
                     samples={1}
+                    color={controls.color}
                 />
             </mesh>
         </group>
