@@ -21,6 +21,17 @@ export default create(
                     return {
                         isBottleOpen: true,
                         phase: 'transitionStart',
+                        activeSeason: SEASONS.winter,
+                    }
+                })
+            },
+
+            closeBottle: () => {
+                set(() => {
+                    return {
+                        isBottleOpen: false,
+                        phase: 'transitionStart',
+                        activeSeason: SEASONS.spring,
                     }
                 })
             },

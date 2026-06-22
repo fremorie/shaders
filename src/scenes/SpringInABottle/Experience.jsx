@@ -3,7 +3,6 @@ import { useThree } from '@react-three/fiber'
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import { folder, useControls } from 'leva'
-import { Physics } from '@react-three/rapier'
 
 import { Scene } from './Scene'
 import { CircularMask } from './CircularMask'
@@ -28,9 +27,6 @@ export function Experience({ store }) {
 
     const levaControls = useControls(
         {
-            Physics: folder({
-                showColliders: false,
-            }),
             Camera: folder({
                 x: { value: CAMERA_POSITION.initial[0], min: -20, max: 20 },
                 y: { value: CAMERA_POSITION.initial[1], min: -20, max: 20 },
@@ -82,10 +78,8 @@ export function Experience({ store }) {
                         <BottleLabel />
                     </group>
 
-                    <Physics debug={debug && levaControls.showColliders}>
-                        <Bottle store={store} />
-                        <Cork />
-                    </Physics>
+                    <Bottle store={store} />
+                    <Cork />
                 </group>
             </Float>
         </>
