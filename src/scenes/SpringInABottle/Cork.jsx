@@ -24,6 +24,7 @@ export function Cork() {
             <CorkModel
                 onPointerOver={() => setHovered(true)}
                 onPointerOut={() => setHovered(false)}
+                hovered={hovered}
                 onClick={handleCorkClick}
             />
         </group>
