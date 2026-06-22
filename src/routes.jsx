@@ -29,6 +29,7 @@ import { Butterfly } from './models/Butterfly'
 import { DistanceFieldShaderPage } from './components/DistanceField/Page'
 import { TerrariumPhysicalMaterial } from './other/TerrariumPhysicalMaterial'
 import { TerrariumTransmissionMaterial } from './other/TerrariumTransmissionMaterial'
+import { GrassV2Page } from './components/GrassV2/Page'
 
 export const ROUTES = [
     {
@@ -65,6 +66,12 @@ export const ROUTES = [
         path: '/shaders/grass',
         label: 'Grass',
         element: <GrassPage />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/grass-v2',
+        label: 'Grass V2',
+        element: <GrassV2Page />,
         section: 'Experiments',
     },
 
