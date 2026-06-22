@@ -5,7 +5,7 @@ import { useGLTF, useTexture } from '@react-three/drei'
 
 export function BottleLabel(props) {
     const { nodes } = useGLTF('./models/Label/Label.glb')
-    const bakedTexture = useTexture('./models/Label/baked2.jpg')
+    const bakedTexture = useTexture('./models/Label/bakedWithText.jpg')
 
     // eslint-disable-next-line
     bakedTexture.flipY = false
@@ -23,4 +23,4 @@ export function BottleLabel(props) {
 }
 
 useGLTF.preload('./models/Label/Label.glb')
-useTexture.preload('./models/Label/baked2.jpg')
+useTexture.preload('./models/Label/bakedWithText.jpg')
