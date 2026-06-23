@@ -22,8 +22,9 @@ extend({ GrassBladeMaterialV2 })
 const MIN_BLADE_SCALE = 0.8
 const MAX_BLADE_SCALE = 1.2
 
-const BLADE_WIDTH = 0.1
-const BLADE_HEIGHT = 0.1
+const BLADE_WIDTH = 0.12
+const BLADE_HEIGHT = 0.12
+
 // Vertical subdivisions so the blade can curve along its length instead of
 // tilting as a rigid strip.
 const BLADE_HEIGHT_SEGMENTS = 6
@@ -109,6 +110,8 @@ export function GrassField({ positions }) {
                 key={GrassBladeMaterialV2.key}
                 ref={materialRef}
                 uAlphaMap={bladeAlphaMap}
+                alphaToCoverage
+                transparent
             />
         </instancedMesh>
     )
