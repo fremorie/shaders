@@ -6,7 +6,7 @@ varying vec2 vUv;
 
 #include "../includes/perlinNoise.glsl"
 
-const vec2 WIND_DIRECTION = vec2(0.8575, 0.5145);
+const vec2 WIND_DIRECTION = vec2(0.2, 0.2);
 const float WIND_SPEED = 0.15;
 const float WIND_FREQUENCY = 0.4;
 const float WIND_STRENGTH = 0.04;
