@@ -16,7 +16,7 @@ void main() {
     // Displace the UV
     vec2 displacedUv = vUv + voronoi3d(vec3(vUv * 15.0, uTime * 0.1)).xy;
 
-    // Perlin noise
+    // Voronoi noise
     float strength = voronoi3d(vec3(displacedUv * 5.0, uTime * 0.2)).x;
 
     // Outer glow
@@ -29,18 +29,15 @@ void main() {
 
     // Alpha
     float distanceToCenter = length(uv);
-    float alpha = smoothstep(0.9, 1.0, distanceToCenter);
-    alpha = smoothstep(0.98, 1.0, color.b);
+    float alpha = smoothstep(0.98, 1.0, color.b);
     alpha = 1.0 - alpha;
 
     alpha = max(alpha, uAlpha);
 
-    if (uActiveSeason == 1) {
-        alpha = smoothstep(0.8 + abs(sin(uTime + strength) * 0.05), 1.0, distanceToCenter);
-        gl_FragColor = vec4(uColorEnd, alpha);
-    } else {
-        gl_FragColor = vec4(color, alpha);
-    }
+    alpha = uActiveSeason == 0 ? alpha : smoothstep(0.8 + abs(sin(uTime + strength) * 0.05), 1.0, distanceToCenter);
+    vec3 finalColor = uActiveSeason == 0 ? color : uColorEnd;
+
+    gl_FragColor = vec4(finalColor, alpha);
 
     #include <colorspace_fragment>
 }
