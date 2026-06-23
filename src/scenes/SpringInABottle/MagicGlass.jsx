@@ -3,12 +3,10 @@ import * as THREE from 'three'
 import { useGLTF, shaderMaterial } from '@react-three/drei'
 import { extend, useFrame } from '@react-three/fiber'
 import { useControls } from 'leva'
-import gsap from 'gsap'
 
 import vertexShader from './shaders/magicGlass/vertex.glsl'
 import fragmentShader from './shaders/magicGlass/fragment.glsl'
-import useSceneState from './store/useSceneState'
-import { TRANSITION_HALF_DURATION } from './utils/transition'
+import { useMagicGlassAnimation } from './hooks/useMagicGlassAnimation'
 
 const MagicGlassMaterial = shaderMaterial(
     {
@@ -25,11 +23,11 @@ const MagicGlassMaterial = shaderMaterial(
 extend({ MagicGlassMaterial })
 
 export function MagicGlass({ store }) {
-    const phase = useSceneState((state) => state.phase)
-
     const { nodes } = useGLTF('./models/MagicGlass.glb')
 
     const magicGlassMaterialRef = useRef(null)
+
+    useMagicGlassAnimation(magicGlassMaterialRef)
 
     const { uColorStart, uColorEnd, positionX, positionY, positionZ } =
         useControls(
@@ -53,32 +51,6 @@ export function MagicGlass({ store }) {
             magicGlassMaterialRef.current.uTime += delta
         }
     })
-
-    // useEffect(() => {
-    //     if (activeSeason === SEASONS.winter) {
-    //         magicGlassMaterialRef.current.uColorStart.set('#ffffff')
-    //         magicGlassMaterialRef.current.uColorEnd.set('#f5cf1d')
-    //     }
-    // }, [activeSeason])
-
-    useEffect(() => {
-        if (
-            phase === 'openTransitionStart' ||
-            phase === 'closeTransitionStart'
-        ) {
-            const timeline = gsap.timeline()
-
-            timeline.to(magicGlassMaterialRef.current, {
-                uAlpha: 1,
-                duration: TRANSITION_HALF_DURATION,
-            })
-
-            timeline.to(magicGlassMaterialRef.current, {
-                uAlpha: 0,
-                duration: TRANSITION_HALF_DURATION,
-            })
-        }
-    }, [phase])
 
     return (
         <group dispose={null}>

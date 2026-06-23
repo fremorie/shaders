@@ -6,7 +6,7 @@ import useSceneState from '../store/useSceneState'
 import { TRANSITION_HALF_DURATION } from '../utils/transition'
 
 // gsap can't tween a THREE.Color directly, so we tween its rgb channels
-const TRANSITION_COLOR = new THREE.Color('#3f6972')
+const TRANSITION_COLOR = new THREE.Color('#9ec8ff')
 const RESTING_COLOR = new THREE.Color('#ffffff')
 
 export function useBottleAnimation(bottleRef) {
