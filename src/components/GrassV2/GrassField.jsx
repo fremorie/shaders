@@ -22,7 +22,7 @@ extend({ GrassBladeMaterialV2 })
 const MIN_BLADE_SCALE = 0.8
 const MAX_BLADE_SCALE = 1.2
 
-const BLADE_WIDTH = 0.01
+const BLADE_WIDTH = 0.1
 const BLADE_HEIGHT = 0.1
 // Vertical subdivisions so the blade can curve along its length instead of
 // tilting as a rigid strip.
@@ -31,7 +31,7 @@ const BLADE_HEIGHT_SEGMENTS = 6
 export function GrassField({ positions }) {
     const meshRef = useRef(null)
     const materialRef = useRef(null)
-    const bladeAlphaMap = useTexture('./textures/grassBlade/blade_alpha.jpg')
+    const bladeAlphaMap = useTexture('./textures/grassBladeSimplified.png')
 
     const bladeGeometry = useMemo(() => {
         const geometry = new THREE.PlaneGeometry(
@@ -46,10 +46,10 @@ export function GrassField({ positions }) {
         return geometry
     }, [])
 
-    const { count, matrices, phaseOffsets } = useMemo(() => {
+    const { count, matrices, bladeRandoms } = useMemo(() => {
         const count = positions.length
 
-        const phaseOffsets = new Float32Array(count)
+        const bladeRandoms = new Float32Array(count)
         const matrices = []
         const matrix = new THREE.Matrix4()
         const position = new THREE.Vector3()
@@ -72,10 +72,10 @@ export function GrassField({ positions }) {
             matrices.push(matrix.clone())
 
             // eslint-disable-next-line
-            phaseOffsets[i] = Math.random() * Math.PI * 2
+            bladeRandoms[i] = Math.random()
         }
 
-        return { count, matrices, phaseOffsets }
+        return { count, matrices, bladeRandoms }
     }, [positions])
 
     useEffect(() => {
@@ -88,10 +88,10 @@ export function GrassField({ positions }) {
         mesh.instanceMatrix.needsUpdate = true
 
         mesh.geometry.setAttribute(
-            'aPhaseOffset',
-            new THREE.InstancedBufferAttribute(phaseOffsets, 1)
+            'aBladeRandom',
+            new THREE.InstancedBufferAttribute(bladeRandoms, 1)
         )
-    }, [count, matrices, phaseOffsets])
+    }, [count, matrices, bladeRandoms])
 
     useFrame((_, delta) => {
         if (materialRef.current) {
@@ -100,7 +100,11 @@ export function GrassField({ positions }) {
     })
 
     return (
-        <instancedMesh ref={meshRef} args={[bladeGeometry, null, count]}>
+        <instancedMesh
+            ref={meshRef}
+            args={[bladeGeometry, null, count]}
+            frustumCulled={false}
+        >
             <grassBladeMaterialV2
                 key={GrassBladeMaterialV2.key}
                 ref={materialRef}

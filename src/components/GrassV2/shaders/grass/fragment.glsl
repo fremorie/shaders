@@ -7,7 +7,9 @@ varying vec2 vUv;
 void main() {
     float alpha = texture2D(uAlphaMap, vUv).r;
 
-    if (alpha < 0.15) discard;
+    if (alpha < 0.9) {
+        discard;
+    }
 
     vec3 baseColor = uCenterColor;
 
