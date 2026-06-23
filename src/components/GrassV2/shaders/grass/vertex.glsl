@@ -13,6 +13,18 @@ void main() {
     vec3 localPosition = position;
     localPosition.x += wind * WIND_STRENGTH;
 
+    // Always face the camera
+    vec3 instanceWorldOrigin = (modelMatrix * instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+    vec3 toCamera = cameraPosition - instanceWorldOrigin;
+    float facingAngle = atan(toCamera.x, toCamera.z);
+    float sinAngle = sin(facingAngle);
+    float cosAngle = cos(facingAngle);
+    localPosition = vec3(
+        localPosition.x * cosAngle + localPosition.z * sinAngle,
+        localPosition.y,
+        -localPosition.x * sinAngle + localPosition.z * cosAngle
+    );
+
     vec4 modelPosition = modelMatrix * instanceMatrix * vec4(localPosition, 1.0);
 
     vec4 viewPosition = viewMatrix * modelPosition;

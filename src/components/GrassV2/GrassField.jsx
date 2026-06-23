@@ -54,17 +54,11 @@ export function GrassField({ positions }) {
         const matrix = new THREE.Matrix4()
         const position = new THREE.Vector3()
         const quaternion = new THREE.Quaternion()
-        const rotation = new THREE.Euler()
         const scale = new THREE.Vector3()
 
         for (let i = 0; i < count; i++) {
             const [x, y, z] = positions[i]
             position.set(x, y, z)
-
-            // eslint-disable-next-line
-            rotation.set(0, Math.random() * Math.PI * 2, 0)
-
-            quaternion.setFromEuler(rotation)
 
             const uniformScale =
                 MIN_BLADE_SCALE +
@@ -111,7 +105,6 @@ export function GrassField({ positions }) {
                 key={GrassBladeMaterialV2.key}
                 ref={materialRef}
                 uAlphaMap={bladeAlphaMap}
-                side={THREE.DoubleSide}
             />
         </instancedMesh>
     )
