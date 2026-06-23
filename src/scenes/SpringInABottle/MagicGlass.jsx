@@ -27,7 +27,7 @@ export function MagicGlass({ store }) {
 
     const magicGlassMaterialRef = useRef(null)
 
-    //useMagicGlassAnimation(magicGlassMaterialRef)
+    useMagicGlassAnimation(magicGlassMaterialRef)
 
     const { uColorStart, uColorEnd, positionX, positionY, positionZ } =
         useControls(

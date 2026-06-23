@@ -1,6 +1,6 @@
 import { Environment, Float, useEnvironment } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { folder, useControls } from 'leva'
 
@@ -13,6 +13,7 @@ import { Rope } from './Rope'
 import { BottleLabel } from './BottleLabel'
 import { Cork } from './Cork'
 import { Bottle } from './Bottle'
+import { useSceneAnimation } from './hooks/useSceneAnimation'
 
 const ENVIRONMENT_FILES = [
     './environmentMaps/veniceSunset/venice_sunset_1k.hdr',
@@ -22,8 +23,10 @@ useEnvironment.preload({ files: ENVIRONMENT_FILES })
 
 export function Experience({ store }) {
     const debug = useDebug()
-
     const camera = useThree((state) => state.camera)
+    const sceneRef = useRef(null)
+
+    useSceneAnimation(sceneRef)
 
     const levaControls = useControls(
         {
@@ -65,6 +68,7 @@ export function Experience({ store }) {
 
             <Float speed={1} rotationIntensity={0.5} floatIntensity={0.5}>
                 <group
+                    ref={sceneRef}
                     // Rotate the whole scene so that it looks like
                     // the sun from the environment map casts shadows.
                     rotation-y={-2.8}
