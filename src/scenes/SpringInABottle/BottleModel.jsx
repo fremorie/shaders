@@ -9,7 +9,7 @@ import { useBottleAnimation } from './hooks/useBottleAnimation'
 export function BottleModel({ position, store }) {
     const bottleRef = useRef(null)
 
-    useBottleAnimation(bottleRef)
+    //useBottleAnimation(bottleRef)
 
     const { nodes } = useGLTF('./models/BottleWithAHole.glb')
 
