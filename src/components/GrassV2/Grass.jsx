@@ -30,7 +30,12 @@ const getGrassBladesPositions = (
         const intersections = raycaster.intersectObject(terrainRaycasterMesh)
 
         if (intersections.length > 0) {
-            positions.push([x, intersections[0].point.y, z])
+            positions.push([
+                x,
+                // Push them down a little
+                intersections[0].point.y - 0.01,
+                z,
+            ])
         }
     }
     return positions
@@ -49,10 +54,13 @@ export function Grass({ store }) {
     const { centerX, centerZ, radius, count } = useControls(
         {
             Grass: folder({
-                centerX: { value: 0, min: -1, max: 1, step: 0.01 },
-                centerZ: { value: 0, min: -1, max: 1, step: 0.01 },
-                radius: { value: 0.01, min: 0.01, max: 2, step: 0.01 },
-                count: { value: 20, min: 1, max: 1000, step: 1 },
+                //                 [-1, -0.13],
+                //                 0.06,
+                //                 102
+                centerX: { value: -1, min: -1, max: 1, step: 0.01 },
+                centerZ: { value: -0.13, min: -1, max: 1, step: 0.01 },
+                radius: { value: 0.06, min: 0.01, max: 2, step: 0.01 },
+                count: { value: 102, min: 1, max: 1000, step: 1 },
             }),
         },
         { store }
@@ -69,76 +77,89 @@ export function Grass({ store }) {
         [terrainRaycasterMesh, centerX, centerZ, radius, count]
     )
 
-    const clampA = getGrassBladesPositions(
-        terrainRaycasterMesh,
-        [-1, -0.13],
-        0.08,
-        102
-    )
-
-    const clampB = getGrassBladesPositions(
-        terrainRaycasterMesh,
-        [-0.05, -0.9],
-        0.08,
-        38
-    )
-
-    const clampC = getGrassBladesPositions(
-        terrainRaycasterMesh,
-        [-0.11, -0.25],
-        0.08,
-        108
-    )
-
-    const clampD = getGrassBladesPositions(
-        terrainRaycasterMesh,
-        [-0.12, -0.12],
-        0.04,
-        20
-    )
-
-    const clampE = getGrassBladesPositions(
-        terrainRaycasterMesh,
-        [0.22, 0.01],
-        0.1,
-        55
-    )
-
-    const clampF = getGrassBladesPositions(
-        terrainRaycasterMesh,
-        [0.33, 0.13],
-        0.07,
-        67
-    )
-
-    const clampG = getGrassBladesPositions(
-        terrainRaycasterMesh,
-        [0.44, 0.79],
-        0.04,
-        26
-    )
-
-    const clampH = getGrassBladesPositions(
-        terrainRaycasterMesh,
-        [-0.47, 0.41],
-        0.08,
-        60
-    )
-
     const clamps = useMemo(
         () => [
-            ...clampA,
-            ...clampB,
-            ...clampC,
-            ...clampD,
-            ...clampE,
-            ...clampF,
-            ...clampG,
-            ...clampH,
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [-0.94, -0.13],
+                0.12,
+                184
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [-0.89, 0.05],
+                0.1,
+                102
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [-0.05, -0.9],
+                0.08,
+                38
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [-0.11, -0.25],
+                0.08,
+                108
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [-0.12, -0.12],
+                0.04,
+                20
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [0.22, 0.01],
+                0.1,
+                55
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [0.33, 0.13],
+                0.07,
+                67
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [0.44, 0.79],
+                0.04,
+                26
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [-0.47, 0.41],
+                0.08,
+                60
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [0.58, -0.24],
+                0.05,
+                73
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [0.61, -0.34],
+                0.05,
+                73
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [0.4, 0.47],
+                0.09,
+                143
+            ),
+            ...getGrassBladesPositions(
+                terrainRaycasterMesh,
+                [0.33, 0.36],
+                0.05,
+                78
+            ),
             ...grassClampActive,
         ],
-        // eslint-disable-next-line
-        [grassClampActive]
+        [grassClampActive, terrainRaycasterMesh]
     )
 
     return (
