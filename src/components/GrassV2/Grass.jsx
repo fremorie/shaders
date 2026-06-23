@@ -51,8 +51,8 @@ export function Grass({ store }) {
             Grass: folder({
                 centerX: { value: 0, min: -1, max: 1, step: 0.01 },
                 centerZ: { value: 0, min: -1, max: 1, step: 0.01 },
-                radius: { value: 1.2, min: 0.01, max: 2, step: 0.01 },
-                count: { value: 50000, min: 1, max: 100000, step: 1 },
+                radius: { value: 0.3, min: 0.01, max: 2, step: 0.01 },
+                count: { value: 500, min: 1, max: 100000, step: 1 },
             }),
         },
         { store }
