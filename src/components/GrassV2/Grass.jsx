@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { folder, useControls } from 'leva'
 
 import { GrassField } from './GrassField'
-import { Terrain } from './Terrain'
+import { SpringModel } from './SpringModel.jsx'
 
 const TERRAIN_MESH_POSITION = new THREE.Vector3(0.005, 0.32, -0.003)
 const RAYCAST_ORIGIN_HEIGHT = 5
@@ -51,8 +51,8 @@ export function Grass({ store }) {
             Grass: folder({
                 centerX: { value: 0, min: -1, max: 1, step: 0.01 },
                 centerZ: { value: 0, min: -1, max: 1, step: 0.01 },
-                radius: { value: 0.3, min: 0.01, max: 2, step: 0.01 },
-                count: { value: 500, min: 1, max: 100000, step: 1 },
+                radius: { value: 0.01, min: 0.01, max: 2, step: 0.01 },
+                count: { value: 20, min: 1, max: 1000, step: 1 },
             }),
         },
         { store }
@@ -69,10 +69,82 @@ export function Grass({ store }) {
         [terrainRaycasterMesh, centerX, centerZ, radius, count]
     )
 
+    const clampA = getGrassBladesPositions(
+        terrainRaycasterMesh,
+        [-1, -0.13],
+        0.08,
+        102
+    )
+
+    const clampB = getGrassBladesPositions(
+        terrainRaycasterMesh,
+        [-0.05, -0.9],
+        0.08,
+        38
+    )
+
+    const clampC = getGrassBladesPositions(
+        terrainRaycasterMesh,
+        [-0.11, -0.25],
+        0.08,
+        108
+    )
+
+    const clampD = getGrassBladesPositions(
+        terrainRaycasterMesh,
+        [-0.12, -0.12],
+        0.04,
+        20
+    )
+
+    const clampE = getGrassBladesPositions(
+        terrainRaycasterMesh,
+        [0.22, 0.01],
+        0.1,
+        55
+    )
+
+    const clampF = getGrassBladesPositions(
+        terrainRaycasterMesh,
+        [0.33, 0.13],
+        0.07,
+        67
+    )
+
+    const clampG = getGrassBladesPositions(
+        terrainRaycasterMesh,
+        [0.44, 0.79],
+        0.04,
+        26
+    )
+
+    const clampH = getGrassBladesPositions(
+        terrainRaycasterMesh,
+        [-0.47, 0.41],
+        0.08,
+        60
+    )
+
+    const clamps = useMemo(
+        () => [
+            ...clampA,
+            ...clampB,
+            ...clampC,
+            ...clampD,
+            ...clampE,
+            ...clampF,
+            ...clampG,
+            ...clampH,
+            ...grassClampActive,
+        ],
+        // eslint-disable-next-line
+        [grassClampActive]
+    )
+
     return (
         <>
-            <Terrain />
-            <GrassField positions={grassClampActive} />
+            <SpringModel />
+            <GrassField positions={clamps} />
         </>
     )
 }
