@@ -30,19 +30,6 @@ export function GrassV2Page() {
                 <Sky />
                 <Perf position="bottom-left" />
             </Canvas>
-            <Explanation title="Credits">
-                <p>
-                    Grass alpha texture adapted from the PMNDRS examples
-                    repository (MIT License).
-                </p>
-
-                <a
-                    target="_blank"
-                    href="https://github.com/pmndrs/examples/blob/main/demos/grass-shader/src/resources/blade_alpha.jpg"
-                >
-                    Source
-                </a>
-            </Explanation>
         </>
     )
 }

@@ -4,7 +4,7 @@ import * as THREE from 'three'
 import { folder, useControls } from 'leva'
 
 import { GrassField } from './GrassField'
-import { SpringModel } from './SpringModel.jsx'
+import { SpringModel } from './SpringModel'
 
 const TERRAIN_MESH_POSITION = new THREE.Vector3(0.005, 0.32, -0.003)
 const RAYCAST_ORIGIN_HEIGHT = 5

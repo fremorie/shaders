@@ -27,5 +27,3 @@ export function SpringModel() {
 
 useGLTF.preload('./models/Spring/Spring3.glb')
 useTexture.preload('./models/Spring/baked.jpg')
-useTexture.preload('./models/Spring/SpringTerrainDepthMapFixed2.jpg')
-useTexture.preload('./textures/perlinNoise/perlin.png')

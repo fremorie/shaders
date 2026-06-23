@@ -6,7 +6,7 @@ varying vec2 vUv;
 
 #include "../includes/perlinNoise.glsl"
 
-const vec2 WIND_DIRECTION = vec2(0.2, 0.2);
+const vec2 WIND_DIRECTION = vec2(0.8, 0.5);
 const float WIND_SPEED = 0.15;
 const float WIND_FREQUENCY = 0.4;
 const float WIND_STRENGTH = 0.04;
@@ -32,7 +32,9 @@ void main() {
     localPosition.x += windAmount * windMultiplier * WIND_STRENGTH;
 
     // Always face the camera
-    vec3 toCamera = cameraPosition - instanceWorldOrigin;
+    vec3 cameraModelSpace = (inverse(modelMatrix) * vec4(cameraPosition, 1.0)).xyz;
+    vec3 instanceModelOrigin = (instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
+    vec3 toCamera = cameraModelSpace - instanceModelOrigin;
     float facingAngle = atan(toCamera.x, toCamera.z);
     float sinAngle = sin(facingAngle);
     float cosAngle = cos(facingAngle);
