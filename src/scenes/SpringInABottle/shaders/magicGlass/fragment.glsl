@@ -2,6 +2,7 @@ uniform float uTime;
 uniform vec3 uColorStart;
 uniform vec3 uColorEnd;
 uniform float uAlpha;
+uniform int uActiveSeason;
 
 varying vec2 vUv;
 
@@ -34,7 +35,12 @@ void main() {
 
     alpha = max(alpha, uAlpha);
 
-    gl_FragColor = vec4(color, alpha);
+    if (uActiveSeason == 1) {
+        alpha = smoothstep(0.8 + abs(sin(uTime + strength) * 0.05), 1.0, distanceToCenter);
+        gl_FragColor = vec4(uColorEnd, alpha);
+    } else {
+        gl_FragColor = vec4(color, alpha);
+    }
 
     #include <colorspace_fragment>
 }

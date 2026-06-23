@@ -9,9 +9,12 @@ export function useMagicGlassAnimation(magicGlassMaterialRef) {
     const activeSeason = useSceneState((state) => state.activeSeason)
 
     useEffect(() => {
+        magicGlassMaterialRef.current.uActiveSeason =
+            activeSeason === SEASONS.spring ? 0 : 1
+
         if (activeSeason === SEASONS.winter) {
             magicGlassMaterialRef.current.uColorStart.set('#ffffff')
-            magicGlassMaterialRef.current.uColorEnd.set('#f5cf1d')
+            magicGlassMaterialRef.current.uColorEnd.set('#fce07e')
         } else {
             magicGlassMaterialRef.current.uColorStart.set('#c8d7eb')
             magicGlassMaterialRef.current.uColorEnd.set('#8fa1c4')

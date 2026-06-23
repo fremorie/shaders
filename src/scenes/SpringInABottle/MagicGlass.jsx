@@ -14,6 +14,7 @@ const MagicGlassMaterial = shaderMaterial(
         uPerlinNoise: null,
         uColorStart: new THREE.Color('#c8d7eb'),
         uColorEnd: new THREE.Color('#8fa1c4'),
+        uActiveSeason: 0,
         uAlpha: 0,
     },
     vertexShader,
