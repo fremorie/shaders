@@ -4,7 +4,6 @@ import { useCreateStore, LevaPanel } from 'leva'
 import { Perf } from 'r3f-perf'
 
 import { Grass } from './Grass'
-import { Explanation } from '../layout/Explanation/Explanation'
 
 export function GrassV2Page() {
     const store = useCreateStore()

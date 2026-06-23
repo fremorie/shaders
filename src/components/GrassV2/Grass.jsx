@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import * as THREE from 'three'
 import { folder, useControls } from 'leva'
 
-import { GrassField } from './GrassField'
+import { GrassField } from '../common/Grass/GrassField'
 import { SpringModel } from './SpringModel'
 
 const TERRAIN_MESH_POSITION = new THREE.Vector3(0.005, 0.32, -0.003)
