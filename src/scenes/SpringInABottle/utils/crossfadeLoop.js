@@ -1,8 +1,11 @@
-export function equalPowerFade(position, duration, fadeDuration) {
+export function equalPowerFade(playbackPosition, duration, fadeDuration) {
     if (!Number.isFinite(duration) || duration <= 0) return 0
 
-    const fadeInProgress = Math.min(position / fadeDuration, 1)
-    const fadeOutProgress = Math.min((duration - position) / fadeDuration, 1)
+    const fadeInProgress = Math.min(playbackPosition / fadeDuration, 1)
+    const fadeOutProgress = Math.min(
+        (duration - playbackPosition) / fadeDuration,
+        1
+    )
     const progress = Math.max(0, Math.min(fadeInProgress, fadeOutProgress))
 
     return Math.sin((progress * Math.PI) / 2)
@@ -15,7 +18,7 @@ export function createCrossfadeLoop({ url, volume, crossfadeDuration }) {
         voice.volume = 0
     })
 
-    let animationFrame = null
+    let animationFrameId = null
 
     const startVoice = (voice) => {
         voice.currentTime = 0
@@ -23,8 +26,8 @@ export function createCrossfadeLoop({ url, volume, crossfadeDuration }) {
         voice.play().catch(() => {})
     }
 
-    const update = () => {
-        voices.forEach((voice, index) => {
+    const updateVoiceVolumes = () => {
+        voices.forEach((voice, voiceIndex) => {
             if (voice.paused) return
 
             const { currentTime, duration } = voice
@@ -32,9 +35,7 @@ export function createCrossfadeLoop({ url, volume, crossfadeDuration }) {
                 equalPowerFade(currentTime, duration, crossfadeDuration) *
                 volume
 
-            // Once this voice enters its tail, bring in the other voice from the
-            // start so their fades overlap into a crossfade.
-            const otherVoice = voices[1 - index]
+            const otherVoice = voices[1 - voiceIndex]
             if (
                 duration - currentTime <= crossfadeDuration &&
                 otherVoice.paused
@@ -43,17 +44,17 @@ export function createCrossfadeLoop({ url, volume, crossfadeDuration }) {
             }
         })
 
-        animationFrame = requestAnimationFrame(update)
+        animationFrameId = requestAnimationFrame(updateVoiceVolumes)
     }
 
     return {
         start() {
             startVoice(voices[0])
-            animationFrame = requestAnimationFrame(update)
+            animationFrameId = requestAnimationFrame(updateVoiceVolumes)
         },
         dispose() {
-            if (animationFrame !== null) {
-                cancelAnimationFrame(animationFrame)
+            if (animationFrameId !== null) {
+                cancelAnimationFrame(animationFrameId)
             }
             voices.forEach((voice) => {
                 voice.pause()

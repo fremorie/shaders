@@ -1,27 +1,19 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 import { createCrossfadeLoop } from '../utils/crossfadeLoop'
 
 export function useCrossfadeLoop({ url, volume, crossfadeDuration }) {
+    const loopRef = useRef(null)
+
     useEffect(() => {
         const loop = createCrossfadeLoop({ url, volume, crossfadeDuration })
-
-        const start = () => {
-            loop.start()
-            removeListeners()
-        }
-
-        const removeListeners = () => {
-            window.removeEventListener('pointerdown', start)
-            window.removeEventListener('keydown', start)
-        }
-
-        window.addEventListener('pointerdown', start)
-        window.addEventListener('keydown', start)
+        loopRef.current = loop
 
         return () => {
-            removeListeners()
             loop.dispose()
+            loopRef.current = null
         }
     }, [url, volume, crossfadeDuration])
+
+    return useCallback(() => loopRef.current?.start(), [])
 }

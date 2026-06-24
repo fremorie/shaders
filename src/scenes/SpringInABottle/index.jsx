@@ -6,14 +6,24 @@ import { Suspense } from 'react'
 
 import { Experience } from './Experience'
 import { FadeIn } from './FadeIn'
-import { AmbientMusic } from './AmbientMusic'
+import { StartScreen } from './StartScreen'
 import { CAMERA_POSITION } from './utils/camera'
 import { useDebug } from './hooks/useDebug'
+import { useCrossfadeLoop } from './hooks/useCrossfadeLoop'
+import useSceneState from './store/useSceneState'
 import { Explanation } from '../../components/layout/Explanation/Explanation'
+
+const MUSIC_URL = './sounds/ambientMusic/ambientMusic.mp3'
 
 export function SpringInABottle() {
     const debug = useDebug()
     const store = useCreateStore()
+    const startMusic = useCrossfadeLoop({
+        url: MUSIC_URL,
+        volume: 0.4,
+        crossfadeDuration: 4,
+    })
+    const startExperience = useSceneState((state) => state.start)
 
     return (
         <>
@@ -51,7 +61,12 @@ export function SpringInABottle() {
 
             <FadeIn />
 
-            <AmbientMusic volume={0.4} crossfadeDuration={4} />
+            <StartScreen
+                onStart={(shouldPlayAudio) => {
+                    startExperience()
+                    if (shouldPlayAudio) startMusic()
+                }}
+            />
 
             <Loader
                 containerStyles={{

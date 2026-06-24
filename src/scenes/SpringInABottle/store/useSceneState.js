@@ -12,6 +12,18 @@ export default create(
             isBottleOpen: false,
             activeSeason: SEASONS.spring,
             phase: 'init',
+            hasStarted: false,
+
+            /**
+             * Entry
+             */
+            start: () => {
+                set(() => {
+                    return {
+                        hasStarted: true,
+                    }
+                })
+            },
 
             /**
              * Phases

@@ -14,6 +14,7 @@ import { BottleLabel } from './BottleLabel'
 import { Cork } from './Cork'
 import { Bottle } from './Bottle'
 import { useSceneAnimation } from './hooks/useSceneAnimation'
+import useSceneState from './store/useSceneState'
 
 const ENVIRONMENT_FILES = [
     './environmentMaps/veniceSunset/venice_sunset_1k.hdr',
@@ -25,6 +26,7 @@ export function Experience({ store }) {
     const debug = useDebug()
     const camera = useThree((state) => state.camera)
     const sceneRef = useRef(null)
+    const hasStarted = useSceneState((state) => state.hasStarted)
 
     useSceneAnimation(sceneRef)
 
@@ -47,6 +49,8 @@ export function Experience({ store }) {
     }, [levaControls.x, levaControls.y, levaControls.z])
 
     useEffect(() => {
+        if (!hasStarted) return
+
         gsap.to(camera.position, {
             x: CAMERA_POSITION.final[0],
             y: CAMERA_POSITION.final[1],
@@ -55,7 +59,7 @@ export function Experience({ store }) {
             ease: 'power1.out',
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [hasStarted])
 
     return (
         <>
