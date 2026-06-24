@@ -3,6 +3,7 @@ uniform float uTime;
 uniform vec3 uEdgeColor;
 uniform vec3 uDepthColor;
 
+uniform sampler2D uShadowsTexture;
 uniform sampler2D uPerlinNoise;
 uniform sampler2D uDepthMap;
 
@@ -44,6 +45,11 @@ void main() {
         uFresnelPower
     );
     finalColor = mix(finalColor, uFresnelColor, fresnel * uFresnelStrength);
+
+    // Shadows
+    float shadows = texture2D(uShadowsTexture, vUv).r;
+    float shadowFactor = smoothstep(0.0, 0.7, shadows);
+    finalColor = mix(finalColor * 0.5, finalColor, shadowFactor);
 
     gl_FragColor = vec4(vec3(finalColor), 1.0);
 
