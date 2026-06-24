@@ -14,6 +14,8 @@ export default create(
             phase: 'init',
             hasStarted: false,
             isAudioEnabled: false,
+            isEntranceAnimating: false,
+            isCorkHovered: false,
 
             /**
              * Entry
@@ -23,6 +25,22 @@ export default create(
                     return {
                         hasStarted: true,
                         isAudioEnabled,
+                    }
+                })
+            },
+
+            setEntranceAnimating: (isEntranceAnimating) => {
+                set(() => {
+                    return {
+                        isEntranceAnimating,
+                    }
+                })
+            },
+
+            setCorkHovered: (isCorkHovered) => {
+                set(() => {
+                    return {
+                        isCorkHovered,
                     }
                 })
             },

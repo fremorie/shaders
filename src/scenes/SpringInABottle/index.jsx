@@ -2,7 +2,7 @@ import { LevaPanel, useCreateStore } from 'leva'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Loader } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 
 import { Experience } from './Experience'
 import { FadeIn } from './FadeIn'
@@ -12,6 +12,7 @@ import { useDebug } from './hooks/useDebug'
 import { useCrossfadeLoop } from './hooks/useCrossfadeLoop'
 import useSceneState from './store/useSceneState'
 import { Credits } from './Credits'
+import './SpringInABottle.css'
 
 const MUSIC_URL = './sounds/ambientMusic/ambientMusic.mp3'
 
@@ -24,6 +25,21 @@ export function SpringInABottle() {
         crossfadeDuration: 4,
     })
     const startExperience = useSceneState((state) => state.start)
+    const isEntranceAnimating = useSceneState(
+        (state) => state.isEntranceAnimating
+    )
+    const hasStarted = useSceneState((state) => state.hasStarted)
+    const isCorkHovered = useSceneState((state) => state.isCorkHovered)
+
+    const isInteractive = hasStarted && !isEntranceAnimating
+
+    useEffect(() => {
+        if (!isInteractive) return
+        document.body.style.cursor = 'grab'
+        return () => {
+            document.body.style.cursor = 'auto'
+        }
+    }, [isInteractive])
 
     return (
         <>
@@ -34,6 +50,11 @@ export function SpringInABottle() {
             />
 
             <Canvas
+                className={
+                    isInteractive && !isCorkHovered
+                        ? 'spring-in-a-bottle--interactive'
+                        : undefined
+                }
                 flat
                 camera={{
                     fov: 45,
@@ -45,6 +66,9 @@ export function SpringInABottle() {
             >
                 <OrbitControls
                     makeDefault
+                    enableRotate={!isEntranceAnimating}
+                    enablePan={!isEntranceAnimating}
+                    enableZoom={!isEntranceAnimating}
                     maxDistance={30}
                     minDistance={2}
                     target={[0, 1.2, 0]}

@@ -27,6 +27,9 @@ export function Experience({ store }) {
     const camera = useThree((state) => state.camera)
     const sceneRef = useRef(null)
     const hasStarted = useSceneState((state) => state.hasStarted)
+    const setEntranceAnimating = useSceneState(
+        (state) => state.setEntranceAnimating
+    )
 
     useSceneAnimation(sceneRef)
 
@@ -51,7 +54,10 @@ export function Experience({ store }) {
     useEffect(() => {
         if (!hasStarted) return
 
-        const timeline = gsap.timeline()
+        const timeline = gsap.timeline({
+            onStart: () => setEntranceAnimating(true),
+            onComplete: () => setEntranceAnimating(false),
+        })
 
         timeline.to(camera.position, {
             x: CAMERA_POSITION.middle[0],
@@ -69,6 +75,11 @@ export function Experience({ store }) {
             delay: 1,
             ease: 'power1.out',
         })
+
+        return () => {
+            timeline.kill()
+            setEntranceAnimating(false)
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hasStarted])
 
