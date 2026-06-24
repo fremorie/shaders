@@ -100,7 +100,11 @@ export function GrassField({ positions, centerColor, ...props }) {
     })
 
     return (
-        <instancedMesh ref={meshRef} args={[bladeGeometry, null, count]}>
+        <instancedMesh
+            ref={meshRef}
+            args={[bladeGeometry, null, count]}
+            frustumCulled={false}
+        >
             <grassBladeMaterialV2
                 key={GrassBladeMaterialV2.key}
                 ref={materialRef}
