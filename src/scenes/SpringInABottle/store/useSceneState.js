@@ -13,14 +13,16 @@ export default create(
             activeSeason: SEASONS.spring,
             phase: 'init',
             hasStarted: false,
+            isAudioEnabled: false,
 
             /**
              * Entry
              */
-            start: () => {
+            start: (isAudioEnabled) => {
                 set(() => {
                     return {
                         hasStarted: true,
+                        isAudioEnabled,
                     }
                 })
             },

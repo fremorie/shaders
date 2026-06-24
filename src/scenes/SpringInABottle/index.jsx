@@ -63,7 +63,7 @@ export function SpringInABottle() {
 
             <StartScreen
                 onStart={(shouldPlayAudio) => {
-                    startExperience()
+                    startExperience(shouldPlayAudio)
                     if (shouldPlayAudio) startMusic()
                 }}
             />
@@ -133,6 +133,15 @@ export function SpringInABottle() {
                             href="https://www.kenney.nl/assets/watercraft-kit"
                         >
                             Kenney Watercraft Kit
+                        </a>
+                    </li>
+                    <li>
+                        <b>Cork pop sound:&nbsp;</b>
+                        <a
+                            target="_blank"
+                            href="https://freesound.org/people/HenKonen/sounds/757257/"
+                        >
+                            Wine cork by HenKonen
                         </a>
                     </li>
                 </ul>

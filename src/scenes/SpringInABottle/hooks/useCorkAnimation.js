@@ -3,6 +3,9 @@ import gsap from 'gsap'
 import { useFrame } from '@react-three/fiber'
 
 import useSceneState from '../store/useSceneState'
+import { useSoundEffect } from './useSoundEffect'
+
+const CORK_POP_SOUND_URL = './sounds/corkPop/corkPop.wav'
 
 // Where the cork rests while it plugs the bottle
 export const PLUGGED_POSITION = { x: 0, y: 0, z: 0 }
@@ -16,6 +19,9 @@ export function useCorkAnimation(corkRef) {
 
     const openBottleAction = useSceneState((state) => state.openBottle)
     const closeBottleAction = useSceneState((state) => state.closeBottle)
+    const isAudioEnabled = useSceneState((state) => state.isAudioEnabled)
+
+    const playCorkPop = useSoundEffect({ url: CORK_POP_SOUND_URL, volume: 0.8 })
 
     const popCork = () => {
         isPoppedRef.current = true
@@ -23,6 +29,8 @@ export function useCorkAnimation(corkRef) {
         gsap.killTweensOf(anchorPosition.current)
 
         openBottleAction()
+
+        if (isAudioEnabled) playCorkPop()
 
         const timeline = gsap.timeline()
 
