@@ -108,6 +108,15 @@ export function SpringInABottle() {
                             Fonts-TLWG
                         </a>
                     </li>
+                    <li>
+                        <b>Boat model:&nbsp;</b>
+                        <a
+                            target="_blank"
+                            href="https://www.kenney.nl/assets/watercraft-kit"
+                        >
+                            Kenney Watercraft Kit
+                        </a>
+                    </li>
                 </ul>
             </Explanation>
         </>
