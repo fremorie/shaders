@@ -144,6 +144,15 @@ export function SpringInABottle() {
                             Wine cork by HenKonen
                         </a>
                     </li>
+                    <li>
+                        <b>Cork seal sound:&nbsp;</b>
+                        <a
+                            target="_blank"
+                            href="https://freesound.org/people/HenKonen/sounds/757208/"
+                        >
+                            Gas pressure escaping by HenKonen
+                        </a>
+                    </li>
                 </ul>
             </Explanation>
         </>

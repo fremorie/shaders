@@ -6,6 +6,8 @@ import useSceneState from '../store/useSceneState'
 import { useSoundEffect } from './useSoundEffect'
 
 const CORK_POP_SOUND_URL = './sounds/corkPop/corkPop.wav'
+const CORK_SEAL_SOUND_URL = './sounds/gasPressure/gasPressureEscaping.wav'
+const CORK_SEAL_SOUND_DELAY = 0.9
 
 // Where the cork rests while it plugs the bottle
 export const PLUGGED_POSITION = { x: 0, y: 0, z: 0 }
@@ -22,6 +24,10 @@ export function useCorkAnimation(corkRef) {
     const isAudioEnabled = useSceneState((state) => state.isAudioEnabled)
 
     const playCorkPop = useSoundEffect({ url: CORK_POP_SOUND_URL, volume: 0.8 })
+    const playCorkSeal = useSoundEffect({
+        url: CORK_SEAL_SOUND_URL,
+        volume: 0.8,
+    })
 
     const popCork = () => {
         isPoppedRef.current = true
@@ -74,6 +80,14 @@ export function useCorkAnimation(corkRef) {
             ease: 'power2.inOut',
             onComplete: closeBottleAction,
         })
+
+        timeline.call(
+            () => {
+                if (isAudioEnabled) playCorkSeal()
+            },
+            null,
+            CORK_SEAL_SOUND_DELAY
+        )
     }
 
     const handleCorkClick = () => {
