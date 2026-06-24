@@ -82,6 +82,39 @@ export function Credits() {
                     AI-generated
                 </li>
             </ul>
+
+            <h2>Other</h2>
+            <ul>
+                <li>
+                    <b>Voronoi 3d implementation:&nbsp;</b>
+                    <a
+                        target="_blank"
+                        href="https://github.com/MaxBittker/glsl-voronoi-noise/blob/76089081d7154629eec8641fe12e7642b56f4312/3d.glsl#L17"
+                    >
+                        MaxBittker/glsl-voronoi-noise
+                    </a>
+                </li>
+                <li>
+                    <b>Water ripple effect:&nbsp;</b>
+                    inspired by&nbsp;
+                    <a
+                        target="_blank"
+                        href="https://youtu.be/MXpML0B2MJc?si=Tu4KNmGdHp-UF5D_&t=462"
+                    >
+                        Bruno Simon's video
+                    </a>
+                </li>
+                <li>
+                    <b>Perlin noise texture:&nbsp;</b>
+                    generated with&nbsp;
+                    <a
+                        target="_blank"
+                        href="https://htmlpreview.github.io/?https://github.com/blackears/PerlinNoiseMaker/blob/master/index.html"
+                    >
+                        Perlin Noise Maker
+                    </a>
+                </li>
+            </ul>
         </Explanation>
     )
 }
