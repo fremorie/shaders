@@ -7,7 +7,7 @@ import { useControls, folder } from 'leva'
 import vertexShader from './shaders/cherryBlossomPetals/vertex.glsl'
 import fragmentShader from './shaders/cherryBlossomPetals/fragment.glsl'
 import { useStencil } from './utils/stencilBuffer'
-import useSceneState, { SEASONS } from './store/useSceneState'
+import { SEASONS } from './store/useSceneState'
 import { generateCherryBlossomPetalPositions } from './utils/generateCherryBlossomPetalPositions'
 
 const PetalMaterial = shaderMaterial(
@@ -24,7 +24,6 @@ const PetalMaterial = shaderMaterial(
 extend({ PetalMaterial })
 
 export function CherryBlossomPetals({ store }) {
-    const activeSeason = useSceneState((state) => state.activeSeason)
     const stencil = useStencil(SEASONS.spring)
     const petalTexture = useTexture('./textures/petal/petal.png')
 
@@ -56,17 +55,6 @@ export function CherryBlossomPetals({ store }) {
         petalMaterialRef.current.uDarkColor = new THREE.Color(darkColor)
         petalMaterialRef.current.uLightColor = new THREE.Color(lightColor)
     }, [lightColor, darkColor])
-
-    useEffect(() => {
-        if (activeSeason === SEASONS.spring) {
-            petalMaterialRef.current.uDarkColor.set('#c89580')
-            petalMaterialRef.current.uLightColor.set('#e5d9d1')
-        } else {
-            // Slightly lighter colors for when spring is visible through the portal
-            petalMaterialRef.current.uDarkColor.set('#e5bba9')
-            petalMaterialRef.current.uLightColor.set('#f8eee7')
-        }
-    }, [activeSeason])
 
     return (
         <points>

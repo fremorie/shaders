@@ -9,7 +9,6 @@ import fragmentShader from './shaders/grass/fragment.glsl'
 const GrassBladeMaterialV2 = shaderMaterial(
     {
         uTime: 0,
-        uEdgeColor: new THREE.Color('#99C460'),
         uCenterColor: new THREE.Color('#6f8f46'),
         uAlphaMap: null,
     },
@@ -29,7 +28,7 @@ const BLADE_HEIGHT = 0.12
 // tilting as a rigid strip.
 const BLADE_HEIGHT_SEGMENTS = 6
 
-export function GrassField({ positions }) {
+export function GrassField({ positions, centerColor, ...props }) {
     const meshRef = useRef(null)
     const materialRef = useRef(null)
     const bladeAlphaMap = useTexture('./textures/grassBladeSimplified.png')
@@ -101,17 +100,15 @@ export function GrassField({ positions }) {
     })
 
     return (
-        <instancedMesh
-            ref={meshRef}
-            args={[bladeGeometry, null, count]}
-            frustumCulled={false}
-        >
+        <instancedMesh ref={meshRef} args={[bladeGeometry, null, count]}>
             <grassBladeMaterialV2
                 key={GrassBladeMaterialV2.key}
                 ref={materialRef}
                 uAlphaMap={bladeAlphaMap}
+                uCenterColor={centerColor}
                 alphaToCoverage
                 transparent
+                {...props}
             />
         </instancedMesh>
     )
