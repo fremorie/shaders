@@ -7,7 +7,7 @@
     border-radius: 4px;
     border: 1px solid #000000;
     background: rgba(0, 0, 0, 0.6);
-    max-width: 600px;
+    max-width: 300px;
 }
 
 .explanation li {
@@ -68,4 +68,8 @@
     min-height: 0;
     font-size: 14px;
     margin: 0;
+}
+
+.explanation h2 {
+    font-size: 14px;
 }
