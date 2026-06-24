@@ -25,14 +25,14 @@ void main() {
     finalColor = mix(uDepthColor, uEdgeColor, pow(depthMap, 1.5));
 
     // Ripple
-    float noise = texture2D(uPerlinNoise, vUv).r;
-    float rippleMixStrength = depthMap;
-    float ripple = mod((rippleMixStrength - uTime * 0.02) * 30.0, 1.0);
+    float ripplePhase = (depthMap - uTime * 0.03) * 10.0;
+    float rippleIndex = floor(ripplePhase);
+    float noise = texture2D(uPerlinNoise, vUv * 3.0 + rippleIndex * 1.8).r;
+    float ripple = mod(ripplePhase, 1.0);
     ripple = ripple - (1.0 - depthMap);
     ripple += noise;
     ripple = (
-        ripple > 0.7 &&
-        depthMap > 0.3
+        ripple > 0.99
     ) ? ripple : 0.0;
 
     finalColor += ripple;
