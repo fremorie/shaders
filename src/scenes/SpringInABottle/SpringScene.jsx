@@ -11,7 +11,7 @@ export function SpringScene({ store }) {
             <Butterflies store={store} />
             <CherryBlossomPetals store={store} />
             <Grass />
-            <Boat />
+            <Boat store={store} />
             {/*<DriftingPetal store={store} />*/}
         </>
     )
