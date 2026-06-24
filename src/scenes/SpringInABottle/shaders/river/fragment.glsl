@@ -47,7 +47,11 @@ void main() {
     finalColor = mix(finalColor, uFresnelColor, fresnel * uFresnelStrength);
 
     // Shadows
-    float shadows = texture2D(uShadowsTexture, vUv).r;
+    vec2 wobble = vec2(
+        texture2D(uPerlinNoise, vUv + uTime * 0.02).r,
+        texture2D(uPerlinNoise, vUv - uTime * 0.02).r
+    ) - 0.5;
+    float shadows = texture2D(uShadowsTexture, vUv + wobble * 0.03).r;
     float shadowFactor = smoothstep(0.0, 0.7, shadows);
     finalColor = mix(finalColor * 0.5, finalColor, shadowFactor);
 
