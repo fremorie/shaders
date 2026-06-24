@@ -19,6 +19,8 @@ export function createCrossfadeLoop({ url, volume, crossfadeDuration }) {
     })
 
     let animationFrameId = null
+    let isRunning = false
+    let voicesPausedWhileHidden = []
 
     const startVoice = (voice) => {
         voice.currentTime = 0
@@ -47,12 +49,37 @@ export function createCrossfadeLoop({ url, volume, crossfadeDuration }) {
         animationFrameId = requestAnimationFrame(updateVoiceVolumes)
     }
 
+    const handleVisibilityChange = () => {
+        if (document.hidden) {
+            if (animationFrameId !== null) {
+                cancelAnimationFrame(animationFrameId)
+                animationFrameId = null
+            }
+            voicesPausedWhileHidden = voices.filter((voice) => !voice.paused)
+            voicesPausedWhileHidden.forEach((voice) => voice.pause())
+        } else if (isRunning) {
+            voicesPausedWhileHidden.forEach((voice) => {
+                voice.play().catch(() => {})
+            })
+            voicesPausedWhileHidden = []
+            animationFrameId = requestAnimationFrame(updateVoiceVolumes)
+        }
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
     return {
         start() {
+            isRunning = true
             startVoice(voices[0])
             animationFrameId = requestAnimationFrame(updateVoiceVolumes)
         },
         dispose() {
+            isRunning = false
+            document.removeEventListener(
+                'visibilitychange',
+                handleVisibilityChange
+            )
             if (animationFrameId !== null) {
                 cancelAnimationFrame(animationFrameId)
             }
