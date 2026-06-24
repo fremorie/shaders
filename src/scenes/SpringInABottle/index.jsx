@@ -6,6 +6,7 @@ import { Suspense } from 'react'
 
 import { Experience } from './Experience'
 import { FadeIn } from './FadeIn'
+import { AmbientMusic } from './AmbientMusic'
 import { CAMERA_POSITION } from './utils/camera'
 import { useDebug } from './hooks/useDebug'
 import { Explanation } from '../../components/layout/Explanation/Explanation'
@@ -49,6 +50,8 @@ export function SpringInABottle() {
             </Canvas>
 
             <FadeIn />
+
+            <AmbientMusic volume={0.4} crossfadeDuration={4} />
 
             <Loader
                 containerStyles={{
