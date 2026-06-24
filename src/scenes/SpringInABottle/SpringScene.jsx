@@ -2,6 +2,7 @@ import { SpringModel } from './SpringModel'
 import { Butterflies } from './Butterflies'
 import { CherryBlossomPetals } from './CherryBlossomPetals'
 import { Grass } from './Grass'
+import { Boat } from './Boat'
 
 export function SpringScene({ store }) {
     return (
@@ -10,6 +11,7 @@ export function SpringScene({ store }) {
             <Butterflies store={store} />
             <CherryBlossomPetals store={store} />
             <Grass />
+            <Boat />
             {/*<DriftingPetal store={store} />*/}
         </>
     )
