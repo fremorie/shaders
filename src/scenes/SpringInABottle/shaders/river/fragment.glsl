@@ -6,6 +6,7 @@ uniform vec3 uDepthColor;
 uniform sampler2D uShadowsTexture;
 uniform sampler2D uPerlinNoise;
 uniform sampler2D uDepthMap;
+uniform sampler2D uBoatField;
 
 uniform vec3 uFresnelColor;
 uniform float uFresnelPower;
@@ -19,14 +20,12 @@ void main() {
     // Final color
     vec3 finalColor = vec3(1.0, 1.0, 1.0);
 
-    // Noise
-    float noise = texture2D(uPerlinNoise, vUv).r;
-
     // Water color based on depth
     float depthMap = texture2D(uDepthMap, vUv).r;
     finalColor = mix(uDepthColor, uEdgeColor, pow(depthMap, 1.5));
 
     // Ripple
+    float noise = texture2D(uPerlinNoise, vUv).r;
     float rippleMixStrength = depthMap;
     float ripple = mod((rippleMixStrength - uTime * 0.02) * 30.0, 1.0);
     ripple = ripple - (1.0 - depthMap);
@@ -54,6 +53,21 @@ void main() {
     float shadows = texture2D(uShadowsTexture, vUv + wobble * 0.03).r;
     float shadowFactor = smoothstep(0.0, 0.7, shadows);
     finalColor = mix(finalColor * 0.5, finalColor, shadowFactor);
+
+    // Ripples around the boat
+    float halo = texture2D(uBoatField, vUv).r;
+    float phase = (halo + uTime * 0.02) * 15.0;
+    float ringIndex = floor(phase);
+    float ringNoise = texture2D(uPerlinNoise, vUv * 4.0 + ringIndex * 1.7).r;
+    float boatRipple = mod(phase, 1.0);
+    boatRipple = boatRipple - (1.0 - halo);
+    boatRipple += ringNoise;
+    boatRipple = (
+        boatRipple > 0.6 &&
+        halo > 0.05
+    ) ? boatRipple : 0.0;
+
+    finalColor += boatRipple;
 
     gl_FragColor = vec4(vec3(finalColor), 1.0);
 

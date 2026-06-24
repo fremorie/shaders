@@ -11,7 +11,7 @@ export function Boat(props) {
     const stencil = useStencil(SEASONS.spring)
 
     const { nodes } = useGLTF('./models/Boat/boatMerged.glb')
-    const bakedTexture = useTexture('./models/Boat/baked.jpg')
+    const bakedTexture = useTexture('./models/Boat/baked.png')
 
     // eslint-disable-next-line
     bakedTexture.flipY = false
@@ -29,4 +29,4 @@ export function Boat(props) {
 }
 
 useGLTF.preload('./models/Boat/boatMerged.glb')
-useTexture.preload('./models/Boat/baked.jpg')
+useTexture.preload('./models/Boat/baked.png')

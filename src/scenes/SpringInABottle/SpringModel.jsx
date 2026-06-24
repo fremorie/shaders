@@ -17,6 +17,7 @@ const RiverMaterial = shaderMaterial(
         uDepthMap: null,
         uShadowsTexture: null,
         uPerlinNoise: null,
+        uBoatField: null,
         uFresnelColor: new THREE.Color('#ffffff'),
         uFresnelPower: 3.0,
         uFresnelStrength: 0.6,
@@ -35,7 +36,8 @@ export function SpringModel({ store }) {
     const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapFixed2.jpg'
     )
-    const riverShadowsTexture = useTexture('./models/Boat/baked.jpg')
+    const riverShadowsTexture = useTexture('./models/Boat/baked.png')
+    const boatDepthMap = useTexture('./models/Boat/depthMap.png')
     const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
 
     // eslint-disable-next-line
@@ -44,6 +46,8 @@ export function SpringModel({ store }) {
     riverShadowsTexture.flipY = false
     // eslint-disable-next-line
     depthMap.flipY = false
+    // eslint-disable-next-line
+    boatDepthMap.flipY = false
 
     const riverMaterialRef = useRef(null)
 
@@ -87,6 +91,7 @@ export function SpringModel({ store }) {
                     uDepthMap={depthMap}
                     uPerlinNoise={perlinNoise}
                     uShadowsTexture={riverShadowsTexture}
+                    uBoatField={boatDepthMap}
                     {...stencil}
                 />
             </mesh>
@@ -98,4 +103,4 @@ useGLTF.preload('./models/Spring/Spring3.glb')
 useTexture.preload('./models/Spring/baked.jpg')
 useTexture.preload('./models/Spring/SpringTerrainDepthMapFixed2.jpg')
 useTexture.preload('./textures/perlinNoise/perlin.png')
-useTexture.preload('./models/Boat/baked.jpg')
+useTexture.preload('./models/Boat/baked.png')
