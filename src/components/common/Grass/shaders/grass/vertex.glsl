@@ -8,8 +8,8 @@ varying vec2 vUv;
 
 const vec2 WIND_DIRECTION = vec2(0.8, -0.5);
 const float WIND_SPEED = 0.15;
-const float WIND_FREQUENCY = 0.4;
-const float WIND_STRENGTH = 0.05;
+const float WIND_FREQUENCY = 0.8;
+const float WIND_STRENGTH = 0.03;
 
 void main() {
     vec3 instanceWorldOrigin = (modelMatrix * instanceMatrix * vec4(0.0, 0.0, 0.0, 1.0)).xyz;
@@ -23,7 +23,7 @@ void main() {
     );
 
     // Each blade bends a little more or less than its neighbours
-    float bladeStrength = 0.7 + aBladeRandom * 0.6;
+    float bladeStrength = 0.8 + aBladeRandom * 0.6;
     float windAmount = (gust + flutter * 0.3) * bladeStrength;
 
     float windMultiplier = smoothstep(0.0, 1.0, uv.y);
