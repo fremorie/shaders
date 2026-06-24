@@ -6,6 +6,9 @@ export function useSoundEffect({ url, volume = 1 }) {
     useEffect(() => {
         const audio = new Audio(url)
         audio.volume = volume
+        // Decode the file up front so the first play() doesn't hitch on click.
+        audio.preload = 'auto'
+        audio.load()
         audioRef.current = audio
 
         return () => {

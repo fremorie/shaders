@@ -9,6 +9,10 @@ import { TRANSITION_HALF_DURATION } from '../utils/transition'
 const TRANSITION_COLOR = new THREE.Color('#9ec8ff')
 const RESTING_COLOR = new THREE.Color('#ffffff')
 
+// Resting iridescence must stay just above 0
+// (to avoid recompiling transmission material's shaders)
+const RESTING_IRIDESCENCE = 0.001
+
 export function useBottleAnimation(bottleRef) {
     const phase = useSceneState((state) => state.phase)
     const endOpenTransitionAction = useSceneState(
@@ -46,7 +50,7 @@ export function useBottleAnimation(bottleRef) {
 
             timeline.to(material, {
                 _transmission: 0.88,
-                iridescence: 0,
+                iridescence: RESTING_IRIDESCENCE,
                 duration: TRANSITION_HALF_DURATION,
             })
 

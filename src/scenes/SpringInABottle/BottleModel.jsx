@@ -19,7 +19,9 @@ export function BottleModel({ position, store }) {
                 transmission: { value: 0.88, min: 0, max: 1 },
                 roughness: { value: 0.18, min: 0, max: 1 },
                 reflectivity: { value: 0, min: 0, max: 1 },
-                iridescence: { value: 0, min: 0, max: 1 },
+                // Keep a tiny non-zero resting value so the USE_IRIDESCENCE
+                // shader variant compiles at load
+                iridescence: { value: 0.001, min: 0.001, max: 1 },
                 thickness: { value: 0, min: 0, max: 1 },
                 color: '#ffffff',
             }),
