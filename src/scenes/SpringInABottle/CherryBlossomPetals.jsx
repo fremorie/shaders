@@ -83,6 +83,7 @@ export function CherryBlossomPetals({ store }) {
                 ref={petalMaterialRef}
                 key={PetalMaterial.key}
                 uTexture={petalTexture}
+                depthWrite={false}
                 alphaToCoverage
                 {...stencil}
             />
