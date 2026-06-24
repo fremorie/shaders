@@ -8,7 +8,7 @@ import useSceneState from '../store/useSceneState'
 export const PLUGGED_POSITION = { x: 0, y: 0, z: 0 }
 
 // Where the cork settles once the bottle is opened
-const FLOATING_POSITION = { x: 0, y: 0.4, z: -0.8 }
+const FLOATING_POSITION = { x: 0, y: 0.4, z: 0 }
 
 export function useCorkAnimation(corkRef) {
     const anchorPosition = useRef({ ...PLUGGED_POSITION })
