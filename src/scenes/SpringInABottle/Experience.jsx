@@ -72,7 +72,7 @@ export function Experience({ store }) {
             y: CAMERA_POSITION.final[1],
             z: CAMERA_POSITION.final[2],
             duration: 2,
-            delay: 1,
+            delay: 0.2,
             ease: 'power1.out',
         })
 
