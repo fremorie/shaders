@@ -11,9 +11,9 @@ export function Lights({ debug, store }) {
         'Directional Light',
         {
             lightPosition: folder({
-                X: { value: 0.04, max: 10, min: -10, step: 0.01 },
-                Y: { value: 3.13, max: 10, min: -10, step: 0.01 },
-                Z: { value: 0.51, max: 10, min: -10, step: 0.01 },
+                X: { value: 1.57, max: 10, min: -10, step: 0.01 },
+                Y: { value: 1.8, max: 10, min: -10, step: 0.01 },
+                Z: { value: 1.62, max: 10, min: -10, step: 0.01 },
             }),
         },
         { store }
@@ -42,14 +42,14 @@ export function Lights({ debug, store }) {
             position={[lightPosition.X, lightPosition.Y, lightPosition.Z]}
             intensity={0.1}
             castShadow
-            shadow-mapSize={[2048, 2048]}
+            shadow-mapSize={[1024, 1024]}
             shadow-bias={-0.0005}
             shadow-camera-near={0.1}
-            shadow-camera-far={20}
-            shadow-camera-top={3}
-            shadow-camera-bottom={-3}
-            shadow-camera-left={-3}
-            shadow-camera-right={3}
+            shadow-camera-far={4}
+            shadow-camera-top={1}
+            shadow-camera-bottom={-0.5}
+            shadow-camera-left={-1.2}
+            shadow-camera-right={1.2}
         />
     )
 }
