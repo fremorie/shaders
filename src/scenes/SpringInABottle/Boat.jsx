@@ -16,6 +16,7 @@ export function Boat({ store, ...props }) {
     const stencil = useStencil(SEASONS.spring)
 
     const meshRef = useRef(null)
+    const shadowMeshRef = useRef(null)
 
     const controls = useControls(
         {
@@ -49,6 +50,17 @@ export function Boat({ store, ...props }) {
         meshRef.current.rotation.z =
             Math.sin(elapsedTime * controls.rollSpeed + 1.0) *
             controls.rollAmplitude
+
+        shadowMeshRef.current.position.y =
+            BASE_Y +
+            0.001 +
+            Math.sin(elapsedTime * controls.bobSpeed) * controls.bobAmplitude
+        shadowMeshRef.current.rotation.x =
+            Math.sin(elapsedTime * controls.pitchSpeed) *
+            controls.pitchAmplitude
+        shadowMeshRef.current.rotation.z =
+            Math.sin(elapsedTime * controls.rollSpeed + 1.0) *
+            controls.rollAmplitude
     })
 
     return (
@@ -59,6 +71,14 @@ export function Boat({ store, ...props }) {
                 position={[0.068, BASE_Y, 0.603]}
             >
                 <meshBasicMaterial map={bakedTexture} {...stencil} />
+            </mesh>
+            <mesh
+                ref={shadowMeshRef}
+                geometry={nodes.boat.geometry}
+                position={[0.068, BASE_Y + 0.001, 0.603]}
+                receiveShadow
+            >
+                <shadowMaterial transparent opacity={0.35} {...stencil} />
             </mesh>
         </group>
     )

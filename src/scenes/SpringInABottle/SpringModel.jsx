@@ -118,8 +118,9 @@ export function SpringModel({ store }) {
             </mesh>
             {/* Shares the terrain geometry and only darkens where shadows land */}
             <mesh
-                geometry={shadowMeshNodes.shadowMeshWithoutRiver.geometry}
-                position={[0.068, 0.522, 0.603]}
+                geometry={shadowMeshNodes.shadowMeshNoRiver.geometry}
+                // Real position + a very tiny number to raise it above the visible scene
+                position={[0.005, 0.33 + 0.0001, -0.003]}
                 receiveShadow
             >
                 <shadowMaterial
