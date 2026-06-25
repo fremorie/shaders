@@ -81,13 +81,12 @@ void main() {
     finalColor = mix(finalColor, uFresnelColor, fresnel * uFresnelStrength);
 
     // Baked shadows
-    vec2 boatWobble = vec2(
-        texture2D(uPerlinNoise, vUv + uTime * 0.02).r,
-        texture2D(uPerlinNoise, vUv - uTime * 0.02).r
-    ) - 0.5;
-    float shadows = texture2D(uShadowsTexture, vUv + boatWobble * 0.03).r;
+    float shadows = texture2D(uShadowsTexture, vUv + shadowWobble * 0.03).r;
     float shadowFactor = smoothstep(0.0, 0.7, shadows);
-    finalColor = mix(finalColor * 0.5, finalColor, shadowFactor);
+    // Same tint + darkness as the real-time shadow
+    float boatShadowDarkness = 0.74;
+    vec3 boatShadowColor = mix(finalColor, uDepthColor, 0.6) * (1.0 - boatShadowDarkness);
+    finalColor = mix(boatShadowColor, finalColor, shadowFactor);
 
     // Ripples around the boat
     float halo = texture2D(uBoatField, vUv).r;

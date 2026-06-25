@@ -50,7 +50,7 @@ export function SpringModel({ store }) {
     const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapBlurred2.jpg'
     )
-    const riverShadowsTexture = useTexture('./models/Boat/baked.png')
+    const riverShadowsTexture = useTexture('./models/Boat/baked_cleaned.png')
     const boatDepthMap = useTexture('./models/Boat/depthMap.png')
     const perlinNoise = useTexture('./textures/perlinNoise/perlin.png')
 
@@ -154,5 +154,5 @@ useGLTF.preload('./models/Spring/Spring3.glb')
 useTexture.preload('./models/Spring/baked.jpg')
 useTexture.preload('./models/Spring/SpringTerrainDepthMapBlurred2.jpg')
 useTexture.preload('./textures/perlinNoise/perlin.png')
-useTexture.preload('./models/Boat/baked.png')
+useTexture.preload('./models/Boat/baked_cleaned.png')
 useGLTF.preload('./models/Spring/ShadowMeshWithoutRiver.glb')

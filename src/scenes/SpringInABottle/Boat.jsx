@@ -32,7 +32,7 @@ export function Boat({ store, ...props }) {
     )
 
     const { nodes } = useGLTF('./models/Boat/boatMerged.glb')
-    const bakedTexture = useTexture('./models/Boat/baked.png')
+    const bakedTexture = useTexture('./models/Boat/baked_cleaned.png')
 
     // eslint-disable-next-line
     bakedTexture.flipY = false
@@ -65,4 +65,4 @@ export function Boat({ store, ...props }) {
 }
 
 useGLTF.preload('./models/Boat/boatMerged.glb')
-useTexture.preload('./models/Boat/baked.png')
+useTexture.preload('./models/Boat/baked_cleaned.png')
