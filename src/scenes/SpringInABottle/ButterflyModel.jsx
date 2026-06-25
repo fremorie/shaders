@@ -31,6 +31,7 @@ export const ButterflyModel = ({ orbit, material }) => {
         Object.values(nodes).forEach((node) => {
             if (node.isMesh) {
                 node.material = material
+                node.castShadow = true
             }
         })
     }, [nodes, material])

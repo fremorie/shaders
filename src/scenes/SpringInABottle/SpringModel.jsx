@@ -32,6 +32,7 @@ export function SpringModel({ store }) {
     const stencil = useStencil(SEASONS.spring)
 
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
+    const { nodes: shadowMeshNodes } = useGLTF('./models/Spring/ShadowMesh.glb')
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
     const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapBlurred2.jpg'
@@ -67,6 +68,14 @@ export function SpringModel({ store }) {
         { store }
     )
 
+    const { shadowOpacity } = useControls(
+        'Shadows',
+        {
+            shadowOpacity: { value: 0.35, min: 0, max: 1, step: 0.01 },
+        },
+        { store }
+    )
+
     useEffect(() => {
         riverMaterialRef.current.uFresnelColor = new THREE.Color(fresnelColor)
         riverMaterialRef.current.uFresnelPower = fresnelPower
@@ -80,6 +89,18 @@ export function SpringModel({ store }) {
                 position={[-0.871, 0.616, 0.325]}
             >
                 <meshBasicMaterial map={bakedTexture} {...stencil} />
+            </mesh>
+            {/* Shares the terrain geometry and only darkens where shadows land */}
+            <mesh
+                geometry={shadowMeshNodes.ShadowMesh.geometry}
+                position={[-0.251, 0.509, 0.127]}
+                receiveShadow
+            >
+                <shadowMaterial
+                    transparent
+                    opacity={shadowOpacity}
+                    {...stencil}
+                />
             </mesh>
             <mesh
                 geometry={nodes.river.geometry}
@@ -104,3 +125,4 @@ useTexture.preload('./models/Spring/baked.jpg')
 useTexture.preload('./models/Spring/SpringTerrainDepthMapBlurred2.jpg')
 useTexture.preload('./textures/perlinNoise/perlin.png')
 useTexture.preload('./models/Boat/baked.png')
+useGLTF.preload('./models/Spring/ShadowMesh.glb')

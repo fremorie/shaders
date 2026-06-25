@@ -5,6 +5,7 @@ import { Perf } from 'r3f-perf'
 import { Suspense, useEffect } from 'react'
 
 import { Experience } from './Experience'
+import { Lights } from './Lights'
 import { FadeIn } from './FadeIn'
 import { StartScreen } from './StartScreen'
 import { CAMERA_POSITION } from './utils/camera'
@@ -47,6 +48,7 @@ export function SpringInABottle() {
                 store={store}
                 hidden={!debug}
                 theme={{ sizes: { rootWidth: '350px' } }}
+                collapsed
             />
 
             <Canvas
@@ -63,6 +65,7 @@ export function SpringInABottle() {
                     position: CAMERA_POSITION.initial,
                 }}
                 gl={{ stencil: true }}
+                shadows
             >
                 <OrbitControls
                     makeDefault
@@ -77,6 +80,8 @@ export function SpringInABottle() {
                 {debug && <Perf position="bottom-left" />}
 
                 {debug && <axesHelper args={[2]} />}
+
+                <Lights debug={debug} store={store} />
 
                 <Suspense fallback={null}>
                     <Experience store={store} />
