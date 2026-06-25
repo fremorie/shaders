@@ -82,7 +82,7 @@ void main() {
 
     // Baked shadows
     float shadows = texture2D(uShadowsTexture, vUv + shadowWobble * 0.03).r;
-    float shadowFactor = smoothstep(0.0, 0.7, shadows);
+    float shadowFactor = smoothstep(0.0, 0.6, shadows);
     // Same tint + darkness as the real-time shadow
     float boatShadowDarkness = 0.74;
     vec3 boatShadowColor = mix(finalColor, uDepthColor, 0.6) * (1.0 - boatShadowDarkness);
