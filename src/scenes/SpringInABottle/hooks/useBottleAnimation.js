@@ -6,7 +6,7 @@ import useSceneState from '../store/useSceneState'
 import { TRANSITION_HALF_DURATION } from '../utils/transition'
 
 // gsap can't tween a THREE.Color directly, so we tween its rgb channels
-const TRANSITION_COLOR = new THREE.Color('#9ec8ff')
+const TRANSITION_COLOR = new THREE.Color('#baa0a0')
 const RESTING_COLOR = new THREE.Color('#ffffff')
 
 // Resting iridescence must stay just above 0
