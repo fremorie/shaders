@@ -21,9 +21,20 @@ const RiverMaterial = shaderMaterial(
         uFresnelColor: new THREE.Color('#ffffff'),
         uFresnelPower: 3.0,
         uFresnelStrength: 0.6,
+        uShadowWobbleStrength: 0.03,
+        uShadowWobbleFrequency: 8.0,
+        uShadowDarkness: 0.4,
     },
     vertexShader,
-    fragmentShader
+    fragmentShader,
+    (material) => {
+        // Real-time light shadows
+        material.lights = true
+        material.uniforms = THREE.UniformsUtils.merge([
+            THREE.UniformsLib.lights,
+            material.uniforms,
+        ])
+    }
 )
 
 extend({ RiverMaterial })
@@ -32,7 +43,9 @@ export function SpringModel({ store }) {
     const stencil = useStencil(SEASONS.spring)
 
     const { nodes } = useGLTF('./models/Spring/Spring3.glb')
-    const { nodes: shadowMeshNodes } = useGLTF('./models/Spring/ShadowMesh.glb')
+    const { nodes: shadowMeshNodes } = useGLTF(
+        './models/Spring/ShadowMeshWithoutRiver.glb'
+    )
     const bakedTexture = useTexture('./models/Spring/baked.jpg')
     const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapBlurred2.jpg'
@@ -68,10 +81,23 @@ export function SpringModel({ store }) {
         { store }
     )
 
-    const { shadowOpacity } = useControls(
+    const {
+        shadowWobbleStrength,
+        shadowWobbleFrequency,
+        shadowOpacity,
+        shadowDarkness,
+    } = useControls(
         'Shadows',
         {
             shadowOpacity: { value: 0.35, min: 0, max: 1, step: 0.01 },
+            shadowDarkness: { value: 0.2, min: 0, max: 1, step: 0.01 },
+            shadowWobbleStrength: {
+                value: 0.01,
+                min: 0,
+                max: 0.15,
+                step: 0.001,
+            },
+            shadowWobbleFrequency: { value: 6.5, min: 1, max: 30, step: 0.5 },
         },
         { store }
     )
@@ -92,8 +118,8 @@ export function SpringModel({ store }) {
             </mesh>
             {/* Shares the terrain geometry and only darkens where shadows land */}
             <mesh
-                geometry={shadowMeshNodes.ShadowMesh.geometry}
-                position={[-0.251, 0.509, 0.127]}
+                geometry={shadowMeshNodes.shadowMeshWithoutRiver.geometry}
+                position={[0.068, 0.522, 0.603]}
                 receiveShadow
             >
                 <shadowMaterial
@@ -105,6 +131,7 @@ export function SpringModel({ store }) {
             <mesh
                 geometry={nodes.river.geometry}
                 position={[-0.251, 0.508, 0.127]}
+                receiveShadow
             >
                 <riverMaterial
                     key={RiverMaterial.key}
@@ -113,6 +140,9 @@ export function SpringModel({ store }) {
                     uPerlinNoise={perlinNoise}
                     uShadowsTexture={riverShadowsTexture}
                     uBoatField={boatDepthMap}
+                    uShadowWobbleStrength={shadowWobbleStrength}
+                    uShadowWobbleFrequency={shadowWobbleFrequency}
+                    uShadowDarkness={shadowDarkness}
                     {...stencil}
                 />
             </mesh>
@@ -125,4 +155,4 @@ useTexture.preload('./models/Spring/baked.jpg')
 useTexture.preload('./models/Spring/SpringTerrainDepthMapBlurred2.jpg')
 useTexture.preload('./textures/perlinNoise/perlin.png')
 useTexture.preload('./models/Boat/baked.png')
-useGLTF.preload('./models/Spring/ShadowMesh.glb')
+useGLTF.preload('./models/Spring/ShadowMeshWithoutRiver.glb')

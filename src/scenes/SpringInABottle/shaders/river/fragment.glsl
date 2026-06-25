@@ -1,3 +1,7 @@
+#include <common>
+#include <packing>
+#include <shadowmap_pars_fragment>
+
 uniform float uTime;
 
 uniform vec3 uEdgeColor;
@@ -11,6 +15,13 @@ uniform sampler2D uBoatField;
 uniform vec3 uFresnelColor;
 uniform float uFresnelPower;
 uniform float uFresnelStrength;
+
+uniform float uShadowWobbleStrength;
+uniform float uShadowWobbleFrequency;
+uniform float uShadowDarkness;
+
+// Set by the renderer from the receiveShadow flag.
+uniform bool receiveShadow;
 
 varying vec2 vUv;
 varying vec3 vWorldPosition;
@@ -37,6 +48,30 @@ void main() {
 
     finalColor += ripple;
 
+    // Real-time shadows from the directional light (butterflies)
+    vec2 shadowWobble = vec2(
+        texture2D(uPerlinNoise, vUv * uShadowWobbleFrequency + uTime * 0.05).r,
+        texture2D(uPerlinNoise, vUv * uShadowWobbleFrequency - uTime * 0.05).r
+    ) - 0.5;
+
+    float directionalShadow = 1.0;
+    #if NUM_DIR_LIGHT_SHADOWS > 0
+        vec4 shadowCoord = vDirectionalShadowCoord[0];
+        shadowCoord.xy += shadowWobble * uShadowWobbleStrength;
+        directionalShadow = getShadow(
+            directionalShadowMap[0],
+            directionalLightShadows[0].shadowMapSize,
+            directionalLightShadows[0].shadowIntensity,
+            directionalLightShadows[0].shadowBias,
+            directionalLightShadows[0].shadowRadius,
+            shadowCoord
+        );
+    #endif
+    if (!receiveShadow) directionalShadow = 1.0;
+
+    vec3 shadowTint = mix(finalColor, uDepthColor, 0.6) * (1.0 - uShadowDarkness);
+    finalColor = mix(shadowTint, finalColor, directionalShadow);
+
     // Fresnel
     vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
     float fresnel = pow(
@@ -45,12 +80,12 @@ void main() {
     );
     finalColor = mix(finalColor, uFresnelColor, fresnel * uFresnelStrength);
 
-    // Shadows
-    vec2 wobble = vec2(
+    // Baked shadows
+    vec2 boatWobble = vec2(
         texture2D(uPerlinNoise, vUv + uTime * 0.02).r,
         texture2D(uPerlinNoise, vUv - uTime * 0.02).r
     ) - 0.5;
-    float shadows = texture2D(uShadowsTexture, vUv + wobble * 0.03).r;
+    float shadows = texture2D(uShadowsTexture, vUv + boatWobble * 0.03).r;
     float shadowFactor = smoothstep(0.0, 0.7, shadows);
     finalColor = mix(finalColor * 0.5, finalColor, shadowFactor);
 
