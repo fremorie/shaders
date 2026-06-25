@@ -1,13 +1,34 @@
 // Bottle bounds: the butterfly can never fly past these
-const MAX_X = 0.9
-const MAX_Z = 0.9
+const MAX_RADIUS = 0.9
 const MAX_Y = 1.8
+
+// The bottle's central axis in the butterflies' parent space
+const AXIS_X = -0.023
+const AXIS_Z = 0.011
 
 // How far ahead on the path we peek to work out which way the butterfly faces
 const LOOK_AHEAD = 0.05
 
 function clampAxis(value, max) {
     return value > 0 ? Math.min(max, value) : Math.max(-max, value)
+}
+
+// Stay in the bottle, dear butterfly
+function clampRadius(x, z) {
+    const offsetX = x - AXIS_X
+    const offsetZ = z - AXIS_Z
+    const distance = Math.hypot(offsetX, offsetZ)
+
+    if (distance <= MAX_RADIUS) {
+        return { x, z }
+    }
+
+    const scale = MAX_RADIUS / distance
+
+    return {
+        x: AXIS_X + offsetX * scale,
+        z: AXIS_Z + offsetZ * scale,
+    }
 }
 
 function breathingRadius(elapsedTime, orbit, seed) {
@@ -61,10 +82,12 @@ export function setButterflyNextPosition(elapsedTime, groupRef, orbit) {
         orbit
     )
 
+    const horizontal = clampRadius(position.x, position.z)
+
     groupRef.current.position.set(
-        clampAxis(position.x, MAX_X),
+        horizontal.x,
         clampAxis(position.y, MAX_Y),
-        clampAxis(position.z, MAX_Z)
+        horizontal.z
     )
 
     groupRef.current.rotation.y =
