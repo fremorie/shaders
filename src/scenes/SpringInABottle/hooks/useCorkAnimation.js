@@ -23,10 +23,10 @@ export function useCorkAnimation(corkRef) {
     const closeBottleAction = useSceneState((state) => state.closeBottle)
     const isAudioEnabled = useSceneState((state) => state.isAudioEnabled)
 
-    const playCorkPop = useSoundEffect({ url: CORK_POP_SOUND_URL, volume: 0.8 })
+    const playCorkPop = useSoundEffect({ url: CORK_POP_SOUND_URL, volume: 0.3 })
     const playCorkSeal = useSoundEffect({
         url: CORK_SEAL_SOUND_URL,
-        volume: 0.8,
+        volume: 0.3,
     })
 
     const popCork = () => {
