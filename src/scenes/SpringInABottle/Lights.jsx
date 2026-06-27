@@ -40,7 +40,7 @@ export function Lights({ debug, store }) {
         <directionalLight
             ref={directionalLightRef}
             position={[lightPosition.X, lightPosition.Y, lightPosition.Z]}
-            intensity={0.1}
+            intensity={0.01}
             castShadow
             shadow-mapSize={[1024, 1024]}
             shadow-bias={-0.0005}
