@@ -47,6 +47,7 @@ void main() {
 
     finalColor += ripple;
 
+    /* Begin SHADOWS */
     // Real-time shadows from the directional light (butterflies)
     vec2 shadowWobble = vec2(
         texture2D(uPerlinNoise, vUv * uShadowWobbleFrequency + uTime * 0.05).r,
@@ -71,13 +72,6 @@ void main() {
     vec3 shadowTint = mix(finalColor, uDepthColor, 0.6) * (1.0 - uShadowDarkness);
     finalColor = mix(shadowTint, finalColor, directionalShadow);
 
-    // Fresnel
-    vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
-    float fresnel = pow(
-        1.0 - max(dot(normalize(vWorldNormal), viewDirection), 0.0),
-        uFresnelPower
-    );
-    finalColor = mix(finalColor, uFresnelColor, fresnel * uFresnelStrength);
 
     // Baked shadows
     float shadows = texture2D(uShadowsTexture, vUv + shadowWobble * 0.03).r;
@@ -86,6 +80,16 @@ void main() {
     float boatShadowDarkness = 0.74;
     vec3 boatShadowColor = mix(finalColor, uDepthColor, 0.6) * (1.0 - boatShadowDarkness);
     finalColor = mix(boatShadowColor, finalColor, shadowFactor);
+    /* End SHADOWS */
+
+
+    // Fresnel
+    vec3 viewDirection = normalize(cameraPosition - vWorldPosition);
+    float fresnel = pow(
+        1.0 - max(dot(normalize(vWorldNormal), viewDirection), 0.0),
+        uFresnelPower
+    );
+    finalColor = mix(finalColor, uFresnelColor, fresnel * uFresnelStrength);
 
     // Ripples around the boat
     float halo = texture2D(uBoatField, vUv).r;
