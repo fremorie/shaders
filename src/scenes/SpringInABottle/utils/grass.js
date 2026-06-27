@@ -86,11 +86,6 @@ export const GRASS_CONFIG = [
         count: 73,
     },
     {
-        center: [0.61, -0.34],
-        radius: 0.05,
-        count: 73,
-    },
-    {
         center: [0.4, 0.47],
         radius: 0.09,
         count: 143,
