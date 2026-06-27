@@ -11,7 +11,7 @@ export function FadeIn({ isReady }) {
 
         gsap.to(overlayElement.current, {
             opacity: 0,
-            duration: 3,
+            duration: 1,
             ease: 'sine.out',
             onComplete: () => {
                 overlayElement.current.style.display = 'none'
