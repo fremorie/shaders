@@ -60,7 +60,7 @@ export function WinterModel({ store }) {
     const winterRiverMaterialRef = useRef(null)
 
     const { nodes } = useGLTF('./models/Winter/WinterMergedFixed.glb')
-    const bakedTexture = useTexture('./models/Winter/BakedWinter.jpg')
+    const bakedTexture = useTexture('./models/Winter/BakedWinterFixed.jpg')
     const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapFixed2.jpg'
     )
@@ -190,6 +190,6 @@ export function WinterModel({ store }) {
 }
 
 useGLTF.preload('./models/Winter/WinterMergedFixed.glb')
-useTexture.preload('./models/Winter/BakedWinter.jpg')
+useTexture.preload('./models/Winter/BakedWinterFixed.jpg')
 useTexture.preload('./textures/perlinNoise/perlin.png')
 useTexture.preload('./models/Spring/SpringTerrainDepthMapFixed2.jpg')
