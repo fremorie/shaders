@@ -1,5 +1,4 @@
 #include <common>
-#include <packing>
 #include <shadowmap_pars_fragment>
 
 uniform float uTime;
