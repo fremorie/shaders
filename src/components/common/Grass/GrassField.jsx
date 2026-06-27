@@ -31,7 +31,7 @@ const BLADE_HEIGHT_SEGMENTS = 6
 export function GrassField({ positions, centerColor, ...props }) {
     const meshRef = useRef(null)
     const materialRef = useRef(null)
-    const bladeAlphaMap = useTexture('./textures/grassBladeSimplified.png')
+    const bladeAlphaMap = useTexture('./textures/grassBladeSimplified.jpg')
 
     const bladeGeometry = useMemo(() => {
         const geometry = new THREE.PlaneGeometry(
@@ -111,9 +111,10 @@ export function GrassField({ positions, centerColor, ...props }) {
                 uAlphaMap={bladeAlphaMap}
                 uCenterColor={centerColor}
                 alphaToCoverage
-                transparent
                 {...props}
             />
         </instancedMesh>
     )
 }
+
+useTexture.preload('./textures/grassBladeSimplified.jpg')
