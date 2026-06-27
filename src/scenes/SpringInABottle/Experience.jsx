@@ -14,6 +14,7 @@ import { BottleLabel } from './BottleLabel'
 import { Cork } from './Cork'
 import { Bottle } from './Bottle'
 import { useSceneAnimation } from './hooks/useSceneAnimation'
+import { BASE_SCENE_ROTATION_Y } from './utils/transition'
 import useSceneState from './store/useSceneState'
 
 const ENVIRONMENT_FILES = [
@@ -97,7 +98,7 @@ export function Experience({ store }) {
                     ref={sceneRef}
                     // Rotate the whole scene so that it looks like
                     // the sun from the environment map casts shadows.
-                    rotation-y={-2.8}
+                    rotation-y={BASE_SCENE_ROTATION_Y}
                 >
                     <Scene store={store} />
                     <CircularMask />
