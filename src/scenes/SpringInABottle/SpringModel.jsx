@@ -46,7 +46,7 @@ export function SpringModel({ store }) {
     const { nodes: shadowMeshNodes } = useGLTF(
         './models/Spring/ShadowMeshWithoutRiver.glb'
     )
-    const bakedTexture = useTexture('./models/Spring/baked.jpg')
+    const bakedTexture = useTexture('./models/Spring/bakedFixed.jpg')
     const depthMap = useTexture(
         './models/Spring/SpringTerrainDepthMapBlurred2.jpg'
     )
@@ -152,7 +152,7 @@ export function SpringModel({ store }) {
 }
 
 useGLTF.preload('./models/Spring/Spring3.glb')
-useTexture.preload('./models/Spring/baked.jpg')
+useTexture.preload('./models/Spring/bakedFixed.jpg')
 useTexture.preload('./models/Spring/SpringTerrainDepthMapBlurred2.jpg')
 useTexture.preload('./textures/perlinNoise/perlin.png')
 useTexture.preload('./models/Boat/baked_cleaned.png')
