@@ -22,7 +22,7 @@ export function SpringInABottle() {
     const store = useCreateStore()
     const startMusic = useCrossfadeLoop({
         url: MUSIC_URL,
-        volume: 0.1,
+        volume: 0.3,
         crossfadeDuration: 4,
     })
     const startExperience = useSceneState((state) => state.start)
