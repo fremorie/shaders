@@ -34,9 +34,13 @@ void main() {
     float mask = texture2D(uTexture, uv).r;
     float alpha = smoothstep(0.2, 0.6, mask);
 
+    if (alpha < 0.1) {
+        discard;
+    }
+
     vec3 finalColor = mix(uLightColor, uDarkColor, uv.y);
 
-    gl_FragColor = vec4(finalColor, alpha);
+    gl_FragColor = vec4(finalColor, 1.0);
 
     #include <colorspace_fragment>
 }
