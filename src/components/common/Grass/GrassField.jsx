@@ -2,6 +2,7 @@ import { shaderMaterial, useTexture } from '@react-three/drei'
 import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 import { extend, useFrame } from '@react-three/fiber'
+// import { useControls } from 'leva'
 
 import vertexShader from './shaders/grass/vertex.glsl'
 import fragmentShader from './shaders/grass/fragment.glsl'
@@ -10,10 +11,19 @@ const GrassBladeMaterialV2 = shaderMaterial(
     {
         uTime: 0,
         uCenterColor: new THREE.Color('#6f8f46'),
+        uShadowColor: new THREE.Color('#d3d9de'),
         uAlphaMap: null,
     },
     vertexShader,
-    fragmentShader
+    fragmentShader,
+    (material) => {
+        // Real-time directional light shadows
+        material.lights = true
+        material.uniforms = THREE.UniformsUtils.merge([
+            THREE.UniformsLib.lights,
+            material.uniforms,
+        ])
+    }
 )
 
 extend({ GrassBladeMaterialV2 })
@@ -32,6 +42,10 @@ export function GrassField({ positions, centerColor, ...props }) {
     const meshRef = useRef(null)
     const materialRef = useRef(null)
     const bladeAlphaMap = useTexture('./textures/grassBladeSimplified.jpg')
+
+    // const { shadowColor } = useControls('Grass Shadow', {
+    //     shadowColor: '#d3d9de',
+    // })
 
     const bladeGeometry = useMemo(() => {
         const geometry = new THREE.PlaneGeometry(
@@ -93,6 +107,12 @@ export function GrassField({ positions, centerColor, ...props }) {
         )
     }, [count, matrices, bladeRandoms])
 
+    // useEffect(() => {
+    //     if (materialRef.current) {
+    //         materialRef.current.uShadowColor = new THREE.Color(shadowColor)
+    //     }
+    // }, [shadowColor])
+
     useFrame((_, delta) => {
         if (materialRef.current) {
             materialRef.current.uTime += delta
@@ -104,6 +124,7 @@ export function GrassField({ positions, centerColor, ...props }) {
             ref={meshRef}
             args={[bladeGeometry, null, count]}
             frustumCulled={false}
+            receiveShadow
         >
             <grassBladeMaterialV2
                 key={GrassBladeMaterialV2.key}

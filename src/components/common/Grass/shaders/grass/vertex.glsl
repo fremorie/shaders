@@ -1,3 +1,6 @@
+#include <common>
+#include <shadowmap_pars_vertex>
+
 uniform float uTime;
 
 attribute float aBladeRandom;
@@ -44,11 +47,15 @@ void main() {
         -localPosition.x * sinAngle + localPosition.z * cosAngle
     );
 
-    vec4 modelPosition = modelMatrix * instanceMatrix * vec4(localPosition, 1.0);
+    vec4 worldPosition = modelMatrix * instanceMatrix * vec4(localPosition, 1.0);
 
-    vec4 viewPosition = viewMatrix * modelPosition;
+    vec4 viewPosition = viewMatrix * worldPosition;
     vec4 projectionPosition = projectionMatrix * viewPosition;
     gl_Position = projectionPosition;
 
     vUv = uv;
+
+    // Feed world position + normal into three's shadow chunk
+    vec3 transformedNormal = normalMatrix * normal;
+    #include <shadowmap_vertex>
 }
