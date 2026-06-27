@@ -27,7 +27,7 @@ export function StartScreen({ onStart }) {
                         className="start-screen__button start-screen__button--primary"
                         onClick={() => enterExperience(true)}
                     >
-                        Play with sound
+                        Enter with sound
                     </button>
                     <button
                         className="start-screen__button"
