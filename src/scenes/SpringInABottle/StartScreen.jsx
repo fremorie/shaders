@@ -1,13 +1,11 @@
-import { useProgress } from '@react-three/drei'
 import { useState } from 'react'
 
 import './StartScreen.css'
 
-export function StartScreen({ onStart }) {
-    const { progress } = useProgress()
+export function StartScreen({ isReady, onStart }) {
     const [isDismissed, setIsDismissed] = useState(false)
 
-    if (progress < 100 || isDismissed) return null
+    if (!isReady || isDismissed) return null
 
     const enterExperience = (shouldPlayAudio) => {
         onStart(shouldPlayAudio)

@@ -1,8 +1,8 @@
 import { LevaPanel, useCreateStore } from 'leva'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Loader } from '@react-three/drei'
+import { OrbitControls, Preload } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useCallback, useEffect, useState } from 'react'
 
 import { Experience } from './Experience'
 import { Lights } from './Lights'
@@ -13,6 +13,7 @@ import { useDebug } from './hooks/useDebug'
 import { useCrossfadeLoop } from './hooks/useCrossfadeLoop'
 import useSceneState from './store/useSceneState'
 import { Credits } from './Credits'
+import { SceneReady } from './utils/SceneReady'
 import './SpringInABottle.css'
 
 const MUSIC_URL = './sounds/ambientMusic/ambientMusic.mp3'
@@ -31,6 +32,9 @@ export function SpringInABottle() {
     )
     const hasStarted = useSceneState((state) => state.hasStarted)
     const isCorkHovered = useSceneState((state) => state.isCorkHovered)
+
+    const [isSceneReady, setIsSceneReady] = useState(false)
+    const handleSceneReady = useCallback(() => setIsSceneReady(true), [])
 
     const isInteractive = hasStarted && !isEntranceAnimating
 
@@ -85,21 +89,18 @@ export function SpringInABottle() {
 
                 <Suspense fallback={null}>
                     <Experience store={store} />
+                    <Preload all />
+                    <SceneReady onReady={handleSceneReady} />
                 </Suspense>
             </Canvas>
 
-            <FadeIn />
+            <FadeIn isReady={isSceneReady} />
 
             <StartScreen
+                isReady={isSceneReady}
                 onStart={(shouldPlayAudio) => {
                     startExperience(shouldPlayAudio)
                     if (shouldPlayAudio) startMusic()
-                }}
-            />
-
-            <Loader
-                containerStyles={{
-                    zIndex: 2,
                 }}
             />
 
