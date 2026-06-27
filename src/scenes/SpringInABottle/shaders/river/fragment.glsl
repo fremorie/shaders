@@ -70,8 +70,7 @@ void main() {
     if (!receiveShadow) directionalShadow = 1.0;
 
     vec3 shadowTint = mix(finalColor, uDepthColor, 0.6) * (1.0 - uShadowDarkness);
-    finalColor = mix(shadowTint, finalColor, directionalShadow);
-
+    vec3 realTimeShadowColor = mix(shadowTint, finalColor, directionalShadow);
 
     // Baked shadows
     float shadows = texture2D(uShadowsTexture, vUv + shadowWobble * 0.03).r;
@@ -79,9 +78,10 @@ void main() {
     // Same tint + darkness as the real-time shadow
     float boatShadowDarkness = 0.74;
     vec3 boatShadowColor = mix(finalColor, uDepthColor, 0.6) * (1.0 - boatShadowDarkness);
-    finalColor = mix(boatShadowColor, finalColor, shadowFactor);
-    /* End SHADOWS */
+    vec3 bakedShadowColor = mix(boatShadowColor, finalColor, shadowFactor);
 
+    finalColor = min(realTimeShadowColor, bakedShadowColor);
+    /* End SHADOWS */
 
     // Fresnel
     vec3 viewDirection = normalize(cameraPosition - vWorldPosition);

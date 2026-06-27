@@ -90,7 +90,7 @@ export function SpringModel({ store }) {
         'Shadows',
         {
             shadowOpacity: { value: 0.35, min: 0, max: 1, step: 0.01 },
-            shadowDarkness: { value: 0.2, min: 0, max: 1, step: 0.01 },
+            shadowDarkness: { value: 0.24, min: 0, max: 1, step: 0.01 },
             shadowWobbleStrength: {
                 value: 0.03,
                 min: 0,
