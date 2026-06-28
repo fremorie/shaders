@@ -27,6 +27,11 @@ export function CherryBlossomPetals({ store }) {
     const stencil = useStencil(SEASONS.spring)
     const petalTexture = useTexture('./textures/petal/petal.png')
 
+    // eslint-disable-next-line
+    petalTexture.minFilter = THREE.LinearFilter
+    // eslint-disable-next-line
+    petalTexture.generateMipmaps = false
+
     const petalMaterialRef = useRef(null)
 
     useFrame((state, delta) => {

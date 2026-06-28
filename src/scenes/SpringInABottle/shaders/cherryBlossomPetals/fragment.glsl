@@ -40,7 +40,7 @@ void main() {
 
     vec3 finalColor = mix(uLightColor, uDarkColor, uv.y);
 
-    gl_FragColor = vec4(finalColor, 1.0);
+    gl_FragColor = vec4(finalColor, alpha);
 
     #include <colorspace_fragment>
 }
