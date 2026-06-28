@@ -5,6 +5,7 @@ import { Perf } from 'r3f-perf'
 import { Suspense, useCallback, useEffect, useState } from 'react'
 
 import { Experience } from './Experience'
+import { Effects } from './Effects'
 import { Lights } from './Lights'
 import { FadeIn } from './FadeIn'
 import { StartScreen } from './StartScreen'
@@ -89,6 +90,7 @@ export function SpringInABottle() {
 
                 <Suspense fallback={null}>
                     <Experience store={store} />
+                    <Effects store={store} />
                     <Preload all />
                     <SceneReady onReady={handleSceneReady} />
                 </Suspense>

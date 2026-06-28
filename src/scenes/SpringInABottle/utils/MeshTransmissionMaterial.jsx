@@ -357,6 +357,13 @@ export const MeshTransmissionMaterial = React.forwardRef(
                     oldBg = state.scene.background
                     oldEnvMapIntensity = ref.current.envMapIntensity
 
+                    // Force an explicit clear before each FBO render.
+                    // Otherwise, the stencil masks collapse inside
+                    // the refraction buffer and the masked scene disappears.
+                    const oldRenderTarget = state.gl.getRenderTarget()
+                    const oldAutoClear = state.gl.autoClear
+                    state.gl.autoClear = true
+
                     // Switch off tonemapping lest it double tone maps
                     // Save the current background and set the HDR as the new BG
                     // Use discardmaterial, the parent will be invisible, but it's shadows will still be cast
@@ -367,6 +374,7 @@ export const MeshTransmissionMaterial = React.forwardRef(
                     if (backside) {
                         // Render into the backside buffer
                         state.gl.setRenderTarget(fboBack)
+                        state.gl.clear()
                         state.gl.render(state.scene, state.camera)
                         // And now prepare the material for the main render using the backside buffer
                         parent.material = ref.current
@@ -379,6 +387,7 @@ export const MeshTransmissionMaterial = React.forwardRef(
 
                     // Render into the main buffer
                     state.gl.setRenderTarget(fboMain)
+                    state.gl.clear()
                     state.gl.render(state.scene, state.camera)
 
                     parent.material = ref.current
@@ -389,7 +398,8 @@ export const MeshTransmissionMaterial = React.forwardRef(
 
                     // Set old state back
                     state.scene.background = oldBg
-                    state.gl.setRenderTarget(null)
+                    state.gl.setRenderTarget(oldRenderTarget)
+                    state.gl.autoClear = oldAutoClear
                     state.gl.toneMapping = oldTone
                 }
             }
