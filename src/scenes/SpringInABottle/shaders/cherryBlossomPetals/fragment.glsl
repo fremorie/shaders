@@ -34,7 +34,7 @@ void main() {
     float mask = texture2D(uTexture, uv).r;
     float alpha = smoothstep(0.2, 0.6, mask) * inBounds;
 
-    vec3 finalColor = mix(uLightColor, uDarkColor, uv.y);
+    vec3 finalColor = mix(uDarkColor, uLightColor, uv.y);
 
     gl_FragColor = vec4(finalColor, alpha);
 
