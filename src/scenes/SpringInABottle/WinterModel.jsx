@@ -106,7 +106,7 @@ export function WinterModel({ store }) {
             frostColor: '#ffffff',
             frostStrength: { value: 0.2, min: 0.0, max: 1.0, step: 0.01 },
             waterColor: '#15466e',
-            flowSpeed: { value: 0.05, min: 0.0, max: 0.5, step: 0.001 },
+            flowSpeed: { value: 0.07, min: 0.0, max: 0.5, step: 0.001 },
             flowStrength: { value: 0.35, min: 0.0, max: 1.0, step: 0.01 },
             freezeLevel: { value: 0.17, min: 0.0, max: 0.5, step: 0.001 },
         },
