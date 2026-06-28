@@ -9,6 +9,7 @@ import fragmentShader from './shaders/cherryBlossomPetals/fragment.glsl'
 import { useStencil } from './utils/stencilBuffer'
 import { SEASONS } from './store/useSceneState'
 import { generateCherryBlossomPetalPositions } from './utils/generateCherryBlossomPetalPositions'
+import { RENDER_ORDER } from './utils/renderOrder'
 
 const PetalMaterial = shaderMaterial(
     {
@@ -62,7 +63,7 @@ export function CherryBlossomPetals({ store }) {
     }, [lightColor, darkColor])
 
     return (
-        <points>
+        <points renderOrder={RENDER_ORDER.petals}>
             <bufferGeometry>
                 <bufferAttribute
                     attach="attributes-position"
@@ -87,7 +88,8 @@ export function CherryBlossomPetals({ store }) {
                 ref={petalMaterialRef}
                 key={PetalMaterial.key}
                 uTexture={petalTexture}
-                alphaToCoverage
+                transparent
+                depthWrite={false}
                 {...stencil}
             />
         </points>

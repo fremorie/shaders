@@ -26,17 +26,13 @@ void main() {
 
     uv = rotate(uv, vRotation);
 
-    // Drop anything pushed outside the sprite by the squash/rotation
-    if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
-        discard;
-    }
+    // Fade out anything pushed outside the sprite by the squash/rotation
+    float inBounds =
+        step(0.0, uv.x) * step(uv.x, 1.0) *
+        step(0.0, uv.y) * step(uv.y, 1.0);
 
     float mask = texture2D(uTexture, uv).r;
-    float alpha = smoothstep(0.2, 0.6, mask);
-
-    if (alpha < 0.1) {
-        discard;
-    }
+    float alpha = smoothstep(0.2, 0.6, mask) * inBounds;
 
     vec3 finalColor = mix(uLightColor, uDarkColor, uv.y);
 
