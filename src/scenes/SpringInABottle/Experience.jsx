@@ -61,19 +61,10 @@ export function Experience({ store }) {
         })
 
         timeline.to(camera.position, {
-            x: CAMERA_POSITION.middle[0],
-            y: CAMERA_POSITION.middle[1],
-            z: CAMERA_POSITION.middle[2],
-            duration: 7,
-            ease: 'power1.out',
-        })
-
-        timeline.to(camera.position, {
             x: CAMERA_POSITION.final[0],
             y: CAMERA_POSITION.final[1],
             z: CAMERA_POSITION.final[2],
-            duration: 2,
-            delay: 0.2,
+            duration: 7,
             ease: 'power1.out',
         })
 
