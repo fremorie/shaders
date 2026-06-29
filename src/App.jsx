@@ -4,7 +4,6 @@ import { Sidebar } from './components/layout/Sidebar'
 import { ROUTES } from './routes'
 
 import './App.css'
-import { SpringInABottle } from './scenes/SpringInABottle'
 
 function Layout() {
     return (
@@ -24,11 +23,6 @@ function App() {
                         <Route path={path} element={element} key={label} />
                     ))}
                 </Route>
-                <Route
-                    path="/shaders/terrarium"
-                    element={<SpringInABottle />}
-                    key="StylizedNature"
-                />
             </Routes>
         </BrowserRouter>
     )
