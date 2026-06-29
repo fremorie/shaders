@@ -30,6 +30,7 @@ import { DistanceFieldShaderPage } from './components/DistanceField/Page'
 import { TerrariumPhysicalMaterial } from './other/TerrariumPhysicalMaterial'
 import { TerrariumTransmissionMaterial } from './other/TerrariumTransmissionMaterial'
 import { GrassV2Page } from './components/GrassV2/Page'
+import { MatricesPage } from './components/Matrices/Page'
 
 export const ROUTES = [
     {
@@ -204,6 +205,12 @@ export const ROUTES = [
         path: '/shaders/distance-field',
         label: 'Distance Field',
         element: <DistanceFieldShaderPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/matrices',
+        label: 'Understanding vertex shader matrices',
+        element: <MatricesPage />,
         section: 'Basics',
     },
 

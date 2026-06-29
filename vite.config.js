@@ -38,7 +38,7 @@ export default defineConfig({
         host: true, // Open to local network and display URL
         open: !(
             // eslint-disable-next-line no-undef
-            ('SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env)
+            'SANDBOX_URL' in process.env || 'CODESANDBOX_HOST' in process.env
         ), // Open if it's not a CodeSandbox
     },
 })
