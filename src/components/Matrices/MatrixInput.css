@@ -15,6 +15,16 @@
     margin: 0 0 8px 0;
 }
 
+.transformation-matrix-container p {
+    font-size: 14px;
+}
+
+.matrix-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .matrix {
     display: flex;
     flex-direction: column;

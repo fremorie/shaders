@@ -209,7 +209,7 @@ export const ROUTES = [
     },
     {
         path: '/shaders/matrices',
-        label: 'Understanding vertex shader matrices',
+        label: 'Transformation matrix',
         element: <MatricesPage />,
         section: 'Basics',
     },

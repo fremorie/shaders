@@ -6,10 +6,7 @@ import * as THREE from 'three'
 
 import { MatricesShader } from './MatricesShader'
 import { MatrixInput } from './MatrixInput'
-
-const IDENTITY_MATRIX_ELEMENTS = [
-    1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-]
+import { IDENTITY_MATRIX_ELEMENTS } from './utils'
 
 export function MatricesPage() {
     const store = useCreateStore()

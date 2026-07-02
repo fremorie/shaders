@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
 
 import { RawShaderMaterial } from '../../utils/RawShaderMaterial'
+import { IDENTITY_MATRIX_ELEMENTS } from './utils'
+
 import vertexShader from './vertex.glsl'
 import fragmentShader from './fragment.glsl'
 
@@ -13,22 +15,7 @@ export function MatricesShader({ transformationMatrix }) {
         () => ({
             uTransformationMatrix: new THREE.Uniform(
                 new THREE.Matrix4(
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0,
-                    0,
-                    0,
-                    0,
-                    1
+                    ...IDENTITY_MATRIX_ELEMENTS,
                 )
             ),
         }),
