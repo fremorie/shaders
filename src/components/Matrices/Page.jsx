@@ -8,6 +8,8 @@ import { MatricesShader } from './MatricesShader'
 import { MatrixInput } from './MatrixInput'
 import { IDENTITY_MATRIX_ELEMENTS } from './utils'
 
+import { AxesHelper } from '../common/AxesHelper'
+
 export function MatricesPage() {
     const store = useCreateStore()
 
@@ -45,7 +47,7 @@ export function MatricesPage() {
                     fov={45}
                     near={0.1}
                     far={200}
-                    position={[2, 2, 2]}
+                    position={[10, 10, 10]}
                 />
                 <color args={['#f7eed5']} attach="background" />
                 <OrbitControls makeDefault />
@@ -54,6 +56,7 @@ export function MatricesPage() {
                     transformationMatrix={transformationMatrix}
                 />
                 <gridHelper args={[10, 10]} />
+                <AxesHelper size={5} labels />
             </Canvas>
             <MatrixInput
                 matrixElements={matrixElements}
