@@ -15,15 +15,20 @@ export function MatricesPage() {
         IDENTITY_MATRIX_ELEMENTS
     )
 
-    const transformationMatrix = useMemo(
-        () => new THREE.Matrix4().set(...matrixElements),
-        [matrixElements]
-    )
+    const transformationMatrix = useMemo(() => {
+        const numericElements = matrixElements.map((element) => {
+            const parsedValue = parseFloat(element)
+            return isNaN(parsedValue) ? 0 : parsedValue
+        })
 
-    const handleMatrixChange = (index, value) => {
+        return new THREE.Matrix4().set(...numericElements)
+    }, [matrixElements])
+
+    const handleMatrixChange = (index, newValue) => {
         setMatrixElements((previousElements) => {
             const nextElements = [...previousElements]
-            nextElements[index] = value
+            nextElements[index] = newValue
+
             return nextElements
         })
     }
@@ -44,7 +49,10 @@ export function MatricesPage() {
                 />
                 <color args={['#f7eed5']} attach="background" />
                 <OrbitControls makeDefault />
-                <MatricesShader transformationMatrix={transformationMatrix} />
+                <MatricesShader
+                    store={store}
+                    transformationMatrix={transformationMatrix}
+                />
                 <gridHelper args={[10, 10]} />
             </Canvas>
             <MatrixInput

@@ -6,17 +6,16 @@ import { IDENTITY_MATRIX_ELEMENTS } from './utils'
 
 import vertexShader from './vertex.glsl'
 import fragmentShader from './fragment.glsl'
+import { folder, useControls } from 'leva'
 
-export function MatricesShader({ transformationMatrix }) {
+export function MatricesShader({ store, transformationMatrix }) {
     const materialRef = useRef(null)
     const meshRef = useRef(null)
 
     const uniforms = useMemo(
         () => ({
             uTransformationMatrix: new THREE.Uniform(
-                new THREE.Matrix4(
-                    ...IDENTITY_MATRIX_ELEMENTS,
-                )
+                new THREE.Matrix4(...IDENTITY_MATRIX_ELEMENTS)
             ),
         }),
         []
@@ -30,6 +29,17 @@ export function MatricesShader({ transformationMatrix }) {
         }
     }, [transformationMatrix])
 
+    const { wireframe } = useControls(
+        {
+            Cube: folder({
+                wireframe: {
+                    value: false,
+                },
+            }),
+        },
+        { store }
+    )
+
     return (
         <mesh ref={meshRef}>
             <boxGeometry />
@@ -38,6 +48,7 @@ export function MatricesShader({ transformationMatrix }) {
                 vertexShader={vertexShader}
                 fragmentShader={fragmentShader}
                 uniforms={uniforms}
+                wireframe={wireframe}
             />
         </mesh>
     )

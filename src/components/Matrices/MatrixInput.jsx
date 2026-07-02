@@ -2,8 +2,7 @@ import './MatrixInput.css'
 
 export function MatrixInput({ matrixElements, onChange }) {
     const handleCellChange = (index) => (event) => {
-        const parsedValue = parseFloat(event.target.value)
-        onChange(index, parsedValue)
+        onChange(index, event.target.value)
     }
 
     return (
@@ -22,7 +21,8 @@ export function MatrixInput({ matrixElements, onChange }) {
                                 return (
                                     <div className="cell" key={columnIndex}>
                                         <input
-                                            type="number"
+                                            type="text"
+                                            inputMode="decimal"
                                             value={matrixElements[index]}
                                             onChange={handleCellChange(index)}
                                         />

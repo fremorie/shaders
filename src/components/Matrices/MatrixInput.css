@@ -28,6 +28,28 @@
 .matrix {
     display: flex;
     flex-direction: column;
+    position: relative;
+    padding: 4px 10px;
+}
+
+.matrix::before,
+.matrix::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    border: 2px solid #ffffff;
+}
+
+.matrix::before {
+    left: 0;
+    border-right: none;
+}
+
+.matrix::after {
+    right: 0;
+    border-left: none;
 }
 
 .matrix .row {
@@ -37,17 +59,10 @@
 
 .cell input {
     width: 40px;
-    background: rgba(0, 0, 0, 0.6);
+    background: transparent;
+    border: none;
+    outline: none;
     color: #ffffff;
     font-weight: bold;
     text-align: center;
-}
-
-input[type='number'] {
-    -moz-appearance: textfield;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
 }
