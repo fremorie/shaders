@@ -1,0 +1,43 @@
+.transformation-matrix-container {
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+}
+
+.transformation-matrix-container h1 {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+}
+
+.matrix {
+    display: flex;
+    flex-direction: column;
+}
+
+.matrix .row {
+    display: flex;
+    flex-direction: row;
+}
+
+.cell input {
+    width: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

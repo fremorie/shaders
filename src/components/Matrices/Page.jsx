@@ -1,11 +1,36 @@
+import { useMemo, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { useCreateStore, LevaPanel } from 'leva'
+import * as THREE from 'three'
 
 import { MatricesShader } from './MatricesShader'
+import { MatrixInput } from './MatrixInput'
+
+const IDENTITY_MATRIX_ELEMENTS = [
+    1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
+]
 
 export function MatricesPage() {
     const store = useCreateStore()
+
+    const [matrixElements, setMatrixElements] = useState(
+        IDENTITY_MATRIX_ELEMENTS
+    )
+
+    const transformationMatrix = useMemo(
+        () => new THREE.Matrix4().set(...matrixElements),
+        [matrixElements]
+    )
+
+    const handleMatrixChange = (index, value) => {
+        setMatrixElements((previousElements) => {
+            const nextElements = [...previousElements]
+            nextElements[index] = value
+            return nextElements
+        })
+    }
+
     return (
         <>
             <LevaPanel
@@ -22,8 +47,13 @@ export function MatricesPage() {
                 />
                 <color args={['#f7eed5']} attach="background" />
                 <OrbitControls makeDefault />
-                <MatricesShader store={store} />
+                <MatricesShader transformationMatrix={transformationMatrix} />
+                <gridHelper args={[10, 10]} />
             </Canvas>
+            <MatrixInput
+                matrixElements={matrixElements}
+                onChange={handleMatrixChange}
+            />
         </>
     )
 }
