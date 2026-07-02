@@ -30,7 +30,7 @@ import { DistanceFieldShaderPage } from './components/DistanceField/Page'
 import { TerrariumPhysicalMaterial } from './other/TerrariumPhysicalMaterial'
 import { TerrariumTransmissionMaterial } from './other/TerrariumTransmissionMaterial'
 import { GrassV2Page } from './components/GrassV2/Page'
-import { MatricesPage } from './components/Matrices/Page'
+import { MatricesPage } from './components/TransformationMatrix/Page'
 
 export const ROUTES = [
     {
