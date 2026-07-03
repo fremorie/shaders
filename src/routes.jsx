@@ -31,6 +31,7 @@ import { TerrariumPhysicalMaterial } from './other/TerrariumPhysicalMaterial'
 import { TerrariumTransmissionMaterial } from './other/TerrariumTransmissionMaterial'
 import { GrassV2Page } from './components/GrassV2/Page'
 import { MatricesPage } from './components/TransformationMatrix/Page'
+import { ModelMatrixPage } from './components/ModelMatrix/Page'
 
 export const ROUTES = [
     {
@@ -211,6 +212,12 @@ export const ROUTES = [
         path: '/shaders/matrices',
         label: 'Transformation matrix',
         element: <MatricesPage />,
+        section: 'Basics',
+    },
+    {
+        path: '/shaders/model-matrix',
+        label: 'Model matrix',
+        element: <ModelMatrixPage />,
         section: 'Basics',
     },
 
