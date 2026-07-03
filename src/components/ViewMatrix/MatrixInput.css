@@ -1,0 +1,70 @@
+.model-matrix-container {
+    max-width: 100%;
+    width: 400px;
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+}
+
+.model-matrix-container h1 {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+}
+
+.model-matrix-container p {
+    font-size: 14px;
+}
+
+.matrix-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.matrix {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 4px 10px;
+}
+
+.matrix::before,
+.matrix::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    border: 2px solid #ffffff;
+}
+
+.matrix::before {
+    left: 0;
+    border-right: none;
+}
+
+.matrix::after {
+    right: 0;
+    border-left: none;
+}
+
+.matrix .row {
+    display: flex;
+    flex-direction: row;
+}
+
+.cell input {
+    width: 40px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}

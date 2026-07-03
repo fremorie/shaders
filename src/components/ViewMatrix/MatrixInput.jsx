@@ -7,11 +7,8 @@ export function MatrixInput({ matrixElements, onChange }) {
 
     return (
         <div className="model-matrix-container">
-            <h1>Model matrix</h1>
-            <p>
-                Change the values in the matrix and see how they affect the
-                cube.
-            </p>
+            <h1>View matrix</h1>
+            <p>Rotate the camera and see how it affects the view matrix.</p>
             <div className="matrix-container">
                 <div className="matrix">
                     {[0, 1, 2, 3].map((rowIndex) => (
@@ -21,6 +18,7 @@ export function MatrixInput({ matrixElements, onChange }) {
                                 return (
                                     <div className="cell" key={columnIndex}>
                                         <input
+                                            disabled
                                             type="text"
                                             inputMode="decimal"
                                             value={matrixElements[index]}
@@ -33,16 +31,6 @@ export function MatrixInput({ matrixElements, onChange }) {
                     ))}
                 </div>
             </div>
-            <p>
-                This matrix is passed to the vertex shader as{' '}
-                <b>uModelMatrix</b>&nbsp; and is used instead of the standard{' '}
-                <b>modelMatrix</b> to calculate the final vertex position:
-            </p>
-            <pre>gl_Position = </pre>
-            <pre> projectionMatrix *</pre>
-            <pre> viewMatrix *</pre>
-            <pre> uModelMatrix *</pre>
-            <pre> vec4(position, 1);</pre>
         </div>
     )
 }

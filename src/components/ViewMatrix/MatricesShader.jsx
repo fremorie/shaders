@@ -1,20 +1,16 @@
 import { useEffect, useMemo, useRef } from 'react'
+import { folder, useControls } from 'leva'
+import * as THREE from 'three'
 
 import { RawShaderMaterial } from '../../utils/RawShaderMaterial'
 
 import vertexShader from './vertex.glsl'
 import fragmentShader from './fragment.glsl'
-import { folder, useControls } from 'leva'
-import * as THREE from 'three'
-import { IDENTITY_MATRIX_ELEMENTS } from '../TransformationMatrix/utils.js'
-import { useThree } from '@react-three/fiber'
+import { DEFAULT_VIEW_MATRIX_ELEMENTS } from './utils'
 
-export function MatricesShader({ store, modelMatrix }) {
+export function MatricesShader({ store, viewMatrix }) {
     const materialRef = useRef(null)
     const meshRef = useRef(null)
-
-    const three = useThree()
-    console.log(three)
 
     const { wireframe } = useControls(
         {
@@ -29,8 +25,8 @@ export function MatricesShader({ store, modelMatrix }) {
 
     const uniforms = useMemo(
         () => ({
-            uModelMatrix: new THREE.Uniform(
-                new THREE.Matrix4(...IDENTITY_MATRIX_ELEMENTS)
+            uViewMatrix: new THREE.Uniform(
+                new THREE.Matrix4(...DEFAULT_VIEW_MATRIX_ELEMENTS)
             ),
         }),
         []
@@ -38,9 +34,9 @@ export function MatricesShader({ store, modelMatrix }) {
 
     useEffect(() => {
         if (materialRef.current) {
-            materialRef.current.uniforms.uModelMatrix.value.copy(modelMatrix)
+            materialRef.current.uniforms.uViewMatrix.value.copy(viewMatrix)
         }
-    }, [modelMatrix])
+    }, [viewMatrix])
 
     return (
         <mesh ref={meshRef}>
