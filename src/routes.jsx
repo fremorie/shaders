@@ -30,6 +30,7 @@ import { DistanceFieldShaderPage } from './components/DistanceField/Page'
 import { TerrariumPhysicalMaterial } from './other/TerrariumPhysicalMaterial'
 import { TerrariumTransmissionMaterial } from './other/TerrariumTransmissionMaterial'
 import { GrassV2Page } from './components/GrassV2/Page'
+import { GrassV3Page } from './components/GrassV3/Page'
 import { MatricesPage } from './components/TransformationMatrix/Page'
 import { ModelMatrixPage } from './components/ModelMatrix/Page'
 import { ViewMatrixPage } from './components/ViewMatrix/Page'
@@ -75,6 +76,12 @@ export const ROUTES = [
         path: '/shaders/grass-v2',
         label: 'Grass V2',
         element: <GrassV2Page />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/grass-v3',
+        label: 'Grass V3',
+        element: <GrassV3Page />,
         section: 'Experiments',
     },
 
