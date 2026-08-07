@@ -4,21 +4,25 @@ import { useTexture } from '@react-three/drei'
 
 import { createFoliage } from './utils/foliage'
 
-const bushMaterial = new THREE.MeshNormalMaterial({ side: THREE.DoubleSide })
-
 export function Bush() {
-    // const foliageTexture = useTexture('./textures/foliage/foliage.png')
+    const foliageTexture = useTexture('./textures/foliage/foliage.png')
 
     const bushGeometry = useMemo(() => createFoliage(), [])
+    const bushMaterial = useMemo(
+        () =>
+            new THREE.MeshStandardMaterial({
+                side: THREE.DoubleSide,
+                alphaMap: foliageTexture,
+                transparent: true,
+                alphaTest: 0.5,
+                color: '#7aa823',
+            }),
+        [foliageTexture]
+    )
 
     return (
         <>
-            <mesh
-                castShadow
-                receiveShadow
-                geometry={bushGeometry}
-                material={bushMaterial}
-            />
+            <mesh castShadow geometry={bushGeometry} material={bushMaterial} />
         </>
     )
 }
