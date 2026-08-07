@@ -23,6 +23,7 @@ export function Bush() {
         perlinNoiseTexture.wrapS = THREE.RepeatWrapping
         perlinNoiseTexture.wrapT = THREE.RepeatWrapping
         perlinNoiseTexture.needsUpdate = true
+
         bushMaterial.uniforms.uPerlinNoiseTexture.value = perlinNoiseTexture
         bushMaterial.needsUpdate = true
         bushDepthMaterial.needsUpdate = true
@@ -32,35 +33,49 @@ export function Bush() {
         bushMaterial.uniforms.uTime.value += delta
     })
 
-    const {
-        uWorldNoiseScale,
-        uSpeed,
-    } = useControls({
+    const { uWorldNoiseScale, uSpeed } = useControls({
         Bush: folder({
-            uWorldNoiseScale: { value: bushMaterial.uniforms.uWorldNoiseScale.value, min: 0, max: 1, step: 0.01 },
-            uSpeed: { value: bushMaterial.uniforms.uSpeed.value, min: 0, max: 1, step: 0.01 },
+            uWorldNoiseScale: {
+                value: bushMaterial.uniforms.uWorldNoiseScale.value,
+                min: 0,
+                max: 1,
+                step: 0.01,
+            },
+            uSpeed: {
+                value: bushMaterial.uniforms.uSpeed.value,
+                min: 0,
+                max: 1,
+                step: 0.01,
+            },
         }),
     })
 
     useEffect(() => {
-        bushMaterial.uniforms.uSpeed.value = uSpeed;
-        bushMaterial.uniforms.uWorldNoiseScale.value = uWorldNoiseScale;
+        bushMaterial.uniforms.uSpeed.value = uSpeed
+        bushMaterial.uniforms.uWorldNoiseScale.value = uWorldNoiseScale
     }, [uSpeed, uWorldNoiseScale])
 
     return (
         <>
-            <mesh castShadow geometry={bush1Geometry} material={bushMaterial} />
+            <mesh
+                castShadow
+                geometry={bush1Geometry}
+                material={bushMaterial}
+                customDepthMaterial={bushDepthMaterial}
+            />
             <mesh
                 castShadow
                 geometry={bush2Geometry}
                 material={bushMaterial}
                 position-x={6}
+                customDepthMaterial={bushDepthMaterial}
             />
             <mesh
                 castShadow
                 geometry={bush3Geometry}
                 material={bushMaterial}
                 position-x={12}
+                customDepthMaterial={bushDepthMaterial}
             />
         </>
     )
