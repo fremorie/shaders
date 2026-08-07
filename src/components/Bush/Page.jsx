@@ -1,13 +1,16 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
+import { Leva } from 'leva'
 
 import { Bush } from './Bush'
 import { Ground } from './Ground'
-import { Explanation } from '../layout/Explanation/Explanation.jsx'
+import { Explanation } from '../layout/Explanation/Explanation'
+import { Environment } from './Environment'
 
 export function BushPage() {
     return (
         <>
+            <Leva hidden={true} />
             <Canvas
                 camera={{
                     fov: 45,
@@ -21,13 +24,7 @@ export function BushPage() {
 
                 <OrbitControls makeDefault />
 
-                <directionalLight
-                    castShadow
-                    position={[1, 2, 3]}
-                    intensity={4.5}
-                    shadow-normalBias={0.04}
-                />
-                <ambientLight intensity={1.5} />
+                <Environment debug={false} />
 
                 <Bush />
                 <Ground />
