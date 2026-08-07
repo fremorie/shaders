@@ -15,6 +15,7 @@ export function BushPage() {
                     far: 200,
                     position: [-8, 3, 10],
                 }}
+                shadows
             >
                 <color args={['#ffffff']} attach="background" />
 
