@@ -1,26 +1,28 @@
-import * as THREE from 'three'
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useTexture } from '@react-three/drei'
 
 import { createFoliage } from './utils/foliage'
+import { bushMaterial, bushDepthMaterial } from './bushMaterial'
+import { useFrame } from '@react-three/fiber'
 
 export function Bush() {
     const foliageTexture = useTexture('./textures/foliage/foliage.png')
+    const perlinNoiseTexture = useTexture('./textures/perlinNoise/perlin.png')
 
     const bush1Geometry = useMemo(() => createFoliage('bushA'), [])
     const bush2Geometry = useMemo(() => createFoliage('bushB'), [])
     const bush3Geometry = useMemo(() => createFoliage('bushC'), [])
 
-    const bushMaterial = useMemo(
-        () =>
-            new THREE.MeshStandardMaterial({
-                alphaMap: foliageTexture,
-                transparent: true,
-                alphaTest: 0.7,
-                color: '#7aa823',
-            }),
-        [foliageTexture]
-    )
+    useEffect(() => {
+        bushMaterial.alphaMap = foliageTexture
+        bushMaterial.uniforms.uPerlinNoiseTexture.value = perlinNoiseTexture
+        bushMaterial.needsUpdate = true
+        bushDepthMaterial.needsUpdate = true
+    }, [foliageTexture, perlinNoiseTexture])
+
+    useFrame((_, delta) => {
+        bushMaterial.uniforms.uTime.value += delta
+    })
 
     return (
         <>
