@@ -34,6 +34,7 @@ import { GrassV3Page } from './components/GrassV3/Page'
 import { MatricesPage } from './components/TransformationMatrix/Page'
 import { ModelMatrixPage } from './components/ModelMatrix/Page'
 import { ViewMatrixPage } from './components/ViewMatrix/Page'
+import { BushPage } from './components/Bush/Page'
 
 export const ROUTES = [
     {
@@ -82,6 +83,12 @@ export const ROUTES = [
         path: '/shaders/grass-v3',
         label: 'Grass V3',
         element: <GrassV3Page />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/bushes',
+        label: 'Bushes',
+        element: <BushPage />,
         section: 'Experiments',
     },
 
