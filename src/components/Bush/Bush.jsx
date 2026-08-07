@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react'
 import { useTexture } from '@react-three/drei'
+import * as THREE from 'three'
 
 import { createFoliage } from './utils/foliage'
 import { bushMaterial, bushDepthMaterial } from './bushMaterial'
@@ -13,8 +14,14 @@ export function Bush() {
     const bush2Geometry = useMemo(() => createFoliage('bushB'), [])
     const bush3Geometry = useMemo(() => createFoliage('bushC'), [])
 
+    // eslint-disable-next-line
     useEffect(() => {
         bushMaterial.alphaMap = foliageTexture
+
+        // eslint-disable-next-line
+        perlinNoiseTexture.wrapS = THREE.RepeatWrapping
+        perlinNoiseTexture.wrapT = THREE.RepeatWrapping
+        perlinNoiseTexture.needsUpdate = true
         bushMaterial.uniforms.uPerlinNoiseTexture.value = perlinNoiseTexture
         bushMaterial.needsUpdate = true
         bushDepthMaterial.needsUpdate = true
