@@ -7,13 +7,16 @@ import { createFoliage } from './utils/foliage'
 export function Bush() {
     const foliageTexture = useTexture('./textures/foliage/foliage.png')
 
-    const bushGeometry = useMemo(() => createFoliage(), [])
+    const bush1Geometry = useMemo(() => createFoliage('bushA'), [])
+    const bush2Geometry = useMemo(() => createFoliage('bushB'), [])
+    const bush3Geometry = useMemo(() => createFoliage('bushC'), [])
+
     const bushMaterial = useMemo(
         () =>
             new THREE.MeshStandardMaterial({
                 alphaMap: foliageTexture,
                 transparent: true,
-                alphaTest: 0.5,
+                alphaTest: 0.7,
                 color: '#7aa823',
             }),
         [foliageTexture]
@@ -21,7 +24,19 @@ export function Bush() {
 
     return (
         <>
-            <mesh castShadow geometry={bushGeometry} material={bushMaterial} />
+            <mesh castShadow geometry={bush1Geometry} material={bushMaterial} />
+            <mesh
+                castShadow
+                geometry={bush2Geometry}
+                material={bushMaterial}
+                position-x={6}
+            />
+            <mesh
+                castShadow
+                geometry={bush3Geometry}
+                material={bushMaterial}
+                position-x={12}
+            />
         </>
     )
 }

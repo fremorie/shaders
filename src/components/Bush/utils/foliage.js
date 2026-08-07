@@ -1,15 +1,17 @@
 import * as THREE from 'three'
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js'
-import { alea } from 'seedrandom'
+import seedrandom from 'seedrandom'
 
-const rng = alea('foliage')
+const { alea } = seedrandom
 
 const BUSH_RADIUS = 2
 const LEAF_SIZE = 2
 const SURFACE_BIAS = 3
 
-export function createFoliage() {
-    const count = 100
+export function createFoliage(seed) {
+    const rng = alea(seed)
+
+    const count = 80
     const planes = []
 
     for (let i = 0; i < count; i++) {

@@ -16,6 +16,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+        "export:bush": "node scripts/export-bush-glb.mjs",
         "lint": "eslint .",
         "format": "prettier --write .",
         "preview": "vite preview"
