@@ -10,7 +10,7 @@ import { Environment } from './Environment'
 export function BushPage() {
     return (
         <>
-            <Leva hidden={true} />
+            <Leva hidden={false} />
             <Canvas
                 camera={{
                     fov: 45,

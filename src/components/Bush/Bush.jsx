@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react'
 import { useTexture } from '@react-three/drei'
 import * as THREE from 'three'
+import { useControls, folder } from 'leva'
 
 import { createFoliage } from './utils/foliage'
 import { bushMaterial, bushDepthMaterial } from './bushMaterial'
@@ -30,6 +31,21 @@ export function Bush() {
     useFrame((_, delta) => {
         bushMaterial.uniforms.uTime.value += delta
     })
+
+    const {
+        uWorldNoiseScale,
+        uSpeed,
+    } = useControls({
+        Bush: folder({
+            uWorldNoiseScale: { value: bushMaterial.uniforms.uWorldNoiseScale.value, min: 0, max: 1, step: 0.01 },
+            uSpeed: { value: bushMaterial.uniforms.uSpeed.value, min: 0, max: 1, step: 0.01 },
+        }),
+    })
+
+    useEffect(() => {
+        bushMaterial.uniforms.uSpeed.value = uSpeed;
+        bushMaterial.uniforms.uWorldNoiseScale.value = uWorldNoiseScale;
+    }, [uSpeed, uWorldNoiseScale])
 
     return (
         <>

@@ -7,6 +7,8 @@ import bushFragmentShader from './shaders/bush/fragment.glsl'
 export const bushUniforms = {
     uTime: new THREE.Uniform(0),
     uPerlinNoiseTexture: new THREE.Uniform(null),
+    uWorldNoiseScale: new THREE.Uniform(0.02),
+    uSpeed: new THREE.Uniform(0.05),
 }
 
 export const bushDepthMaterial = new CustomShaderMaterial({
