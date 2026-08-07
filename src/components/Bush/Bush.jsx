@@ -11,7 +11,6 @@ export function Bush() {
     const bushMaterial = useMemo(
         () =>
             new THREE.MeshStandardMaterial({
-                side: THREE.DoubleSide,
                 alphaMap: foliageTexture,
                 transparent: true,
                 alphaTest: 0.5,

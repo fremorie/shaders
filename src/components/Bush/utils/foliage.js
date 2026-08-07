@@ -24,21 +24,26 @@ export function createFoliage() {
         )
         const position = new THREE.Vector3().setFromSpherical(spherical)
 
+        plane.rotateX(rng() * 9999)
+        plane.rotateY(rng() * 9999)
         plane.rotateZ(rng() * 9999)
+        plane.translate(position.x, position.y, position.z)
 
-        // Normal
+        // Normal: point every vertex straight out from the bush centre, so the
+        // foliage shades as one sphere rather than as 100 separate quads
         const normal = position.clone().normalize()
         const normalArray = new Float32Array(12)
-        for (let j = 0; j < 4; j++) {
-            const i3 = j * 3
 
-            const vertexPosition = new THREE.Vector3(
+        for (let vertexIndex = 0; vertexIndex < 4; vertexIndex++) {
+            const i3 = vertexIndex * 3
+
+            const vertexNormal = new THREE.Vector3(
                 plane.attributes.position.array[i3],
                 plane.attributes.position.array[i3 + 1],
                 plane.attributes.position.array[i3 + 2]
-            )
+            ).normalize()
 
-            const mixedNormal = vertexPosition.lerp(normal, 0.85).normalize()
+            const mixedNormal = vertexNormal.lerp(normal, 0.4)
 
             normalArray[i3] = mixedNormal.x
             normalArray[i3 + 1] = mixedNormal.y
@@ -46,10 +51,12 @@ export function createFoliage() {
         }
 
         plane.setAttribute('normal', new THREE.BufferAttribute(normalArray, 3))
-        plane.translate(position.x, position.y, position.z)
 
-        // Save
-        planes.push(plane)
+        // Save the leaf twice with opposite winding, so it stays visible from both sides
+        const backFace = plane.clone()
+        backFace.setIndex([...plane.index.array].reverse())
+
+        planes.push(plane, backFace)
     }
 
     // Merge all planes
