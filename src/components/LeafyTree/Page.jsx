@@ -61,6 +61,15 @@ export function TreePage() {
                             Bark willow by Charlotte Baglioni
                         </a>
                     </li>
+                    <li>
+                        Birch model:&nbsp;
+                        <a
+                            target="_blank"
+                            href="https://poly.pizza/m/RieYOsjDj8"
+                        >
+                            Birch Tree Dead by Quaternius
+                        </a>
+                    </li>
                 </ul>
             </Explanation>
         </>
