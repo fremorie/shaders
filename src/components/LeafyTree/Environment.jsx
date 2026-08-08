@@ -44,14 +44,14 @@ export function Environment({ debug, store }) {
                 position={[lightPosition.X, lightPosition.Y, lightPosition.Z]}
                 intensity={4.5}
                 shadow-normalBias={0.04}
-                shadow-mapSize={[1024, 1024]}
+                shadow-mapSize={[2048, 2048]}
                 shadow-bias={-0.0005}
                 shadow-camera-near={0.1}
-                shadow-camera-far={25}
-                shadow-camera-top={6}
+                shadow-camera-far={35}
+                shadow-camera-top={10}
                 shadow-camera-bottom={-5}
-                shadow-camera-left={-3}
-                shadow-camera-right={3}
+                shadow-camera-left={-10}
+                shadow-camera-right={10}
             />
             <ambientLight intensity={1.5} />
         </>

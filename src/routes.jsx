@@ -94,7 +94,7 @@ export const ROUTES = [
     },
     {
         path: '/shaders/leafy-tree',
-        label: 'Leafy tree',
+        label: 'Leafy trees',
         element: <TreePage />,
         section: 'Experiments',
     },

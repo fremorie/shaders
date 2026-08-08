@@ -1,12 +1,14 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { LevaPanel, useCreateStore } from 'leva'
+import { Perf } from 'r3f-perf'
 
 import { Tree } from './Tree'
 import { Ground } from './Ground'
 import { Explanation } from '../layout/Explanation/Explanation'
 import { Environment } from './Environment'
-import { Perf } from 'r3f-perf'
+
+import { Birch } from './Birch'
 
 export function TreePage() {
     const store = useCreateStore()
@@ -34,6 +36,7 @@ export function TreePage() {
                 <Environment debug={false} store={store} />
 
                 <Tree store={store} />
+                <Birch store={store} />
                 <Ground />
 
                 <Perf position="bottom-left" />
