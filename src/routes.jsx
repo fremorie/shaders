@@ -35,6 +35,7 @@ import { MatricesPage } from './components/TransformationMatrix/Page'
 import { ModelMatrixPage } from './components/ModelMatrix/Page'
 import { ViewMatrixPage } from './components/ViewMatrix/Page'
 import { BushPage } from './components/Bush/Page'
+import { TreePage } from './components/LeafyTree/Page.jsx'
 
 export const ROUTES = [
     {
@@ -89,6 +90,12 @@ export const ROUTES = [
         path: '/shaders/bushes',
         label: 'Bushes',
         element: <BushPage />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/leafy-tree',
+        label: 'Leafy tree',
+        element: <TreePage />,
         section: 'Experiments',
     },
 
