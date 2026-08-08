@@ -3,17 +3,21 @@ import { folder, useControls } from 'leva'
 import { useHelper } from '@react-three/drei'
 import * as THREE from 'three'
 
-export function Environment({ debug }) {
+export function Environment({ debug, store }) {
     const directionalLightRef = useRef(null)
     const [shadowCamera, setShadowCamera] = useState(null)
 
-    const lightPosition = useControls('Directional Light', {
-        lightPosition: folder({
-            X: { value: 10, max: 10, min: -10, step: 0.01 },
-            Y: { value: 20, max: 10, min: -10, step: 0.01 },
-            Z: { value: 30, max: 10, min: -10, step: 0.01 },
-        }),
-    })
+    const lightPosition = useControls(
+        'Directional Light',
+        {
+            lightPosition: folder({
+                X: { value: 10, max: 10, min: -10, step: 0.01 },
+                Y: { value: 20, max: 10, min: -10, step: 0.01 },
+                Z: { value: 30, max: 10, min: -10, step: 0.01 },
+            }),
+        },
+        { store }
+    )
 
     useHelper(
         debug ? directionalLightRef : null,

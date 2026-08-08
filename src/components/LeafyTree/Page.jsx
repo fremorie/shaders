@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
-import { Leva } from 'leva'
+import { LevaPanel, useCreateStore } from 'leva'
 
 import { Tree } from './Tree'
 import { Ground } from './Ground'
@@ -9,9 +9,15 @@ import { Environment } from './Environment'
 import { Perf } from 'r3f-perf'
 
 export function TreePage() {
+    const store = useCreateStore()
+
     return (
         <>
-            <Leva hidden={false} />
+            <LevaPanel
+                hidden={false}
+                store={store}
+                theme={{ sizes: { rootWidth: '350px' } }}
+            />
             <Canvas
                 camera={{
                     fov: 45,
@@ -25,9 +31,9 @@ export function TreePage() {
 
                 <OrbitControls makeDefault />
 
-                <Environment debug={false} />
+                <Environment debug={false} store={store} />
 
-                <Tree />
+                <Tree store={store} />
                 <Ground />
 
                 <Perf position="bottom-left" />

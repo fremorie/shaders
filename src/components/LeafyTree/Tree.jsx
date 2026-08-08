@@ -6,7 +6,7 @@ import { useControls, folder } from 'leva'
 import { bushMaterial, bushDepthMaterial } from './bushMaterial'
 import { useFrame } from '@react-three/fiber'
 
-export function Tree() {
+export function Tree({ store }) {
     const foliageTexture = useTexture('./textures/foliage/foliage.png')
     const perlinNoiseTexture = useTexture('./textures/perlinNoise/perlin.png')
     const normalMap = useTexture('./textures/wood/bark_willow_02_nor_gl_1k.jpg')
@@ -31,22 +31,25 @@ export function Tree() {
         bushMaterial.uniforms.uTime.value += delta
     })
 
-    const { uWorldNoiseScale, uSpeed } = useControls({
-        Bush: folder({
-            uWorldNoiseScale: {
-                value: bushMaterial.uniforms.uWorldNoiseScale.value,
-                min: 0,
-                max: 1,
-                step: 0.01,
-            },
-            uSpeed: {
-                value: bushMaterial.uniforms.uSpeed.value,
-                min: 0,
-                max: 1,
-                step: 0.01,
-            },
-        }),
-    })
+    const { uWorldNoiseScale, uSpeed } = useControls(
+        {
+            Bush: folder({
+                uWorldNoiseScale: {
+                    value: bushMaterial.uniforms.uWorldNoiseScale.value,
+                    min: 0,
+                    max: 1,
+                    step: 0.01,
+                },
+                uSpeed: {
+                    value: bushMaterial.uniforms.uSpeed.value,
+                    min: 0,
+                    max: 1,
+                    step: 0.01,
+                },
+            }),
+        },
+        { store }
+    )
 
     useEffect(() => {
         bushMaterial.uniforms.uSpeed.value = uSpeed
