@@ -44,10 +44,10 @@ export function Environment({ debug }) {
                 shadow-bias={-0.0005}
                 shadow-camera-near={0.1}
                 shadow-camera-far={25}
-                shadow-camera-top={7}
+                shadow-camera-top={6}
                 shadow-camera-bottom={-5}
-                shadow-camera-left={-8}
-                shadow-camera-right={20}
+                shadow-camera-left={-3}
+                shadow-camera-right={3}
             />
             <ambientLight intensity={1.5} />
         </>
