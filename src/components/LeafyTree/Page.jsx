@@ -33,16 +33,26 @@ export function TreePage() {
                 <Perf position="bottom-left" />
             </Canvas>
             <Explanation title="Credits">
-                <p>Inspired by Bruno Simon's video:</p>
-
-                <p>
-                    <a
-                        target="_blank"
-                        href="https://youtu.be/cesPK0kYkyE?si=lZsxgFWYpX_o_CF5&t=54"
-                    >
-                        https://youtu.be/cesPK0kYkyE?si=lZsxgFWYpX_o_CF5&t=54
-                    </a>
-                </p>
+                <ul>
+                    <li>
+                        Inspired by{' '}
+                        <a
+                            target="_blank"
+                            href="https://youtu.be/cesPK0kYkyE?si=lZsxgFWYpX_o_CF5&t=54"
+                        >
+                            Bruno Simon's video
+                        </a>
+                    </li>
+                    <li>
+                        Tree normal map:&nbsp;
+                        <a
+                            target="_blank"
+                            href="https://polyhaven.com/a/bark_willow_02"
+                        >
+                            Bark willow by Charlotte Baglioni
+                        </a>
+                    </li>
+                </ul>
             </Explanation>
         </>
     )
