@@ -11,7 +11,7 @@ const SURFACE_BIAS = 3
 export function createFoliage(seed) {
     const rng = alea(seed)
 
-    const count = 80
+    const count = 100
     const planes = []
 
     for (let i = 0; i < count; i++) {
@@ -55,10 +55,10 @@ export function createFoliage(seed) {
         plane.setAttribute('normal', new THREE.BufferAttribute(normalArray, 3))
 
         // Save the leaf twice with opposite winding, so it stays visible from both sides
-        const backFace = plane.clone()
-        backFace.setIndex([...plane.index.array].reverse())
+        // const backFace = plane.clone()
+        // backFace.setIndex([...plane.index.array].reverse())
 
-        planes.push(plane, backFace)
+        planes.push(plane)
     }
 
     // Merge all planes
