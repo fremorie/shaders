@@ -12,7 +12,7 @@ void main() {
     vec2 worldUV = (modelMatrix * vec4(csm_Position, 1.0)).xz;
 
     vec2 perlinUV = worldUV * uWorldNoiseScale + uTime * uSpeed;
-    vec4 perlinColor = (texture(uPerlinNoiseTexture, perlinUV) - 0.5) * (csm_Position.y + 0.5);
+    vec4 perlinColor = (texture(uPerlinNoiseTexture, perlinUV) - 0.5);
 
     // Final position
     csm_Position += vec3(perlinColor.r, 0, perlinColor.r) * 0.5;

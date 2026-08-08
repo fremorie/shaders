@@ -34,3 +34,17 @@ export const bushMaterial = new CustomShaderMaterial({
     uniforms: bushUniforms,
     baseMaterial: THREE.MeshStandardMaterial,
 })
+
+export const birchFoliageMaterial = new CustomShaderMaterial({
+    // MeshStandardMaterial props
+    metalness: 0,
+    roughness: 0.8,
+    color: '#A87834',
+    alphaTest: 0.5,
+
+    // Shader (CSM props)
+    vertexShader: bushVertexShader,
+    fragmentShader: bushFragmentShader,
+    uniforms: bushUniforms,
+    baseMaterial: THREE.MeshStandardMaterial,
+})
