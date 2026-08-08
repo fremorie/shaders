@@ -16,10 +16,11 @@ export function BushPage() {
                     fov: 45,
                     near: 0.1,
                     far: 200,
-                    position: [-8, 3, 10],
+                    position: [15, 5, 40],
                 }}
                 shadows
             >
+                <axesHelper />
                 <color args={['#ffffff']} attach="background" />
 
                 <OrbitControls makeDefault />

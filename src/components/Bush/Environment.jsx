@@ -43,8 +43,8 @@ export function Environment({ debug }) {
                 shadow-mapSize={[1024, 1024]}
                 shadow-bias={-0.0005}
                 shadow-camera-near={0.1}
-                shadow-camera-far={25}
-                shadow-camera-top={7}
+                shadow-camera-far={30}
+                shadow-camera-top={10}
                 shadow-camera-bottom={-5}
                 shadow-camera-left={-8}
                 shadow-camera-right={20}

@@ -59,6 +59,13 @@ export function Bush() {
         <>
             <mesh
                 castShadow
+                geometry={bush3Geometry}
+                material={bushMaterial}
+                position-x={-6}
+                customDepthMaterial={bushDepthMaterial}
+            />
+            <mesh
+                castShadow
                 geometry={bush1Geometry}
                 material={bushMaterial}
                 customDepthMaterial={bushDepthMaterial}
