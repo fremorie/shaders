@@ -56,22 +56,31 @@ export function LeafyTreesFrontSidePage() {
                         </a>
                     </li>
                     <li>
-                        Tree normal map:&nbsp;
-                        <a
-                            target="_blank"
-                            href="https://polyhaven.com/a/bark_willow_02"
-                        >
-                            Bark willow by Charlotte Baglioni
-                        </a>
-                    </li>
-                    <li>
                         Birch model:&nbsp;
                         <a
                             target="_blank"
                             href="https://poly.pizza/m/RieYOsjDj8"
                         >
                             Birch Tree Dead by Quaternius
-                        </a>
+                        </a>&nbsp; (edited)
+                    </li>
+                    <li>
+                        Oak tree trunk:&nbsp;
+                        <a
+                            target="_blank"
+                            href="https://poly.pizza/m/1BkD9JnKrE"
+                        >
+                            Tree by Quaternius
+                        </a>&nbsp; (edited)
+                    </li>
+                    <li>
+                        Maple tree trunk:&nbsp;
+                        <a
+                            target="_blank"
+                            href="https://poly.pizza/m/b0boebSV1r"
+                        >
+                            Another tree by Quaternius
+                        </a>&nbsp; (edited)
                     </li>
                 </ul>
             </Explanation>
