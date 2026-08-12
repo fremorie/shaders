@@ -7,7 +7,7 @@ import { oakFoliageMaterial, bushDepthMaterial } from './bushMaterial'
 import { useFrame } from '@react-three/fiber'
 
 export function Tree({ store }) {
-    const foliageTexture = useTexture('./textures/foliage/oak.png')
+    const foliageTexture = useTexture('./textures/foliage/oak_v2.png')
     const perlinNoiseTexture = useTexture('./textures/perlinNoise/perlin.png')
     const normalMap = useTexture('./textures/wood/bark_willow_02_nor_gl_1k.jpg')
 

@@ -7,7 +7,7 @@ import { bushDepthMaterial, birchFoliageMaterial } from './bushMaterial'
 import { useFrame } from '@react-three/fiber'
 
 export function Birch({ store }) {
-    const foliageTexture = useTexture('./textures/foliage/birch.png')
+    const foliageTexture = useTexture('./textures/foliage/birch_v2.png')
     const perlinNoiseTexture = useTexture('./textures/perlinNoise/perlin.png')
 
     // eslint-disable-next-line

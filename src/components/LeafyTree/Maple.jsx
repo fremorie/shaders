@@ -7,7 +7,7 @@ import { mapleFoliageMaterial, bushDepthMaterial } from './bushMaterial'
 import { useFrame } from '@react-three/fiber'
 
 export function Maple({ store }) {
-    const foliageTexture = useTexture('./textures/foliage/maple.png')
+    const foliageTexture = useTexture('./textures/foliage/maple_v2.png')
     const perlinNoiseTexture = useTexture('./textures/perlinNoise/perlin.png')
     const normalMap = useTexture('./textures/wood/bark_willow_02_nor_gl_1k.jpg')
 
