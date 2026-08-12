@@ -9,6 +9,8 @@ import { Explanation } from '../layout/Explanation/Explanation'
 import { Environment } from './Environment'
 
 import { Birch } from './Birch'
+import { Maple } from './Maple'
+import { DefaultTree } from './DefaultTree.jsx'
 
 export function TreePage() {
     const store = useCreateStore()
@@ -36,7 +38,9 @@ export function TreePage() {
                 <Environment debug={false} store={store} />
 
                 <Tree store={store} />
+                <Maple store={store} />
                 <Birch store={store} />
+                <DefaultTree store={store} />
                 <Ground />
 
                 <Perf position="bottom-left" />

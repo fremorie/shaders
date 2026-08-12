@@ -3,11 +3,11 @@ import { useGLTF, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { useControls, folder } from 'leva'
 
-import { oakFoliageMaterial, bushDepthMaterial } from './bushMaterial'
+import { bushMaterial, bushDepthMaterial } from './bushMaterial'
 import { useFrame } from '@react-three/fiber'
 
-export function Tree({ store }) {
-    const foliageTexture = useTexture('./textures/foliage/oak.png')
+export function DefaultTree({ store }) {
+    const foliageTexture = useTexture('./textures/foliage/foliage.png')
     const perlinNoiseTexture = useTexture('./textures/perlinNoise/perlin.png')
     const normalMap = useTexture('./textures/wood/bark_willow_02_nor_gl_1k.jpg')
 
@@ -15,34 +15,33 @@ export function Tree({ store }) {
 
     // eslint-disable-next-line
     useEffect(() => {
-        oakFoliageMaterial.alphaMap = foliageTexture
+        bushMaterial.alphaMap = foliageTexture
 
         // eslint-disable-next-line
         perlinNoiseTexture.wrapS = THREE.RepeatWrapping
         perlinNoiseTexture.wrapT = THREE.RepeatWrapping
         perlinNoiseTexture.needsUpdate = true
 
-        oakFoliageMaterial.uniforms.uPerlinNoiseTexture.value =
-            perlinNoiseTexture
-        oakFoliageMaterial.needsUpdate = true
+        bushMaterial.uniforms.uPerlinNoiseTexture.value = perlinNoiseTexture
+        bushMaterial.needsUpdate = true
         bushDepthMaterial.needsUpdate = true
     }, [foliageTexture, perlinNoiseTexture])
 
     useFrame((_, delta) => {
-        oakFoliageMaterial.uniforms.uTime.value += delta
+        bushMaterial.uniforms.uTime.value += delta
     })
 
     const { uWorldNoiseScale, uSpeed } = useControls(
         {
             Bush: folder({
                 uWorldNoiseScale: {
-                    value: oakFoliageMaterial.uniforms.uWorldNoiseScale.value,
+                    value: bushMaterial.uniforms.uWorldNoiseScale.value,
                     min: 0,
                     max: 1,
                     step: 0.01,
                 },
                 uSpeed: {
-                    value: oakFoliageMaterial.uniforms.uSpeed.value,
+                    value: bushMaterial.uniforms.uSpeed.value,
                     min: 0,
                     max: 1,
                     step: 0.01,
@@ -53,16 +52,16 @@ export function Tree({ store }) {
     )
 
     useEffect(() => {
-        oakFoliageMaterial.uniforms.uSpeed.value = uSpeed
-        oakFoliageMaterial.uniforms.uWorldNoiseScale.value = uWorldNoiseScale
+        bushMaterial.uniforms.uSpeed.value = uSpeed
+        bushMaterial.uniforms.uWorldNoiseScale.value = uWorldNoiseScale
     }, [uSpeed, uWorldNoiseScale])
 
     return (
-        <group>
+        <group position={[-10, 0, 8]}>
             <mesh
                 castShadow
                 geometry={nodes.Leaves.geometry}
-                material={oakFoliageMaterial}
+                material={bushMaterial}
                 customDepthMaterial={bushDepthMaterial}
                 position={[-0.117, 2.789, 1.129]}
                 rotation={[0, -1.454, 0]}

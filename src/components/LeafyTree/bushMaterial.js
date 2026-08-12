@@ -48,3 +48,31 @@ export const birchFoliageMaterial = new CustomShaderMaterial({
     uniforms: bushUniforms,
     baseMaterial: THREE.MeshStandardMaterial,
 })
+
+export const mapleFoliageMaterial = new CustomShaderMaterial({
+    // MeshStandardMaterial props
+    metalness: 0,
+    roughness: 0.8,
+    color: '#A85E49',
+    alphaTest: 0.5,
+
+    // Shader (CSM props)
+    vertexShader: bushVertexShader,
+    fragmentShader: bushFragmentShader,
+    uniforms: bushUniforms,
+    baseMaterial: THREE.MeshStandardMaterial,
+})
+
+export const oakFoliageMaterial = new CustomShaderMaterial({
+    // MeshStandardMaterial props
+    metalness: 0,
+    roughness: 0.8,
+    color: '#597932',
+    alphaTest: 0.5,
+
+    // Shader (CSM props)
+    vertexShader: bushVertexShader,
+    fragmentShader: bushFragmentShader,
+    uniforms: bushUniforms,
+    baseMaterial: THREE.MeshStandardMaterial,
+})
