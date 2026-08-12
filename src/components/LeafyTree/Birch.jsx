@@ -15,7 +15,7 @@ export function Birch({ store }) {
     // eslint-disable-next-line
     foliageTexture.wrapT = THREE.RepeatWrapping
 
-    const { nodes, materials } = useGLTF('./models/Birch.glb')
+    const { nodes, materials } = useGLTF('./models/Birch_smooth.glb')
 
     // eslint-disable-next-line
     useEffect(() => {
