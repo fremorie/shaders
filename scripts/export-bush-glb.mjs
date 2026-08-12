@@ -42,7 +42,7 @@ const scene = new THREE.Scene()
 scene.name = 'Foliage'
 
 for (const bush of BUSHES) {
-    const mesh = new THREE.Mesh(createFoliage(bush.seed), foliageMaterial)
+    const mesh = new THREE.Mesh(createFoliage(bush.seed, true), foliageMaterial)
     mesh.name = bush.name
     mesh.position.x = bush.x
     mesh.castShadow = true

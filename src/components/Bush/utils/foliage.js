@@ -8,7 +8,7 @@ const BUSH_RADIUS = 2
 const LEAF_SIZE = 2
 const SURFACE_BIAS = 3
 
-export function createFoliage(seed) {
+export function createFoliage(seed, frontSide = false) {
     const rng = alea(seed)
 
     const count = 100
@@ -26,8 +26,11 @@ export function createFoliage(seed) {
         )
         const position = new THREE.Vector3().setFromSpherical(spherical)
 
-        plane.rotateX(rng() * 9999)
-        plane.rotateY(rng() * 9999)
+        if (!frontSide) {
+            plane.rotateX(rng() * 9999)
+            plane.rotateY(rng() * 9999)
+        }
+
         plane.rotateZ(rng() * 9999)
         plane.translate(position.x, position.y, position.z)
 
