@@ -62,7 +62,8 @@ export function LeafyTreesFrontSidePage() {
                             href="https://poly.pizza/m/RieYOsjDj8"
                         >
                             Birch Tree Dead by Quaternius
-                        </a>&nbsp; (edited)
+                        </a>
+                        &nbsp; (edited)
                     </li>
                     <li>
                         Oak tree trunk:&nbsp;
@@ -71,7 +72,8 @@ export function LeafyTreesFrontSidePage() {
                             href="https://poly.pizza/m/1BkD9JnKrE"
                         >
                             Tree by Quaternius
-                        </a>&nbsp; (edited)
+                        </a>
+                        &nbsp; (edited)
                     </li>
                     <li>
                         Maple tree trunk:&nbsp;
@@ -80,7 +82,8 @@ export function LeafyTreesFrontSidePage() {
                             href="https://poly.pizza/m/b0boebSV1r"
                         >
                             Another tree by Quaternius
-                        </a>&nbsp; (edited)
+                        </a>
+                        &nbsp; (edited)
                     </li>
                 </ul>
             </Explanation>

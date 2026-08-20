@@ -38,6 +38,7 @@ import { BushPage } from './components/Bush/Page'
 import { TreePage } from './components/LeafyTree/Page'
 import { LeafyTreesFrontSidePage } from './components/LeafyTreeFrontSide/Page'
 import { BushFlatPage } from './components/BushFrontSide/Page.jsx'
+import { WarpedSpherePage } from './components/WarpedSphere/Page.jsx'
 
 export const ROUTES = [
     {
@@ -110,6 +111,12 @@ export const ROUTES = [
         path: '/shaders/leafy-trees-front-side',
         label: 'Leafy trees (flat)',
         element: <LeafyTreesFrontSidePage />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/warped-sphere',
+        label: 'Warped sphere',
+        element: <WarpedSpherePage />,
         section: 'Experiments',
     },
 
