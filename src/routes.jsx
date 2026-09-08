@@ -40,6 +40,7 @@ import { LeafyTreesFrontSidePage } from './components/LeafyTreeFrontSide/Page'
 import { BushFlatPage } from './components/BushFrontSide/Page.jsx'
 import { WarpedSpherePage } from './components/WarpedSphere/Page.jsx'
 import { EyeShaderPage } from './components/Eye/Page'
+import { MonsterPage } from './components/Monster/Page'
 
 export const ROUTES = [
     {
@@ -94,6 +95,12 @@ export const ROUTES = [
         path: '/shaders/eye',
         label: 'Eye',
         element: <EyeShaderPage />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/blobs',
+        label: 'Blobs',
+        element: <MonsterPage />,
         section: 'Experiments',
     },
     {
