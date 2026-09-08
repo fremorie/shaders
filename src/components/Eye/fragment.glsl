@@ -64,6 +64,9 @@ void main() {
         f = smoothstep(0.4, 0.9, fbm(vec2(10.0 * r, 15.0 * a)));
         color *= 1.0 - f;
 
+        f = smoothstep(0.6, 0.8, r);
+        color *= 1.0 - 0.5 * f;
+
         f = smoothstep(0.2, 0.25, r);
         color *= f;
     }
