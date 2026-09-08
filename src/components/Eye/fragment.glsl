@@ -52,6 +52,8 @@ void main() {
 
     if (r < 0.8) {
         color = vec3(0.2, 0.3, 0.4);
+        float f = fbm(5.0 * uv);
+        color = mix(color, vec3(0.2, 0.5, 0.4), f);
     }
 
     gl_FragColor = vec4(color * background, 1.0);
