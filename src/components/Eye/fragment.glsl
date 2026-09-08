@@ -58,6 +58,9 @@ void main() {
         f = 1.0 - smoothstep(0.2, 0.5, r);
         color = mix(color, vec3(0.9, 0.6, 0.2), f);
 
+        f = smoothstep(0.3, 1.0, fbm(vec2(6.0 * r, 20.0 * a)));
+        color = mix(color, vec3(1.0), f);
+
         f = smoothstep(0.2, 0.25, r);
         color *= f;
     }
