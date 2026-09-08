@@ -55,6 +55,9 @@ void main() {
         float f = fbm(5.0 * uv);
         color = mix(color, vec3(0.2, 0.5, 0.4), f);
 
+        f = 1.0 - smoothstep(0.2, 0.5, r);
+        color = mix(color, vec3(0.9, 0.6, 0.2), f);
+
         f = smoothstep(0.2, 0.25, r);
         color *= f;
     }
