@@ -3,6 +3,16 @@ precision mediump float;
 uniform vec2 uResolution;
 uniform float uTime;
 
+uniform vec3 uBaseColor;
+uniform vec3 uNoiseColor;
+uniform vec3 uCenterColor;
+uniform vec3 uStripesColor;
+uniform float uStripesNoiseStrength;
+uniform float uVignetteStrength;
+uniform float uPupilRadius;
+uniform vec3 uReflectionColor;
+uniform float uReflectionSize;
+
 varying vec2 vUv;
 
 #define PI 3.1415926535
@@ -53,16 +63,6 @@ void main() {
     float ss = 0.5 + 0.5 * sin(1.0 * uTime);
     float anim = 1.0 + 0.1 * ss * clamp(1.0 - r, 0.0, 1.0);
     r *= anim;
-
-    vec3 uBaseColor = vec3(0.2, 0.3, 0.4);
-    vec3 uNoiseColor = vec3(0.2, 0.5, 0.4);
-    vec3 uCenterColor = vec3(0.9, 0.6, 0.2);
-    vec3 uStripesColor = vec3(1.0);
-    float uStripesNoiseStrength = 0.5;
-    float uVignetteStrength = 0.5;
-    float uPupilRadius = 0.2;
-    vec3 uReflectionColor = vec3(1.0, 0.9, 0.8);
-    float uReflectionSize = 0.2;
 
     if (r < 0.8) {
         color = uBaseColor;
