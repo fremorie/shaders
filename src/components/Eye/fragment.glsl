@@ -54,30 +54,40 @@ void main() {
     float anim = 1.0 + 0.1 * ss * clamp(1.0 - r, 0.0, 1.0);
     r *= anim;
 
+    vec3 uBaseColor = vec3(0.2, 0.3, 0.4);
+    vec3 uNoiseColor = vec3(0.2, 0.5, 0.4);
+    vec3 uCenterColor = vec3(0.9, 0.6, 0.2);
+    vec3 uStripesColor = vec3(1.0);
+    float uStripesNoiseStrength = 0.5;
+    float uVignetteStrength = 0.5;
+    float uPupilRadius = 0.2;
+    vec3 uReflectionColor = vec3(1.0, 0.9, 0.8);
+    float uReflectionSize = 0.2;
+
     if (r < 0.8) {
-        color = vec3(0.2, 0.3, 0.4);
+        color = uBaseColor;
         float f = fbm(5.0 * uv);
-        color = mix(color, vec3(0.2, 0.5, 0.4), f);
+        color = mix(color, uNoiseColor, f);
 
         f = 1.0 - smoothstep(0.2, 0.5, r);
-        color = mix(color, vec3(0.9, 0.6, 0.2), f);
+        color = mix(color, uCenterColor, f);
 
         a += 0.05 * fbm(20.0 * uv);
 
         f = smoothstep(0.3, 1.0, fbm(vec2(6.0 * r, 20.0 * a)));
-        color = mix(color, vec3(1.0), f);
+        color = mix(color, uStripesColor, f);
 
         f = smoothstep(0.4, 0.9, fbm(vec2(10.0 * r, 15.0 * a)));
-        color *= 1.0 - 0.5 * f;
+        color *= 1.0 - uStripesNoiseStrength * f;
 
         f = smoothstep(0.6, 0.8, r);
-        color *= 1.0 - 0.5 * f;
+        color *= 1.0 - uVignetteStrength * f;
 
-        f = smoothstep(0.2, 0.25, r);
+        f = smoothstep(uPupilRadius, uPupilRadius + 0.05, r);
         color *= f;
 
-        f = 1.0 - smoothstep(0.0, 0.2, length(uv - vec2(0.24, 0.2)));
-        color += vec3(1.0, 0.9, 0.8) * f * 0.9;
+        f = 1.0 - smoothstep(0.0, uReflectionSize, length(uv - vec2(0.24, 0.2)));
+        color += uReflectionColor * f * 0.9;
 
         f = smoothstep(0.7, 0.8, r);
         color = mix(color, vec3(1.0), f);
