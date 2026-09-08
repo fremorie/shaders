@@ -14,6 +14,7 @@ const EYE_DEFAULTS = {
     stripesColor: '#b7e2d9',
     stripesNoiseStrength: 0.5,
     pupilRadius: 0.2,
+    pupilDilation: 0.12,
     vignetteStrength: 0.5,
     reflectionColor: '#fff3e7',
     reflectionSize: 0.2,
@@ -44,6 +45,7 @@ export function EyeShader({ store }) {
             ),
             uVignetteStrength: new THREE.Uniform(EYE_DEFAULTS.vignetteStrength),
             uPupilRadius: new THREE.Uniform(EYE_DEFAULTS.pupilRadius),
+            uPupilDilation: new THREE.Uniform(EYE_DEFAULTS.pupilDilation),
             uReflectionColor: new THREE.Uniform(
                 new THREE.Color(EYE_DEFAULTS.reflectionColor)
             ),
@@ -60,6 +62,7 @@ export function EyeShader({ store }) {
         uStripesColor,
         uStripesNoiseStrength,
         uPupilRadius,
+        uPupilDilation,
         uVignetteStrength,
         uReflectionColor,
         uReflectionSize,
@@ -76,10 +79,17 @@ export function EyeShader({ store }) {
                     max: 1,
                     step: 0.01,
                 },
+                // max stays clear of IRIS_RADIUS so the iris ring never collapses
                 uPupilRadius: {
                     value: EYE_DEFAULTS.pupilRadius,
+                    min: 0.02,
+                    max: 0.6,
+                    step: 0.01,
+                },
+                uPupilDilation: {
+                    value: EYE_DEFAULTS.pupilDilation,
                     min: 0,
-                    max: 0.8,
+                    max: 0.4,
                     step: 0.01,
                 },
             }),
@@ -119,6 +129,7 @@ export function EyeShader({ store }) {
             materialRef.current.uniforms.uVignetteStrength.value =
                 uVignetteStrength
             materialRef.current.uniforms.uPupilRadius.value = uPupilRadius
+            materialRef.current.uniforms.uPupilDilation.value = uPupilDilation
             materialRef.current.uniforms.uReflectionColor.value.set(
                 uReflectionColor
             )
@@ -134,6 +145,7 @@ export function EyeShader({ store }) {
         uStripesNoiseStrength,
         uVignetteStrength,
         uPupilRadius,
+        uPupilDilation,
         uReflectionColor,
         uReflectionSize,
     ])
