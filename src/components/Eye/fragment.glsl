@@ -72,6 +72,9 @@ void main() {
         f = smoothstep(0.2, 0.25, r);
         color *= f;
 
+        f = 1.0 - smoothstep(0.0, 0.2, length(uv - vec2(0.24, 0.2)));
+        color += vec3(1.0, 0.9, 0.8) * f * 0.9;
+
         f = smoothstep(0.7, 0.8, r);
         color = mix(color, vec3(1.0), f);
     }
