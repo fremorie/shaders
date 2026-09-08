@@ -39,6 +39,7 @@ import { TreePage } from './components/LeafyTree/Page'
 import { LeafyTreesFrontSidePage } from './components/LeafyTreeFrontSide/Page'
 import { BushFlatPage } from './components/BushFrontSide/Page.jsx'
 import { WarpedSpherePage } from './components/WarpedSphere/Page.jsx'
+import { EyeShaderPage } from './components/Eye/Page'
 
 export const ROUTES = [
     {
@@ -87,6 +88,12 @@ export const ROUTES = [
         path: '/shaders/grass-v3',
         label: 'Grass V3',
         element: <GrassV3Page />,
+        section: 'Experiments',
+    },
+    {
+        path: '/shaders/eye',
+        label: 'Eye',
+        element: <EyeShaderPage />,
         section: 'Experiments',
     },
     {
