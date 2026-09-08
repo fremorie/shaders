@@ -50,6 +50,10 @@ void main() {
     float r = sqrt(dot(uv, uv));
     float a = atan(uv.y, uv.x);
 
+    float ss = 0.5 + 0.5 * sin(1.0 * uTime);
+    float anim = 1.0 + 0.1 * ss * clamp(1.0 - r, 0.0, 1.0);
+    r *= anim;
+
     if (r < 0.8) {
         color = vec3(0.2, 0.3, 0.4);
         float f = fbm(5.0 * uv);
