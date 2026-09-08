@@ -69,6 +69,9 @@ void main() {
 
         f = smoothstep(0.2, 0.25, r);
         color *= f;
+
+        f = smoothstep(0.7, 0.8, r);
+        color = mix(color, vec3(1.0), f);
     }
 
     gl_FragColor = vec4(color * background, 1.0);
