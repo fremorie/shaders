@@ -20,7 +20,8 @@
         "smooth:birch": "node scripts/smooth-birch-glb.mjs",
         "lint": "eslint .",
         "format": "prettier --write .",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "screenshots": "node scripts/capture-screenshots.mjs"
     },
     "dependencies": {
         "@react-three/drei": "^10.7.7",

@@ -58,6 +58,20 @@ export const PAGE_DESCRIPTIONS = {
         'The spiral again, with its rings rippling at their own speed and a switch between the cosine palette and a flat color.',
     '/shaders/pulsating-spiral':
         'A superellipse whose exponent breathes with time, morphing the shape between a diamond, a circle and a square.',
+    '/shaders/eye':
+        'A procedural iris after Inigo Quilez: fbm noise stretched into radial fibres, a breathing pupil that squeezes them as it dilates, and a soft reflection on top.',
+    '/shaders/blobs':
+        'An icosphere pushed along its normals by animated value noise, so it wobbles like something alive, lit with a hand-written hemisphere, Phong and fresnel model.',
+    '/shaders/bushes':
+        'Stylized bushes built from a hundred randomly rotated leaf quads with normals pointing away from the centre, swaying in a Perlin noise wind, after Bruno Simon.',
+    '/shaders/bushes-flat':
+        'The same bushes loaded from a Blender model, with flat front-facing leaves and double-sided shadows.',
+    '/shaders/leafy-tree':
+        'The bush foliage technique grown into whole trees: an oak, a maple and a birch with alpha-mapped leaves swaying in the wind and casting shadows.',
+    '/shaders/leafy-trees-front-side':
+        'The trees rebuilt from flat, front-facing leaf cards on edited low poly trunks, for a lighter and more painterly crown.',
+    '/shaders/warped-sphere':
+        'A sphere whose vertices ride a sine wave travelling up its height, stacking it into animated ridges tinted by how far each one is pushed out.',
     '/shaders/stencil-buffer':
         'Masking with the stencil buffer: a torus knot that only exists where a circular mask has been painted.',
     '/shaders/grass':
